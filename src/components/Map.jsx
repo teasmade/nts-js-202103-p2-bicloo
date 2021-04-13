@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 // import sampleStations from '../data/sampleStations';
 import '../style/Map.css';
+import CustomIcon from './CustomIcon';
 
 // Nantes "position": [47.2076056402, -1.55753246791]
 
@@ -15,7 +16,7 @@ const Map = () => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker className="testMarker" position={testPosition}>
+      <Marker className="testMarker" position={testPosition} icon={CustomIcon}>
         <Popup>This is our test position marker</Popup>
       </Marker>
 
