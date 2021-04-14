@@ -4,30 +4,44 @@ import {
   Marker,
   Popup,
   LayersControl,
+  useMapEvent,
 } from 'react-leaflet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import sampleStations from '../data/sampleStations';
 import '../style/Map.css';
 import CustomIcon from './CustomIcon';
 
 // Nantes "position": [47.2076056402, -1.55753246791]
-// "https://{s}.tile-cyclos.openstreetmap.fr/{z}/{x}/{y}.png"
+// To transform into "click to center button"
+function MyComponent(props) {
+  const map = useMapEvent('click', () => {
+    map.setView(props.userPosition);
+  });
+  return null;
+}
 
 const Map = () => {
   const defaultPosition = [47.2076056402, -1.55753246791];
 
   const [userPosition, setUserPosition] = useState(defaultPosition);
 
+  const getUserPosition = (lat, long) => {
+    setUserPosition([lat, long]);
+  };
+
   // Get user postion and change the userPostion state
-  navigator.geolocation.getCurrentPosition(
-    (position) =>
-      setUserPosition([position.coords.latitude, position.coords.longitude]),
-    () => defaultPosition
-  );
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) =>
+        getUserPosition(position.coords.latitude, position.coords.longitude),
+      () => defaultPosition
+    );
+  }, []);
 
   return (
     <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
+      <MyComponent userPosition={userPosition} />
       <LayersControl position="topright">
         <LayersControl.BaseLayer checked name="OpenStreetMap.Base">
           <TileLayer
