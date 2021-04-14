@@ -1,9 +1,9 @@
-import SampleComponent from './components/SampleComponent';
+import Map from './components/Map';
 
 function App() {
   return (
     <div className="App">
-      <SampleComponent />
+      <Map />
     </div>
   );
 }
