@@ -5,6 +5,7 @@ import {
   Popup,
   LayersControl,
 } from 'react-leaflet';
+import { useState } from 'react';
 
 import sampleStations from '../data/sampleStations';
 import '../style/Map.css';
@@ -15,10 +16,18 @@ import CustomIcon from './CustomIcon';
 
 const Map = () => {
   const defaultPosition = [47.2076056402, -1.55753246791];
-  const testPosition = [47.21, -1.552];
+
+  const [userPosition, setUserPosition] = useState(defaultPosition);
+
+  // Get user postion and change the userPostion state
+  navigator.geolocation.getCurrentPosition(
+    (position) =>
+      setUserPosition([position.coords.latitude, position.coords.longitude]),
+    () => defaultPosition
+  );
 
   return (
-    <MapContainer center={defaultPosition} zoom={14} scrollWheelZoom>
+    <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
       <LayersControl position="topright">
         <LayersControl.BaseLayer checked name="OpenStreetMap.Base">
           <TileLayer
@@ -33,7 +42,7 @@ const Map = () => {
           />
         </LayersControl.BaseLayer>
       </LayersControl>
-      <Marker className="testMarker" position={testPosition} icon={CustomIcon}>
+      <Marker className="testMarker" position={userPosition} icon={CustomIcon}>
         <Popup>This is our test position marker</Popup>
       </Marker>
 
