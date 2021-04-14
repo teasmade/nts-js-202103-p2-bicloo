@@ -5,6 +5,7 @@ import '../style/Map.css';
 import CustomIcon from './CustomIcon';
 
 // Nantes "position": [47.2076056402, -1.55753246791]
+// "https://{s}.tile-cyclos.openstreetmap.fr/{z}/{x}/{y}.png"
 
 const Map = () => {
   const defaultPosition = [47.2076056402, -1.55753246791];
@@ -14,7 +15,7 @@ const Map = () => {
     <MapContainer center={defaultPosition} zoom={14} scrollWheelZoom>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
       />
       <Marker className="testMarker" position={testPosition} icon={CustomIcon}>
         <Popup>This is our test position marker</Popup>
