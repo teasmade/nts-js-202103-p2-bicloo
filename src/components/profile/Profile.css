@@ -1,0 +1,17 @@
+
+
+.hero-profile {
+  background-image: url('../../assets/background-home.png');
+  height: 88vh;
+}
+
+.title-profile {
+  position: absolute;
+  width: 315px;
+  height: 51px;
+  left: 29px;
+  top: 228px;
+  font-size: 36px;
+  line-height: 45px;
+  text-align: center;
+}

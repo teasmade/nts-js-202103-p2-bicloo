@@ -1,0 +1,44 @@
+.logSignButtonsContainer {
+  width: 100%;
+  padding: 0 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  position: absolute;
+  /*width: 219,73px;*/
+  height: 64px;
+  left: 25.06px;
+  top: 489px;
+}
+
+.logSignButtons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.logSignButtons button {
+  padding: 1vh 8vw;
+  border-radius: 7px;
+}
+
+#signUp {
+  color: white;
+  background-color: #17bebb;
+}
+
+#login {
+  color: #17bebb;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: solid 1px #17bebb;
+  margin-left: 20px;
+}
+
+#noLogin {
+  font-size: 15px;
+  color: white;
+  text-decoration: underline;
+  margin-top: 1vh;
+}

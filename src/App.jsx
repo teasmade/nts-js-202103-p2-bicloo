@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './components/menu/Menu';
 import Profile from './components/profile/Profile';
-import SignUpLogin from './components/profile/SignUpLogin';
 import './style/App.css';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
           </Route>
           <Route exact path="/profile">
             <Profile />
-            <SignUpLogin />
           </Route>
           <Route exact path="/shop">
             <div className="mainSection">Hello Shop</div>
