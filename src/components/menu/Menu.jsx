@@ -4,39 +4,45 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Menu.css';
+import Hamburger from 'hamburger-react';
 
 export default function Menu() {
   const [showMenu, setShowMenu] = useState(false);
+  const [menuTitle, setMenuTitle] = useState('Home');
 
-  const handleMenuClick = () => {
+  const handleMenuClick = (itemTitle) => {
+    if (itemTitle) {
+      setMenuTitle(itemTitle);
+    }
     setShowMenu(!showMenu);
   };
+
+  const menuItems = [
+    { title: 'Home', link: '/', key: 1 },
+    { title: 'Login', link: '/login', key: 2 },
+    { title: 'Map', link: '/map', key: 3 },
+    { title: 'Profile', link: '/profile', key: 4 },
+    { title: 'Shop', link: '/shop', key: 5 },
+  ];
   return (
     <div>
       <header>
-        <div className="burgerMenu menu-btn" onClick={handleMenuClick}>
-          <i className="fas fa-bars" />
-        </div>
-        <h1>HOME</h1>
+        <Hamburger toggle={() => handleMenuClick(false)} toggled={showMenu} />
+        <h1>{menuTitle}</h1>
       </header>
       <div id="movingMenu" className={showMenu ? 'show' : 'noShow'}>
         <nav>
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/map">Map</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/shop">Shop</Link>
-            </li>
+            {menuItems.map((item) => (
+              <li key={item.key}>
+                <Link
+                  onClick={() => handleMenuClick(item.title)}
+                  to={item.link}
+                >
+                  {item.title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

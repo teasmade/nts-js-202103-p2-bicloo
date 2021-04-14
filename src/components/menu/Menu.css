@@ -1,3 +1,14 @@
+header {
+  display: flex;
+  height: 7vh;
+  padding: 0 3vw;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #474350;
+  color: white;
+  font-size: 30px;
+}
+
 ul {
   display: flex;
   justify-content: space-between;
@@ -7,24 +18,12 @@ nav{
   height: 100%;
 }
 
-header {
-  display: flex;
-  height: 10vh;
-}
-
-.burgerMenu {
-  width:50px;
-  height:100%;
-  background-color: turquoise;
-}
-
-
 #movingMenu {
   width: 100vw;
   height: 50vh;
   position: absolute;
   background-color: #474350;
-  transition: transform 1s ease-in;
+  transition: transform 0.5s ease-in-out;
 }
 
 #movingMenu ul {
@@ -36,7 +35,7 @@ header {
 }
 
 li {
-  font-size: 36px;
+  font-size: 30px;
   color: white;
 }
 
