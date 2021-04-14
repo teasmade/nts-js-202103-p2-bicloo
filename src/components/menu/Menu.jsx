@@ -24,6 +24,7 @@ export default function Menu() {
     { title: 'Profile', link: '/profile', key: 4 },
     { title: 'Shop', link: '/shop', key: 5 },
   ];
+
   return (
     <div>
       <header>
@@ -34,7 +35,7 @@ export default function Menu() {
         onClick={() => {
           handleMenuClick(false);
         }}
-        className={`backdrop ${showMenu ? 'show' : 'noShow'}`}
+        className={`menuBackdrop ${showMenu ? 'show' : 'noShow'}`}
       >
         <div id="movingMenu">
           <nav>

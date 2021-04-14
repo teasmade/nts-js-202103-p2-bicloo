@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './components/menu/Menu';
 import Profile from './components/profile/Profile';
 import SignUpLogin from './components/profile/SignUpLogin';
+import Home from './components/home/Home';
 import './style/App.css';
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
         <Menu />
         <Switch>
           <Route exact path="/">
-            <div className="mainSection">Hello Home</div>
+            <Home />
           </Route>
           <Route exact path="/login">
             <div className="mainSection">Hello Login</div>
