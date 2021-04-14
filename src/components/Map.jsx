@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-// import sampleStations from '../data/sampleStations';
+import sampleStations from '../data/sampleStations';
 import '../style/Map.css';
 import CustomIcon from './CustomIcon';
 
@@ -8,7 +8,7 @@ import CustomIcon from './CustomIcon';
 
 const Map = () => {
   const defaultPosition = [47.2076056402, -1.55753246791];
-  const testPosition = [47.21, -1.55];
+  const testPosition = [47.21, -1.552];
 
   return (
     <MapContainer center={defaultPosition} zoom={14} scrollWheelZoom>
@@ -20,7 +20,7 @@ const Map = () => {
         <Popup>This is our test position marker</Popup>
       </Marker>
 
-      {/* {sampleStations.map((station) => (
+      {sampleStations.map((station) => (
         <Marker
           key={station.fields.number}
           position={[station.fields.position[0], station.fields.position[1]]}
@@ -33,7 +33,7 @@ const Map = () => {
             {station.fields.available_bike_stands} stands available
           </Popup>
         </Marker>
-      ))} */}
+      ))}
     </MapContainer>
   );
 };
