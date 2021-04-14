@@ -1,29 +1,34 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Menu from './components/menu/Menu';
+import Profile from './components/profile/Profile';
+import SignUpLogin from './components/profile/SignUpLogin';
+import './style/App.css';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        <Menu />
         <Switch>
           <Route exact path="/">
-            <h1>Hello Home</h1>
+            <div className="mainSection">Hello Home</div>
           </Route>
           <Route exact path="/login">
-            <h1>Hello Login</h1>
+            <div className="mainSection">Hello Login</div>
           </Route>
           <Route exact path="/map">
-            <h1>Hello Map</h1>
+            <div className="mainSection">Hello Map</div>
           </Route>
           <Route exact path="/profile">
-            <h1>Hello Profile</h1>
+            <Profile />
+            <SignUpLogin />
           </Route>
           <Route exact path="/shop">
-            <h1>Hello Shop</h1>
+            <div className="mainSection">Hello Shop</div>
           </Route>
         </Switch>
       </Router>
+      <div className="footer">cool</div>
     </div>
   );
 }

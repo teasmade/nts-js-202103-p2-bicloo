@@ -1,0 +1,49 @@
+ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav{
+  height: 100%;
+}
+
+header {
+  display: flex;
+  height: 10vh;
+}
+
+.burgerMenu {
+  width:50px;
+  height:100%;
+  background-color: turquoise;
+}
+
+
+#movingMenu {
+  width: 100vw;
+  height: 50vh;
+  position: absolute;
+  background-color: #474350;
+  transition: transform 1s ease-in;
+}
+
+#movingMenu ul {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10vw;
+}
+
+li {
+  font-size: 36px;
+  color: white;
+}
+
+.noShow {
+  transform: translate(-100%);
+}
+
+.show {
+  transform: translate(0%);
+}
