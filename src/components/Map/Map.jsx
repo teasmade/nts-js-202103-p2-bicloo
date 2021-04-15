@@ -8,17 +8,18 @@ import {
 } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { useState, useEffect } from 'react';
-
-import sampleStations from './data/sampleStations';
-import './style/Map.css';
-import 'react-leaflet-markercluster/dist/styles.min.css';
 import {
+  createClusterCustomIcon,
   userIcon,
   redMarker,
   orangeMarker,
   yellowMarker,
   greenMarker,
 } from './CustomIcon';
+
+import sampleStations from './data/sampleStations';
+import './style/Map.css';
+import 'react-leaflet-markercluster/dist/styles.min.css';
 
 // Nantes "position": [47.2076056402, -1.55753246791]
 // To transform into "click to center button"
@@ -49,6 +50,8 @@ const Map = () => {
 
   const [colorMarkerFilter, setColorMarkerFilter] = useState('bikes');
   // Change marker color
+  // Want to make average filter but API datas are cheated
+  // e.g: bike_stands: 14, available_bike_stands: 7, available_bikes: 2 ????
   const handleMarkerColor = (availableBikes, availablePlaces, filter) => {
     if (filter === 'bikes') {
       if (availableBikes === 0) return redMarker;
@@ -104,7 +107,10 @@ const Map = () => {
       >
         <Popup>This is our test position marker</Popup>
       </Marker>
-      <MarkerClusterGroup showCoverageOnHover={false}>
+      <MarkerClusterGroup
+        showCoverageOnHover={false}
+        iconCreateFunction={createClusterCustomIcon}
+      >
         {sampleStations.map((station) => (
           <Marker
             key={station.fields.number}

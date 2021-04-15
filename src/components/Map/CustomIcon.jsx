@@ -1,4 +1,4 @@
-import { Icon } from 'leaflet';
+import { Icon, divIcon, point } from 'leaflet';
 import customMarker from './Icons/person.svg';
 import red from './Icons/red-marker.svg';
 import orange from './Icons/orange-marker.svg';
@@ -22,5 +22,13 @@ export const yellowMarker = new CustomIcon({ iconUrl: yellow });
 export const greenMarker = new CustomIcon({ iconUrl: green });
 
 export const userIcon = new CustomIcon({ iconUrl: customMarker });
+
+export const createClusterCustomIcon = (cluster) => {
+  return divIcon({
+    html: `<span>${cluster.getChildCount()}</span>`,
+    className: 'markerClusterRed',
+    iconSize: point(40, 40, true),
+  });
+};
 
 export default userIcon;
