@@ -1,9 +1,11 @@
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './components/menu/Menu';
 import Profile from './components/profile/Profile';
 import SignUpLogin from './components/profile/SignUpLogin';
 import Home from './components/home/Home';
 import './style/App.css';
+
 
 function App() {
   return (
