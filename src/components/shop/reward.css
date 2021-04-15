@@ -1,0 +1,14 @@
+.rewards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10vw;
+  justify-items: center;
+}
+.reward {
+  width: 30vw;
+  height: 30vw;
+  background: #474350;
+  border-radius: 16px;
+  color: white;
+  text-align:center;
+}
