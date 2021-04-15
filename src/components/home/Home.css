@@ -1,0 +1,38 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5vh 0;
+}
+
+.logoTitle {
+  background-color: #474350;
+  overflow: hidden;
+  display: inline-block;
+  padding: 10px;
+  font-weight: normal;
+  font-family: MontserratSubrayada;
+  color: transparent;
+  font-size: 42px;
+  box-shadow: 10px 5px 5px black;
+}
+span {
+  background-image: url('../../assets/background.png');
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  display: block;
+}
+
+.home p {
+  width: 80vw;
+  font-size: 26px;
+  text-align: center;
+}
+
+.homeButton {
+  font-size: 30px;
+  background-color: #17bebb;
+  padding: 2.5vh 15vw;
+  border-radius: 15px;
+}

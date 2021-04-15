@@ -1,0 +1,13 @@
+.mainSection {
+  width: 100vw;
+  height: 88vh;
+  background-image: url("../assets/background.png");
+}
+
+.footer {
+  width: 100vw;
+  height: 5vh;
+  position: absolute;
+  bottom: 0;
+  background: #474350;
+}
