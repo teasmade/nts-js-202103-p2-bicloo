@@ -1,0 +1,39 @@
+.cluster-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  color: #fff;
+  font-weight: 900;
+}
+.cluster-icons::after {
+  content: '';
+  border-radius: 50%;
+  position: absolute;
+  border-radius: 50%;
+  width: 110%;
+  height: 110%;
+  filter: blur(4px);
+  border: 4px solid rgba(255, 255, 255, 0.438);
+}
+
+.marker-cluster-Small {
+  background-color: rgba(0, 102, 31, 0.644);
+  border: 2px solid rgba(160, 0, 0, 0.062);
+}
+
+.marker-cluster-Medium {
+  background-color: rgba(146, 124, 0, 0.644);
+  border: 2px solid rgba(160, 0, 0, 0.062);
+}
+
+.marker-cluster-Large {
+  background-color: rgba(146, 100, 0, 0.644);
+  border: 2px solid rgba(160, 0, 0, 0.062);
+}
+
+.marker-cluster-XLarge {
+  background-color: rgba(146, 0, 0, 0.644);
+  border: 2px solid rgba(160, 0, 0, 0.062);
+}

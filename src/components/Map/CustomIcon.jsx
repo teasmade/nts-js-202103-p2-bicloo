@@ -24,10 +24,33 @@ export const greenMarker = new CustomIcon({ iconUrl: green });
 export const userIcon = new CustomIcon({ iconUrl: customMarker });
 
 export const createClusterCustomIcon = (cluster) => {
+  const count = cluster.getChildCount();
+  let size = null;
+  const iconSize = {};
+
+  if (count <= 3) {
+    size = 'Small cluster-icons';
+    iconSize.size = point(30, 30, true);
+  }
+  if (count >= 4 && count <= 6) {
+    size = 'Medium cluster-icons';
+    iconSize.size = point(40, 40, true);
+  }
+  if (count >= 7 && count <= 10) {
+    size = 'Large cluster-icons';
+    iconSize.size = point(60, 60, true);
+  }
+  if (count > 10) {
+    size = 'XLarge cluster-icons';
+    iconSize.size = point(80, 80, true);
+  }
+
+  const sizeClass = `marker-cluster-${size}`;
+
   return divIcon({
     html: `<span>${cluster.getChildCount()}</span>`,
-    className: 'markerClusterRed',
-    iconSize: point(40, 40, true),
+    className: `${sizeClass}`,
+    iconSize: point(iconSize.size),
   });
 };
 

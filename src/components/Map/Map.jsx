@@ -4,7 +4,6 @@ import {
   Marker,
   Popup,
   LayersControl,
-  /* useMapEvent, */
 } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { useState, useEffect } from 'react';
@@ -19,16 +18,10 @@ import {
 
 import sampleStations from './data/sampleStations';
 import './style/Map.css';
+import './style/CustomIcon.css';
 import 'react-leaflet-markercluster/dist/styles.min.css';
 
 // Nantes "position": [47.2076056402, -1.55753246791]
-// To transform into "click to center button"
-// function MyComponent(props) {
-//   const map = useMapEvent('click', () => {
-//     map.setView(props.userPosition);
-//   });
-//   return null;
-// }
 
 const Map = () => {
   const defaultPosition = [47.2076056402, -1.55753246791];
@@ -49,9 +42,6 @@ const Map = () => {
   }, []);
 
   const [colorMarkerFilter, setColorMarkerFilter] = useState('bikes');
-  // Change marker color
-  // Want to make average filter but API datas are cheated
-  // e.g: bike_stands: 14, available_bike_stands: 7, available_bikes: 2 ????
   const handleMarkerColor = (availableBikes, availablePlaces, filter) => {
     if (filter === 'bikes') {
       if (availableBikes === 0) return redMarker;
@@ -70,16 +60,15 @@ const Map = () => {
 
   return (
     <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
-      {/* <MyComponent userPosition={userPosition} /> */}
       <LayersControl position="topright">
-        <LayersControl.BaseLayer checked name="AliadeSmooth">
+        <LayersControl.BaseLayer name="AliadeSmooth">
           {/* Need an API key */}
           <TileLayer
             attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
             url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=626aff83-a908-4f3d-8898-782129addfc5"
           />
         </LayersControl.BaseLayer>
-        <LayersControl.BaseLayer name="AliadeSmoothDark">
+        <LayersControl.BaseLayer checked name="AliadeSmoothDark">
           {/* Need an API key */}
           <TileLayer
             attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
