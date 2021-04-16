@@ -3,6 +3,8 @@ import Menu from './components/menu/Menu';
 import Profile from './components/profile/Profile';
 import SignUpLogin from './components/profile/SignUpLogin';
 import Home from './components/home/Home';
+import Shop from './components/shop/Shop';
+
 import './style/App.css';
 
 function App() {
@@ -25,7 +27,7 @@ function App() {
             <SignUpLogin />
           </Route>
           <Route exact path="/shop">
-            <div className="mainSection">Hello Shop</div>
+            <Shop />
           </Route>
         </Switch>
       </Router>
