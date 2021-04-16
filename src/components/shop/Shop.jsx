@@ -10,12 +10,18 @@ export default function Shop() {
         <div className="choose">Choisissez votre récompense!</div>
       </div>
       <div className="rewards">
-        <Reward />
-        <Reward />
-        <Reward />
-        <Reward />
-        <Reward />
-        <Reward />
+        <Reward name="10% sur votre abonnement" price="150 XP" />
+        <Reward
+          name="une entrée gratuite au Musée des Beaux arts"
+          price="100 XP"
+        />
+        <Reward name="1 mois offert" price="200 XP" />
+        <Reward name="1 repas dans un restaurant" price="200 XP" />
+        <Reward
+          name="une entrée gratuite au Musée des Beaux arts"
+          price="100 XP"
+        />
+        <Reward name="1 mois offert" price="200 XP" />
       </div>
     </div>
   );
