@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './components/menu/Menu';
 import Profile from './components/profile/Profile';
 import './style/App.css';
+import Footer from './components/footer/Footer';
+import SignIn from './components/profile/signin/SignIn';
+import SignUp from './components/profile/signup/SignUp';
 
 function App() {
   return (
@@ -21,12 +24,18 @@ function App() {
           <Route exact path="/profile">
             <Profile />
           </Route>
+          <Route exact path="/signIn">
+            <SignIn />
+          </Route>
+          <Route exact path="/signUp">
+            <SignUp />
+          </Route>
           <Route exact path="/shop">
             <div className="mainSection">Hello Shop</div>
           </Route>
         </Switch>
       </Router>
-      <div className="footer">cool</div>
+      <Footer />
     </div>
   );
 }
