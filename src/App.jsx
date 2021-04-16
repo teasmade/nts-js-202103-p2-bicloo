@@ -1,7 +1,11 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './components/menu/Menu';
 import Profile from './components/profile/Profile';
-import './style/App.css';
+
+import SignUpLogin from './components/profile/SignUpLogin';
+import Home from './components/home/Home';
+import Shop from './components/shop/Shop';
+
 import Footer from './components/footer/Footer';
 import SignIn from './components/profile/signin/SignIn';
 import SignUp from './components/profile/signup/SignUp';
@@ -13,7 +17,7 @@ function App() {
         <Menu />
         <Switch>
           <Route exact path="/">
-            <div className="mainSection">Hello Home</div>
+            <Home />
           </Route>
           <Route exact path="/login">
             <div className="mainSection">Hello Login</div>
@@ -31,7 +35,7 @@ function App() {
             <SignUp />
           </Route>
           <Route exact path="/shop">
-            <div className="mainSection">Hello Shop</div>
+            <Shop />
           </Route>
         </Switch>
       </Router>

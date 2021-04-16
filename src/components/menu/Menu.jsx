@@ -24,27 +24,35 @@ export default function Menu() {
     { title: 'Profile', link: '/profile', key: 4 },
     { title: 'Shop', link: '/shop', key: 5 },
   ];
+
   return (
     <div>
       <header>
         <Hamburger toggle={() => handleMenuClick(false)} toggled={showMenu} />
         <h1>{menuTitle}</h1>
       </header>
-      <div id="movingMenu" className={showMenu ? 'show' : 'noShow'}>
-        <nav>
-          <ul>
-            {menuItems.map((item) => (
-              <li key={item.key}>
-                <Link
-                  onClick={() => handleMenuClick(item.title)}
-                  to={item.link}
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+      <div
+        onClick={() => {
+          handleMenuClick(false);
+        }}
+        className={`menuBackdrop ${showMenu ? 'show' : 'noShow'}`}
+      >
+        <div id="movingMenu">
+          <nav>
+            <ul>
+              {menuItems.map((item) => (
+                <li key={item.key}>
+                  <Link
+                    onClick={() => handleMenuClick(item.title)}
+                    to={item.link}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   );

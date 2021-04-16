@@ -1,5 +1,6 @@
 .logSignButtonsContainer {
   width: 100%;
+  padding: 0 5vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +17,6 @@
 .logSignButtons button {
   padding: 2vh 9vw;
   border-radius: 15px;
-}
 
 #signUp {
   color: white;
