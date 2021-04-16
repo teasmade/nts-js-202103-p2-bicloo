@@ -20,6 +20,7 @@ import sampleStations from './data/sampleStations';
 import './style/Map.css';
 import './style/CustomIcon.css';
 import 'react-leaflet-markercluster/dist/styles.min.css';
+import Search from './Search';
 
 // Nantes "position": [47.2076056402, -1.55753246791]
 
@@ -59,68 +60,74 @@ const Map = () => {
   };
 
   return (
-    <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
-      <LayersControl position="topright">
-        <LayersControl.BaseLayer name="AliadeSmooth">
-          {/* Need an API key */}
-          <TileLayer
-            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-            url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=626aff83-a908-4f3d-8898-782129addfc5"
-          />
-        </LayersControl.BaseLayer>
-        <LayersControl.BaseLayer checked name="AliadeSmoothDark">
-          {/* Need an API key */}
-          <TileLayer
-            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-            url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=626aff83-a908-4f3d-8898-782129addfc5"
-          />
-        </LayersControl.BaseLayer>
-        <LayersControl.BaseLayer name="OpenStreetMap.Base">
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-        </LayersControl.BaseLayer>
-        <LayersControl.BaseLayer name="OpenStreetMap.Cycle">
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
-          />
-        </LayersControl.BaseLayer>
-      </LayersControl>
-      <Marker
-        className="testMarker"
-        position={userPosition}
-        icon={userIcon}
-        onClick={() => setColorMarkerFilter('places')}
-      >
-        <Popup>This is our test position marker</Popup>
-      </Marker>
-      <MarkerClusterGroup
-        showCoverageOnHover={false}
-        iconCreateFunction={createClusterCustomIcon}
-      >
-        {sampleStations.map((station) => (
-          <Marker
-            key={station.fields.number}
-            position={[station.fields.position[0], station.fields.position[1]]}
-            icon={handleMarkerColor(
-              station.fields.available_bikes,
-              station.fields.available_bike_stands,
-              colorMarkerFilter
-            )}
-          >
-            <Popup>
-              {station.fields.address}
-              <br />
-              {station.fields.available_bikes} bikes available
-              <br />
-              {station.fields.available_bike_stands} stands available
-            </Popup>
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
-    </MapContainer>
+    <>
+      <Search />
+      <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
+        <LayersControl position="topright">
+          <LayersControl.BaseLayer name="AliadeSmooth">
+            {/* Need an API key */}
+            <TileLayer
+              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+              url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=626aff83-a908-4f3d-8898-782129addfc5"
+            />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer checked name="AliadeSmoothDark">
+            {/* Need an API key */}
+            <TileLayer
+              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+              url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=626aff83-a908-4f3d-8898-782129addfc5"
+            />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer name="OpenStreetMap.Base">
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer name="OpenStreetMap.Cycle">
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+            />
+          </LayersControl.BaseLayer>
+        </LayersControl>
+        <Marker
+          className="testMarker"
+          position={userPosition}
+          icon={userIcon}
+          onClick={() => setColorMarkerFilter('places')}
+        >
+          <Popup>This is our test position marker</Popup>
+        </Marker>
+        <MarkerClusterGroup
+          showCoverageOnHover={false}
+          iconCreateFunction={createClusterCustomIcon}
+        >
+          {sampleStations.map((station) => (
+            <Marker
+              key={station.fields.number}
+              position={[
+                station.fields.position[0],
+                station.fields.position[1],
+              ]}
+              icon={handleMarkerColor(
+                station.fields.available_bikes,
+                station.fields.available_bike_stands,
+                colorMarkerFilter
+              )}
+            >
+              <Popup>
+                {station.fields.address}
+                <br />
+                {station.fields.available_bikes} bikes available
+                <br />
+                {station.fields.available_bike_stands} stands available
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+      </MapContainer>
+    </>
   );
 };
 

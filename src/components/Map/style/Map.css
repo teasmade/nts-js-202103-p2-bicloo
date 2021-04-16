@@ -7,3 +7,33 @@
 .leaflet-marker-icon {
   transform: scaleX(-1);
 }
+
+.form-search-open,
+.form-search-close {
+  position: fixed;
+  z-index: 10000;
+  left: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-search-lines {
+  display: flex;
+  margin: 10px;
+}
+
+.btn-search {
+  background-color: blue;
+}
+
+.form-search-open .input-search {
+  background-color: whitesmoke;
+  width: 100%;
+  transition: all 0.8s ease;
+}
+
+.form-search-close .input-search {
+  background-color: rgba(0, 0, 0, 0);
+  width: 0;
+  transition: all 0.8s ease;
+}
