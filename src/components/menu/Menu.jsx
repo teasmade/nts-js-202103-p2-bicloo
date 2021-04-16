@@ -19,7 +19,6 @@ export default function Menu() {
 
   const menuItems = [
     { title: 'Home', link: '/', key: 1 },
-    { title: 'Login', link: '/login', key: 2 },
     { title: 'Map', link: '/map', key: 3 },
     { title: 'Profile', link: '/profile', key: 4 },
     { title: 'Shop', link: '/shop', key: 5 },

@@ -3,12 +3,8 @@ import LogSignButtons from '../tools/LogSignButtons';
 import './Profile.css';
 
 export default function Profile() {
-  const divStyle = {
-    height: '88vh',
-  };
-
   return (
-    <div style={divStyle}>
+    <div className="profileContainer">
       <section className="profile" id="profile">
         <div className="max-width">
           <div className="profile-content">
