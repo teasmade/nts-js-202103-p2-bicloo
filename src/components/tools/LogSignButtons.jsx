@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
@@ -5,15 +7,14 @@ import './LogSignButtons.css';
 import { useHistory } from 'react-router-dom';
 
 export default function LogSignButtons(props) {
-  const signUp = useHistory();
-  const signIn = useHistory();
+  const history = useHistory();
 
   const redirectSignUp = () => {
-    signUp.push('/signUp');
+    history.push('/signUp');
   };
 
   const redirectSignIn = () => {
-    signIn.push('/signIn');
+    history.push('/signIn');
   };
 
   return (
@@ -26,7 +27,16 @@ export default function LogSignButtons(props) {
           Sign-In
         </button>
       </div>
-      {props.noLog ? <p id="noLogin">Access the map without login</p> : null}
+      {props.noLog ? (
+        <p
+          onClick={() => {
+            history.push('/map');
+          }}
+          id="noLogin"
+        >
+          Access the map without login
+        </p>
+      ) : null}
     </div>
   );
 }

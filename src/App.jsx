@@ -2,13 +2,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './components/menu/Menu';
 import Profile from './components/profile/Profile';
 
-import SignUpLogin from './components/profile/SignUpLogin';
 import Home from './components/home/Home';
 import Shop from './components/shop/Shop';
 
 import Footer from './components/footer/Footer';
 import SignIn from './components/profile/signin/SignIn';
 import SignUp from './components/profile/signup/SignUp';
+import Map from './components/Map/Map';
 
 function App() {
   return (
@@ -19,11 +19,8 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/login">
-            <div className="mainSection">Hello Login</div>
-          </Route>
           <Route exact path="/map">
-            <div className="mainSection">Hello Map</div>
+            <Map />
           </Route>
           <Route exact path="/profile">
             <Profile />
