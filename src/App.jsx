@@ -1,11 +1,14 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './components/menu/Menu';
 import Profile from './components/profile/Profile';
+
 import SignUpLogin from './components/profile/SignUpLogin';
 import Home from './components/home/Home';
 import Shop from './components/shop/Shop';
 
-import './style/App.css';
+import Footer from './components/footer/Footer';
+import SignIn from './components/profile/signin/SignIn';
+import SignUp from './components/profile/signup/SignUp';
 
 function App() {
   return (
@@ -24,14 +27,19 @@ function App() {
           </Route>
           <Route exact path="/profile">
             <Profile />
-            <SignUpLogin />
+          </Route>
+          <Route exact path="/signIn">
+            <SignIn />
+          </Route>
+          <Route exact path="/signUp">
+            <SignUp />
           </Route>
           <Route exact path="/shop">
             <Shop />
           </Route>
         </Switch>
       </Router>
-      <div className="footer">cool</div>
+      <Footer />
     </div>
   );
 }

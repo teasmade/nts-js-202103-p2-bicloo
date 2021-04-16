@@ -11,12 +11,12 @@
   display: flex;
   justify-content: center;
   font-size: 18px;
+  z-index: 1;
 }
 
 .logSignButtons button {
-  padding: 1vh 8vw;
-  border-radius: 7px;
-}
+  padding: 2vh 9vw;
+  border-radius: 15px;
 
 #signUp {
   color: white;

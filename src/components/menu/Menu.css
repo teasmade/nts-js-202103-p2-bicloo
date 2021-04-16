@@ -14,7 +14,7 @@ ul {
   justify-content: space-between;
 }
 
-nav{
+nav {
   height: 100%;
 }
 
@@ -30,6 +30,9 @@ nav{
   width: 100vw;
   height: 50vh;
   background-color: #474350;
+  transition: transform 0.5s ease-in-out;
+  z-index: 1;
+
 }
 
 #movingMenu ul {
