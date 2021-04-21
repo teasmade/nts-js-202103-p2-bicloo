@@ -1,6 +1,6 @@
 {
-  "users": [
-    {
+  "users": {
+    "1234": {
       "user_ID": 1234,
       "pseudo": "Georges",
       "password": "1234",
@@ -18,7 +18,7 @@
       "badges_won": ["table of badges"],
       "rewards_bought": ["table of rewards"]
     }
-  ],
+  },
 
   "journeys": [
     {
