@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Menu from './components/menu/Menu';
-import Profile from './components/profile/Profile';
+import Log from './components/profile/Log';
 
 import Home from './components/home/Home';
 import Shop from './components/shop/Shop';
@@ -23,7 +23,7 @@ function App() {
             <Map />
           </Route>
           <Route exact path="/profile">
-            <Profile />
+            <Log />
           </Route>
           <Route exact path="/signIn">
             <SignIn />
