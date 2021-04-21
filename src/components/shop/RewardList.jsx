@@ -1,9 +1,10 @@
 import Reward from './Reward';
 import rewardsData from './rewardsData';
+import './reward.css';
 
 const RewardList = () => {
   return (
-    <div className="RewardList">
+    <div className="rewards">
       {rewardsData.map((reward) => {
         return (
           <Reward

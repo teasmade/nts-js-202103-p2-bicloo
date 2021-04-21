@@ -10,5 +10,15 @@
   background: #474350;
   border-radius: 16px;
   color: white;
-  text-align:center;
+  text-align: center;
+}
+
+.rewardActive {
+  border: 5px solid gold;
+  width: 30vw;
+  height: 30vw;
+  background: #474350;
+  border-radius: 16px;
+  color: white;
+  text-align: center;
 }
