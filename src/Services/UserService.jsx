@@ -38,23 +38,30 @@ const UserService = {
     this.user = null;
   },
 
-  updateUser() {
-    console.log('ouais');
-    axios.patch(`/users/${this.user.user_ID}/.json`, this.user, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
-    });
+  updateUser(property, value) {
+    axios.patch(
+      `/users/${this.user.user_ID}/.json`,
+      { [property]: value },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
+      }
+    );
   },
-
-  // getXp
 
   addXp(nbXp) {
     this.user.total_xp_won += nbXp;
+    this.user.current_xp += nbXp;
+    this.updateUser('total_xp_won', this.user.total_xp_won);
+    this.updateUser('current_xp', this.user.current_xp);
   },
 
-  // removeXp
+  remove(nbXp) {
+    this.user.current_xp -= nbXp;
+    this.updateUser('current_xp', this.user.current_xp);
+  },
 
   // getLevel
 
@@ -67,8 +74,6 @@ const UserService = {
   // getRewardsBought
 
   // addRewardBougth
-
-  // return [getUser, logUser];
 };
 
 export default UserService;
