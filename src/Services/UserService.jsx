@@ -1,26 +1,37 @@
+/* eslint-disable no-else-return */
+/* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
 
-const UserService = () => {
+const UserService = {
   // user id in state
-  const [loggedUser, setLoggedUser] = useState(null);
+  user: null,
 
-  const getUser = (id) => {
-    if (loggedUser) {
-      return Promise.resolve(loggedUser);
-    }
-    return fetch('./Database.json').then((data) => {
-      const loggeduser = data.users.find((user) => user.id === id);
-      setLoggedUser(loggeduser);
-      return loggedUser;
-    });
-  };
+  getUser() {
+    return this.user || null;
+  },
 
-  // const logUser;
+  logUser(pseudo, password) {
+    return fetch('Users.json')
+      .then((response) => response.json())
+      .then((data) => {
+        const userToLog = data.users.find(
+          (user) => user.pseudo === pseudo || user.email === pseudo
+        );
+        if (userToLog && userToLog.password === password) {
+          this.user = userToLog;
+          console.log('mdp ok');
+          return Promise.resolve(true);
+        } else {
+          console.log('mdp ko');
 
-  // logOut
+          return Promise.reject(false);
+        }
+      });
+  },
 
-  // checkPassword return true/false
+  logOut() {
+    this.user = null;
+  },
 
   // getXp
 
@@ -39,6 +50,8 @@ const UserService = () => {
   // getRewardsBought
 
   // addRewardBougth
+
+  // return [getUser, logUser];
 };
 
 export default UserService;
