@@ -65,7 +65,7 @@ const UserService = {
     });
   },
 
-  remove(nbXp) {
+  removeXp(nbXp) {
     this.user.current_xp -= nbXp;
     this.updateUser('current_xp', this.user.current_xp);
   },
@@ -90,9 +90,20 @@ const UserService = {
 
   // addBadge
 
-  // getRewardsBought
-
-  // addRewardBougth
+  getAllRewards() {
+    const userRewards = this.user.rewards_bought;
+    return axios
+      .get('/rewards.json')
+      .then((data) => data.data)
+      .then((data) => {
+        return data.map((reward) => {
+          const newReward = reward;
+          newReward.active = !!userRewards.includes(newReward.id);
+          console.log(newReward);
+          return newReward;
+        });
+      });
+  },
 };
 
 export default UserService;
