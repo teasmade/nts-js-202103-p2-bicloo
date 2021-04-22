@@ -1,0 +1,89 @@
+{
+  "users": {
+    "1234": {
+      "user_ID": 1234,
+      "pseudo": "Georges",
+      "password": "1234",
+      "avatar": "link to image",
+      "firstname": "Fake first name",
+      "lastname": "Fake last name",
+      "email": "fakeuser@fakedomain.fake",
+      "total_xp_won": 10000000,
+      "current_xp": 52000,
+      "level": 400,
+      "user_total_distance": 1500,
+      "logged_in": "Boolean",
+      "created": "21/04/2021",
+      "trajets_done": ["table of journeys"],
+      "badges_won": ["table of badges"],
+      "rewards_bought": ["table of rewards"]
+    }
+  },
+
+  "journeys": [
+    {
+      "trajet_ID": 152453,
+      "user_ID": 1234,
+      "start_time": "",
+      "start_point": "",
+      "end_time": "",
+      "end_point": "",
+      "total_distance": "",
+      "xp_gagne": "",
+      "created": ""
+    },
+    {
+      "trajet_ID": "",
+      "user_ID": "",
+      "start_time": "",
+      "start_point": "",
+      "end_time": "",
+      "end_point": "",
+      "total_distance": "",
+      "xp_gagne": "",
+      "created": ""
+    },
+    {
+      "trajet_ID": "",
+      "user_ID": "",
+      "start_time": "",
+      "start_point": "",
+      "end_time": "",
+      "end_point": "",
+      "total_distance": "",
+      "xp_gagne": "",
+      "created": ""
+    }
+  ],
+
+  "badges": [
+    {
+      "id": 46543215,
+      "name": "Fake badge",
+      "Xp_to_unlock": 100000
+    },
+    {
+      "id": 46543,
+      "name": "Fake second badge",
+      "Xp_to_unlock": 100
+    }
+  ],
+
+  "rewards": [
+    {
+      "id": "",
+      "name": "",
+      "price": ""
+    },
+    {
+      "id": "",
+      "name": "",
+      "price": ""
+    },
+    {
+      "id": "",
+      "name": "",
+      "price": ""
+    }
+  ]
+}

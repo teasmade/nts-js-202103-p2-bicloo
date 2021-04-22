@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 import LogSignButtons from '../tools/LogSignButtons';
+import UserService from '../../Services/UserService';
 
 export default function Home() {
+  const [first, setFirstOk] = useState(false);
+
+  useEffect(() => {
+    if (first) {
+      UserService.logUser('Geoges', '1234');
+    } else {
+      setFirstOk(true);
+    }
+  });
+
   return (
     <div className="mainSection home">
       <h2 className="logoTitle">
