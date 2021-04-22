@@ -1,18 +1,21 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import Badges from './badges/Badges';
 import History from './history/History';
 import './Profile.css';
+import UserService from '../../Services/UserService';
 
 const Profile = () => {
-  const user = 'Fake user'; // getUser() from user service
-  const xp = '1500xp';
+  const pseudo = UserService.getUserName();
+  const level = UserService.getLevel();
+  const totalXp = UserService.getTotalXp();
   const [openBadges, setOpenBadges] = useState(true);
   const [openHistory, setOpenHistory] = useState(true);
   return (
     <div className="profileContainer">
-      <h1 className="text-4xl my-5">Bonjour {user}</h1>
+      <h1 className="text-4xl my-5">Bonjour {pseudo}</h1>
       <div className="relative pt-1 w-11/12">
         <div
           style={{ backgroundColor: '#C4C4C4' }}
@@ -22,23 +25,24 @@ const Profile = () => {
             style={{ backgroundColor: '#17BEBB' }}
             className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center w-3/4"
           >
-            <p className="progress-text">{xp}</p>
+            <p className="progress-text">{totalXp}</p>
           </div>
         </div>
       </div>
       <p className="text-center">
-        Félicitation <strong>{user}</strong>! Tu as atteind le niveau &quot;get
-        the info&quot;
+        Félicitation <strong>{pseudo}</strong>! Tu as atteind le niveau {level};
       </p>
       <div className="profile-howto">
         <p>Comment gagner plus d&apos;XP?</p>
       </div>
       <div className="profile-break-lines" />
-      <section
-        className="profile-sections"
-        onClick={() => setOpenBadges(!openBadges)}
-      >
-        <h2 className="profil-sub-titles text-2xl mb-10">Mes badges</h2>
+      <section className="profile-sections">
+        <h2
+          className="profil-sub-titles text-2xl mb-10"
+          onClick={() => setOpenBadges(!openBadges)}
+        >
+          Mes badges
+        </h2>
         <div
           className={`profile-sections-container${
             openBadges ? '_open' : '_close'
@@ -52,11 +56,13 @@ const Profile = () => {
         </div>
       </section>
       <div className="profile-break-lines" />
-      <section
-        className="profile-sections"
-        onClick={() => setOpenHistory(!openHistory)}
-      >
-        <h2 className="profil-sub-titles text-2xl mb-10">Mes trajets</h2>
+      <section className="profile-sections">
+        <h2
+          className="profil-sub-titles text-2xl mb-10"
+          onClick={() => setOpenHistory(!openHistory)}
+        >
+          Mes trajets
+        </h2>
         <div
           className={`profile-sections-container${
             openHistory ? '_open' : '_close'

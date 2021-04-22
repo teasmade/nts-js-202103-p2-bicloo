@@ -33,6 +33,7 @@ export default function LogSignButtons(props) {
             history.push('/map');
           }}
           id="noLogin"
+          style={props.profile ? { color: 'black' } : null}
         >
           Access the map without login
         </p>

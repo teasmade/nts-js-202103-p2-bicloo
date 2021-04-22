@@ -1,25 +1,23 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ]
-  }
-  ```
-  l.27 : h-12
-*/
-
 import { LockClosedIcon } from '@heroicons/react/solid';
+import { useHistory } from 'react-router-dom';
 import Logo from '../../../assets/logo.png';
+import UserService from '../../../Services/UserService';
 
-export default function Example() {
+const SignIn = () => {
+  const history = useHistory();
+
+  const redirect = () => {
+    if (UserService.getUser()) history.push('/');
+  };
+
+  const handleSign = (e) => {
+    e.preventDefault();
+    const mail = e.target[2].value;
+    const password = e.target[4].value;
+    UserService.logUser(mail, password);
+    setTimeout(redirect, 500);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -29,7 +27,12 @@ export default function Example() {
             Sign in to your account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form
+          className="mt-8 space-y-6"
+          action="#"
+          method="GET"
+          onSubmit={(e) => handleSign(e)}
+        >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -110,4 +113,6 @@ export default function Example() {
       </div>
     </div>
   );
-}
+};
+
+export default SignIn;

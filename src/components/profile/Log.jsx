@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LogSignButtons from '../tools/LogSignButtons';
 import './Log.css';
 import Profile from './Profile';
+import UserService from '../../Services/UserService';
 
 const Log = () => {
-  const [logged, setLogged] = useState(true);
-
+  const [logged, setLogged] = useState(false);
+  useEffect(() => setLogged(UserService.getUser()), []);
   const signPage = (
     <>
       <section className="log" id="profile">
@@ -14,20 +15,13 @@ const Log = () => {
             <div className="text-1">Log or Sign up to</div>
             <div className="text-2">see your profile</div>
           </div>
-          <LogSignButtons />
+          <LogSignButtons noLog profile />
         </div>
       </section>
     </>
   );
 
-  return (
-    <div className="logContainer">
-      <button type="button" onClick={() => setLogged(!logged)}>
-        Click to test
-      </button>{' '}
-      {logged ? <Profile /> : signPage}
-    </div>
-  );
+  return <div className="logContainer">{logged ? <Profile /> : signPage}</div>;
 };
 
 export default Log;
