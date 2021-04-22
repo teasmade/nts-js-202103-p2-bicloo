@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     if (first) {
-      UserService.logUser('Georges', '1234');
+      UserService.logUser('Geoges', '1234');
     } else {
       setFirstOk(true);
     }

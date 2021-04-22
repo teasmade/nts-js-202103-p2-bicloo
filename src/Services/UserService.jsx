@@ -17,14 +17,11 @@ const UserService = {
       .then((data) => {
         // iterate through users
         const users = Object.entries(data);
-        users.forEach((user) => {
-          if (
+        this.user = users.find(
+          (user) =>
             (user[1].pseudo === pseudo || user[1].email === pseudo) &&
             user[1].password === password
-          ) {
-            this.user = user[1];
-          }
-        });
+        );
 
         return this.user ? Promise.resolve(true) : Promise.resolve(false);
       });
