@@ -9,6 +9,8 @@ const UserService = {
   // user id in state
   user: null,
 
+  levels: [0, 1000, 2000, 5000, 10000],
+
   getUser() {
     return this.user || null;
   },
@@ -56,6 +58,11 @@ const UserService = {
     this.user.current_xp += nbXp;
     this.updateUser('total_xp_won', this.user.total_xp_won);
     this.updateUser('current_xp', this.user.current_xp);
+
+    this.levels.forEach((lvl, index) => {
+      if (this.user.total_xp_won >= lvl && this.user.level !== index)
+        this.setLevel(index);
+    });
   },
 
   remove(nbXp) {
@@ -63,9 +70,21 @@ const UserService = {
     this.updateUser('current_xp', this.user.current_xp);
   },
 
-  // getLevel
+  getCurrentXp() {
+    return this.user.current_xp;
+  },
 
-  // setLevel
+  getTotalXp() {
+    return this.user.total_xp_won;
+  },
+
+  getLevel() {
+    return this.user.level;
+  },
+
+  setLevel(index) {
+    this.user.level = index;
+  },
 
   // getBadgesWon
 
