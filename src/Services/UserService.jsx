@@ -1,8 +1,3 @@
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-else-return */
-/* eslint-disable prefer-promise-reject-errors */
-/* eslint-disable no-unused-vars */
 import axios from '../axios-orders';
 
 const UserService = {
@@ -21,18 +16,19 @@ const UserService = {
       .then((data) => data.data)
       .then((data) => {
         console.log(data);
-        const userToLog = null;
         // iterate through users
-        for (const user in data) {
-          console.log(data[user]);
+        console.log(Object.entries(data));
+        const users = Object.entries(data);
+        users.forEach((user) => {
           if (
-            (data[user].pseudo === pseudo || data[user].email === pseudo) &&
-            data[user].password === password
+            (user[1].pseudo === pseudo || user[1].email === pseudo) &&
+            user[1].password === password
           ) {
-            this.user = data[user];
+            this.user = user[1];
           }
-        }
-        return this.user ? Promise.resolve(true) : Promise.reject(false);
+        });
+
+        return this.user ? Promise.resolve(true) : Promise.resolve(false);
       });
   },
 

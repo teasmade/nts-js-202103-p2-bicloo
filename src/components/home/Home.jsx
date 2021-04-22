@@ -23,11 +23,29 @@ export default function Home() {
       </h2>
 
       <p>The App which will make you ride ye boïke more, and more !</p>
-      <button type="button" className="homeButton">
+      <button
+        type="button"
+        className="homeButton"
+        onClick={() => {
+          console.log(UserService.getUser());
+        }}
+      >
         Discover <br />
         the concept
       </button>
       <LogSignButtons noLog />
+      <button type="button" onClick={() => UserService.getAllRewards()}>
+        get rewards
+      </button>
+      <button type="button" onClick={() => UserService.getUserRewards()}>
+        user rewards
+      </button>
+      <button type="button" onClick={() => console.log(UserService.getUser())}>
+        user
+      </button>
+      <button type="button" onClick={() => console.log(UserService.getData())}>
+        data
+      </button>
     </div>
   );
 }
