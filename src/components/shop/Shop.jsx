@@ -9,9 +9,7 @@ export default function Shop() {
         <div className="xpbar">1468 XP disponibles</div>
         <div className="choose">Choisissez votre récompense!</div>
       </div>
-      <div className="rewards">
-        <RewardList />
-      </div>
+      <RewardList />
     </div>
   );
 }
