@@ -8,9 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     if (first) {
-      UserService.logUser('Georges', '1234')
-        .then((res) => console.log('cool', res))
-        .catch((e) => console.log('nul', e));
+      UserService.logUser('Georges', '1234');
     } else {
       setFirstOk(true);
     }
@@ -23,29 +21,11 @@ export default function Home() {
       </h2>
 
       <p>The App which will make you ride ye boïke more, and more !</p>
-      <button
-        type="button"
-        className="homeButton"
-        onClick={() => {
-          console.log(UserService.getUser());
-        }}
-      >
+      <button type="button" className="homeButton">
         Discover <br />
         the concept
       </button>
       <LogSignButtons noLog />
-      <button type="button" onClick={() => UserService.getAllRewards()}>
-        get rewards
-      </button>
-      <button type="button" onClick={() => UserService.getUserRewards()}>
-        user rewards
-      </button>
-      <button type="button" onClick={() => console.log(UserService.getUser())}>
-        user
-      </button>
-      <button type="button" onClick={() => console.log(UserService.getData())}>
-        data
-      </button>
     </div>
   );
 }

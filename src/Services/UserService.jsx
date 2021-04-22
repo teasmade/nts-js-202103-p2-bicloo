@@ -15,9 +15,7 @@ const UserService = {
       .get('/users.json')
       .then((data) => data.data)
       .then((data) => {
-        console.log(data);
         // iterate through users
-        console.log(Object.entries(data));
         const users = Object.entries(data);
         users.forEach((user) => {
           if (
@@ -95,7 +93,6 @@ const UserService = {
         return data.map((reward) => {
           const newReward = reward;
           newReward.active = !!userRewards.includes(newReward.id);
-          console.log(newReward);
           return newReward;
         });
       });
