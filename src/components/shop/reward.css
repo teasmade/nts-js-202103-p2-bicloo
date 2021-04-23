@@ -1,14 +1,29 @@
 .rewards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10vw;
-  justify-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 .reward {
-  width: 30vw;
-  height: 30vw;
+  width: 40%;
+  height: 8.5em;
   background: #474350;
   border-radius: 16px;
   color: white;
-  text-align:center;
+  text-align: center;
+  margin-bottom: 15px;
+  padding-top: 25px;
+}
+
+.rewardActive {
+  transition: all 1.5s ease-out;
+  order: -1;
+  border: 2px solid gold;
+  width: 40%;
+  height: 8.5em;
+  background: #252327;
+  border-radius: 16px;
+  color: gold;
+  text-align: center;
+  margin-bottom: 15px;
 }
