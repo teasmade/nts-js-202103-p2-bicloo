@@ -1,7 +1,7 @@
 .mainSection {
-  width: 100vw;
+  width: 90vw;
   height: 88vh;
-  background-image: url("../assets/background.png");
+  background-image: url('../assets/background.png');
 }
 
 .footer {

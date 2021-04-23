@@ -17,7 +17,7 @@ const UserService = {
       .then((data) => {
         // iterate through users
         const users = Object.entries(data);
-        this.user = users.find(
+        [, this.user] = users.find(
           (user) =>
             (user[1].pseudo === pseudo || user[1].email === pseudo) &&
             user[1].password === password
@@ -54,6 +54,10 @@ const UserService = {
       if (this.user.total_xp_won >= lvl && this.user.level !== index)
         this.setLevel(index);
     });
+  },
+
+  getUserName() {
+    return this.user.pseudo;
   },
 
   removeXp(nbXp) {
