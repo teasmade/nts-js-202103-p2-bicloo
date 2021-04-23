@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import './Badges.css';
 import badgesSvg from './badges.svg';
 
-// eslint-disable-next-line react/prop-types
 const Badges = ({ badgeTitle, number }) => {
   return (
     <div className={number % 2 !== 0 ? 'left' : 'right'}>
