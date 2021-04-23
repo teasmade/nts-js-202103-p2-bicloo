@@ -14,7 +14,10 @@ export default function LogSignButtons(props) {
   };
 
   const redirectSignIn = () => {
-    history.push('/signIn');
+    history.push({
+      pathname: '/signIn',
+      state: props.page,
+    });
   };
 
   return (

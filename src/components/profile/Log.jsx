@@ -15,7 +15,7 @@ const Log = () => {
             <div className="text-1">Log or Sign up to</div>
             <div className="text-2">see your profile</div>
           </div>
-          <LogSignButtons noLog profile />
+          <LogSignButtons noLog page="profile" />
         </div>
       </section>
     </>

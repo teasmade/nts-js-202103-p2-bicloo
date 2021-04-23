@@ -5,9 +5,9 @@ import UserService from '../../../Services/UserService';
 
 const SignIn = () => {
   const history = useHistory();
-
   const redirect = () => {
-    if (UserService.getUser()) history.push('/');
+    if (UserService.getUser())
+      history.push(history.location.state ? `/${history.location.state}` : '/');
   };
 
   const handleSign = (e) => {

@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import Badges from './badges/Badges';
 import History from './history/History';
@@ -29,20 +26,22 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <p className="text-center">
-        Félicitation <strong>{pseudo}</strong>! Tu as atteind le niveau {level};
+      <p>
+        Félicitation <strong>{pseudo}</strong>!
       </p>
+      <p>Tu as atteind le niveau {level}</p>
       <div className="profile-howto">
         <p>Comment gagner plus d&apos;XP?</p>
       </div>
       <div className="profile-break-lines" />
       <section className="profile-sections">
-        <h2
+        <button
+          type="button"
           className="profil-sub-titles text-2xl mb-10"
           onClick={() => setOpenBadges(!openBadges)}
         >
           Mes badges
-        </h2>
+        </button>
         <div
           className={`profile-sections-container${
             openBadges ? '_open' : '_close'
@@ -57,12 +56,13 @@ const Profile = () => {
       </section>
       <div className="profile-break-lines" />
       <section className="profile-sections">
-        <h2
+        <button
+          type="button"
           className="profil-sub-titles text-2xl mb-10"
           onClick={() => setOpenHistory(!openHistory)}
         >
           Mes trajets
-        </h2>
+        </button>
         <div
           className={`profile-sections-container${
             openHistory ? '_open' : '_close'
