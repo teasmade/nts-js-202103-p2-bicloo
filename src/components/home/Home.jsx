@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
 import { useHistory } from 'react-router-dom';
 import LogSignButtons from '../tools/LogSignButtons';
 import UserService from '../../Services/UserService';
+import ModalBackdrop from '../modal/ModalBackdrop';
+import Modal from '../modal/Modal';
 
 export default function Home() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const modalOpenHandler = () => setModalIsOpen(true);
+  const modalCloseHandler = () => setModalIsOpen(false);
+
   const history = useHistory();
   const loggedUser = () => (
     <>
@@ -20,10 +26,12 @@ export default function Home() {
   );
   const noLoggedUser = (
     <>
-      <button type="button" className="homeButton">
+      <button type="button" className="homeButton" onClick={modalOpenHandler}>
         Discover <br />
         the concept
       </button>
+      {modalIsOpen ? <Modal /> : null}
+      {modalIsOpen ? <ModalBackdrop onCancel={modalCloseHandler} /> : null}
       <LogSignButtons noLog />
     </>
   );
