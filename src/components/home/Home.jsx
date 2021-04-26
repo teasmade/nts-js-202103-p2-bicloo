@@ -31,7 +31,9 @@ export default function Home() {
         Discover <br />
         the concept
       </button>
-      {modalIsOpen ? <Modal Content={<HomeModalContent />} /> : null}
+      {modalIsOpen ? (
+        <Modal Content={<HomeModalContent onCancel={modalCloseHandler} />} />
+      ) : null}
       {modalIsOpen ? <ModalBackdrop onCancel={modalCloseHandler} /> : null}
       <LogSignButtons noLog />
     </>

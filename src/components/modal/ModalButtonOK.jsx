@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import './modal.css';
 
-function ModalButtonOK({ confirmText }) {
+// eslint-disable-next-line react/prop-types
+function ModalButtonOK({ confirmText, onCancel }) {
   return (
     <div>
-      <button className="modalButtonOK" type="button">
+      <button onClick={onCancel} className="modalButtonOK" type="button">
         {confirmText}
       </button>
     </div>

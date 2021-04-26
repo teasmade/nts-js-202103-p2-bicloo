@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import './modal.css';
 
-function ModalBackdrop(props) {
-  const { onCancel } = props;
+function ModalBackdrop({ onCancel }) {
   return (
     <div
       className="backdrop"

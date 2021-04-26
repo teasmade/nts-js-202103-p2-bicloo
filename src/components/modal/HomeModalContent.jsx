@@ -1,6 +1,7 @@
 import ModalButtonOK from './ModalButtonOK';
 
-function HomeModalContent() {
+// eslint-disable-next-line react/prop-types
+function HomeModalContent({ onCancel }) {
   return (
     <div>
       <h2>Pourquoi utiliser BiclooApp?</h2>
@@ -21,7 +22,7 @@ function HomeModalContent() {
         voluptatum reiciendis aliquid recusandae facere eum praesentium dolor,
         voluptas quam?
       </p>
-      <ModalButtonOK confirmText="OK, got it" />
+      <ModalButtonOK confirmText="OK, got it" onCancel={onCancel} />
     </div>
   );
 }
