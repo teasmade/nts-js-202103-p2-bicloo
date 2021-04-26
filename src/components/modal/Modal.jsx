@@ -3,7 +3,11 @@ import './modal.css';
 
 function Modal(props) {
   const { Content } = props;
-  return <div className="modal">{Content}</div>;
+  return (
+    <div className="modal" style={{ animation: 'fadeIn 0.75s' }}>
+      {Content}
+    </div>
+  );
 }
 
 Modal.propTypes = {
