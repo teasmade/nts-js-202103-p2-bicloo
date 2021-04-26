@@ -20,7 +20,9 @@ import sampleStations from './data/sampleStations';
 import './style/Map.css';
 import './style/CustomIcon.css';
 import 'react-leaflet-markercluster/dist/styles.min.css';
-import Search from './Search';
+import LeafletgeoSearch from './Search';
+import SearchService from '../../Services/SearchService';
+import Routing from './Routing';
 
 // Nantes "position": [47.2076056402, -1.55753246791]
 
@@ -61,8 +63,10 @@ const Map = () => {
 
   return (
     <>
-      <Search />
       <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
+        <LeafletgeoSearch whichBar="from" />
+        <LeafletgeoSearch whichBar="to" />
+        <Routing coordinates={SearchService.getCoordinates()} />
         <LayersControl position="topright">
           <LayersControl.BaseLayer name="AliadeSmooth">
             {/* Need an API key */}
@@ -122,11 +126,37 @@ const Map = () => {
                 {station.fields.available_bikes} bikes available
                 <br />
                 {station.fields.available_bike_stands} stands available
+                <br />
+                <button
+                  type="button"
+                  onClick={() =>
+                    SearchService.setStartPoint(station.fields.position)
+                  }
+                >
+                  Utiliser comme départ
+                </button>
+                <br />
+                <button
+                  type="button"
+                  onClick={() =>
+                    SearchService.setEndPoint(station.fields.position)
+                  }
+                >
+                  Utiliser comme arrivé
+                </button>
               </Popup>
             </Marker>
           ))}
         </MarkerClusterGroup>
       </MapContainer>
+      <button
+        type="button"
+        onClick={() => {
+          SearchService.deleteRoute();
+        }}
+      >
+        Remove
+      </button>
     </>
   );
 };
