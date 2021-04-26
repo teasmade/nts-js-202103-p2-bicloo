@@ -10,15 +10,17 @@
 
 .modal {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border-radius: 15px;
   background-color: white;
   padding: 1rem;
   text-align: center;
-  width: 30rem;
+  width: 90vw;
   z-index: 10;
   position: fixed;
-  top: 20vh;
-  left: calc(50% - 15rem);
+  top: 10vh;
+  left: calc(50% - 45vw);
+  color: #17bebb;
+  border: solid 2px #17bebb;
 }
 
 .modal ul {
@@ -27,4 +29,16 @@
 
 .modal li {
   color: black;
+  font-size: 1.2rem;
+}
+
+.modal h2 {
+  font-size: 1.1rem;
+}
+
+.modal p {
+  color: black;
+  font-size: 1rem;
+  width: 100%;
+  text-align: justify;
 }

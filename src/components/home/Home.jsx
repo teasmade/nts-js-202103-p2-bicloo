@@ -5,6 +5,7 @@ import LogSignButtons from '../tools/LogSignButtons';
 import UserService from '../../Services/UserService';
 import ModalBackdrop from '../modal/ModalBackdrop';
 import Modal from '../modal/Modal';
+import HomeModalContent from '../modal/HomeModalContent';
 
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function Home() {
         Discover <br />
         the concept
       </button>
-      {modalIsOpen ? <Modal /> : null}
+      {modalIsOpen ? <Modal Content={<HomeModalContent />} /> : null}
       {modalIsOpen ? <ModalBackdrop onCancel={modalCloseHandler} /> : null}
       <LogSignButtons noLog />
     </>
