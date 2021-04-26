@@ -1,3 +1,5 @@
+import ModalButtonOK from './ModalButtonOK';
+
 function HomeModalContent() {
   return (
     <div>
@@ -19,6 +21,7 @@ function HomeModalContent() {
         voluptatum reiciendis aliquid recusandae facere eum praesentium dolor,
         voluptas quam?
       </p>
+      <ModalButtonOK confirmText="OK, got it" />
     </div>
   );
 }

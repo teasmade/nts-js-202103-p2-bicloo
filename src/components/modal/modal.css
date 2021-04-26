@@ -42,3 +42,10 @@
   width: 100%;
   text-align: justify;
 }
+
+.modalButtonOK {
+  background-color: #17bebb;
+  color: white;
+  padding: 2.5vh 12vw;
+  border-radius: 15px;
+}
