@@ -39,3 +39,10 @@ span {
   padding: 2.5vh 15vw;
   border-radius: 15px;
 }
+
+@media screen and (min-width: 680px) {
+  .home {
+    background-image: url('../../assets/background-home-texture.jpg');
+    background-size: contain;
+  }
+}
