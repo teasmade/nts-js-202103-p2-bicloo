@@ -81,9 +81,26 @@ const UserService = {
     this.user.level = index;
   },
 
-  // getBadgesWon
+  getAllBadge() {
+    const userBadges = this.user.badges_won;
+    return axios
+      .get('/badges.json')
+      .then((data) => data.data)
+      .then((data) => {
+        return data.map((badge) => {
+          const newBadge = badge;
+          newBadge.active = !!userBadges.includes(newBadge.id);
+          return newBadge;
+        });
+      });
+  },
 
-  // addBadge
+  addBadge(badgeId) {
+    if (!this.user.badges_won.includes(badgeId)) {
+      this.user.badges_won.push(badgeId);
+      this.updateUser('badges_won', this.user.badges_won);
+    }
+  },
 
   getAllRewards() {
     const userRewards = this.user.rewards_bought;
@@ -97,6 +114,13 @@ const UserService = {
           return newReward;
         });
       });
+  },
+
+  addRewardBought(rewardId) {
+    if (!this.user.rewards_bought.includes(rewardId)) {
+      this.user.rewards_bought.push(rewardId);
+      this.updateUser('rewards_bought', this.user.rewards_bought);
+    }
   },
 };
 
