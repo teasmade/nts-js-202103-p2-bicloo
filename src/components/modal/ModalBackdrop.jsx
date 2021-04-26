@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import './modal.css';
 
 function ModalBackdrop(props) {
@@ -14,5 +14,9 @@ function ModalBackdrop(props) {
     />
   );
 }
+
+ModalBackdrop.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+};
 
 export default ModalBackdrop;
