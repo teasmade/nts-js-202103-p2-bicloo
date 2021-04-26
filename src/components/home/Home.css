@@ -42,7 +42,7 @@ span {
   border-radius: 15px;
 }
 
-@media screen and (min-width: 680px) {
+@media screen and (min-width: 600px) {
   .home {
     background-image: url('../../assets/background-home-texture.jpg');
     background-size: contain;
