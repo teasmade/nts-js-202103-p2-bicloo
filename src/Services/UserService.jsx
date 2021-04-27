@@ -116,6 +116,10 @@ const UserService = {
       });
   },
 
+  getRewardsBought() {
+    return this.user.rewards_bought;
+  },
+
   addRewardBought(rewardId) {
     if (!this.user.rewards_bought.includes(rewardId)) {
       this.user.rewards_bought.push(rewardId);
