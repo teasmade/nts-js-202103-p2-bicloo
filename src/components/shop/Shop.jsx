@@ -15,11 +15,20 @@ export default function Shop() {
       {console.log(rewards)}
       {console.log(rewardsBought)}
       <div className="container">
-        <div className="xpbar">{totalXp} XP disponibles</div>
+        {user ? (
+          <div className="xpbar">{totalXp} XP disponibles</div>
+        ) : (
+          <div className="xpbar" />
+        )}
         <div className="choose">
-          Bonjour {pseudo}, choisissez votre récompense!
+          Bonjour
+          {user
+            ? ` ${pseudo}, choisissez vos récompenses :)`
+            : ', regardez ce que vous pouvez gagner! Sign up to win teh kewl lootz!'}
         </div>
       </div>
+      {/* 2 rewards lists needed, pass in rewards or rewards bought based on user
+      staten */}
       <RewardList />
     </div>
   );
