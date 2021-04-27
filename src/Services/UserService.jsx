@@ -102,7 +102,7 @@ const UserService = {
     }
   },
 
-  getAllRewards() {
+  getUserRewards() {
     const userRewards = this.user.rewards_bought;
     return axios
       .get('/rewards.json')
@@ -116,8 +116,17 @@ const UserService = {
       });
   },
 
-  getRewardsBought() {
-    return this.user.rewards_bought;
+  getAllRewards() {
+    return axios
+      .get('/rewards.json')
+      .then((data) => data.data)
+      .then((data) => {
+        return data.map((reward) => {
+          const newReward = reward;
+
+          return newReward;
+        });
+      });
   },
 
   addRewardBought(rewardId) {
