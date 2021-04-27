@@ -1,18 +1,20 @@
-import { useMap } from 'react-leaflet';
+import { MapLayer, withLeaflet } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
-import SearchService from '../../Services/SearchService';
 
-const Routing = ({ coordinates }) => {
-  const [startPoint, startStation, endStation, endPoint] = coordinates;
-  console.log(startPoint, startStation, endStation, endPoint);
-  const map = useMap();
-  const route = L.Routing.control({
-    waypoints: [L.latLng(27.67, 85.316), L.latLng(27.68, 85.321)],
-  }).addTo(map);
-  SearchService.deleteRoute = () => route.remove();
-
-  return null;
-};
-
-export default Routing;
+class Routing extends MapLayer {
+  createLeafletElement() {
+    const { map } = this.props.leaflet;
+    const leafletElement = L.Routing.control({
+      waypoints: [
+        L.latLng(47.2076056402, -1.55753246891),
+        L.latLng(47.2076056405, -1.55753246771),
+      ],
+      show: false,
+      itineraryBuilder: false,
+      itineraryFormatter: null,
+    }).addTo(map);
+    return leafletElement.getPlan();
+  }
+}
+export default withLeaflet(Routing);

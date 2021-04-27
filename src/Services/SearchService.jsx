@@ -7,7 +7,6 @@ const SearchService = {
 
   setStartPoint(coordinates) {
     this.startPoint = coordinates;
-    console.log(this.startPoint);
   },
 
   setEndPoint(coordinates) {
@@ -16,10 +15,12 @@ const SearchService = {
 
   setStartStation(coordinates) {
     this.startStation = coordinates;
+    console.log('startStation', this.startStation);
   },
 
   setEndStation(coordinates) {
     this.endStation = coordinates;
+    console.log('endStation', this.endStation);
   },
 
   getCoordinates() {

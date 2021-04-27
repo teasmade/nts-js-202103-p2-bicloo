@@ -37,3 +37,7 @@
   width: 0;
   transition: all 0.8s ease;
 }
+
+.leaflet-routing-container {
+  display: none;
+}

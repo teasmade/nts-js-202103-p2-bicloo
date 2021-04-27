@@ -1,12 +1,15 @@
+import { useState, useEffect } from 'react';
+
 import {
-  MapContainer,
+  Map as MapContainer,
   TileLayer,
   Marker,
   Popup,
   LayersControl,
 } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import { useState, useEffect } from 'react';
+import Search from './Search';
+import SearchService from '../../Services/SearchService';
 import {
   createClusterCustomIcon,
   userIcon,
@@ -20,9 +23,9 @@ import sampleStations from './data/sampleStations';
 import './style/Map.css';
 import './style/CustomIcon.css';
 import 'react-leaflet-markercluster/dist/styles.min.css';
-import LeafletgeoSearch from './Search';
-import SearchService from '../../Services/SearchService';
 import Routing from './Routing';
+
+// import Routing from './Routing';
 
 // Nantes "position": [47.2076056402, -1.55753246791]
 
@@ -60,13 +63,10 @@ const Map = () => {
     }
     return greenMarker;
   };
-
   return (
     <>
       <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
-        <LeafletgeoSearch whichBar="from" />
-        <LeafletgeoSearch whichBar="to" />
-        <Routing coordinates={SearchService.getCoordinates()} />
+        <Search FromTo="from" />
         <LayersControl position="topright">
           <LayersControl.BaseLayer name="AliadeSmooth">
             {/* Need an API key */}
@@ -95,6 +95,7 @@ const Map = () => {
             />
           </LayersControl.BaseLayer>
         </LayersControl>
+        <Routing />
         <Marker
           className="testMarker"
           position={userPosition}
@@ -130,7 +131,7 @@ const Map = () => {
                 <button
                   type="button"
                   onClick={() =>
-                    SearchService.setStartPoint(station.fields.position)
+                    SearchService.setStartStation(station.fields.position)
                   }
                 >
                   Utiliser comme départ
@@ -139,7 +140,7 @@ const Map = () => {
                 <button
                   type="button"
                   onClick={() =>
-                    SearchService.setEndPoint(station.fields.position)
+                    SearchService.setEndStation(station.fields.position)
                   }
                 >
                   Utiliser comme arrivé
