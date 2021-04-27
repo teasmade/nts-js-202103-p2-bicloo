@@ -3,14 +3,15 @@ import { LatLng } from 'leaflet';
 import ReactLeafletSearch from 'react-leaflet-search';
 import SearchService from '../../Services/SearchService';
 
-const Search = (props) => {
+const Search = ({ fromTo }) => {
+  console.log(fromTo);
   return (
     <ReactLeafletSearch
       onChange={(info) => {
-        if (props.fromTo === 'from') {
-          SearchService.setStartPoint([info.latLng.lat, info.latLng.long]);
+        if (fromTo === 'from') {
+          SearchService.setStartPoint([info.latLng.lat, info.latLng.lng]);
         } else {
-          SearchService.setEndPoint([info.latLng.lat, info.latLng.long]);
+          SearchService.setEndPoint([info.latLng.lat, info.latLng.lng]);
         }
       }}
       inputPlaceholder="Chercher"

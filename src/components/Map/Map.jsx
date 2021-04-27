@@ -66,7 +66,8 @@ const Map = () => {
   return (
     <>
       <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
-        <Search FromTo="from" />
+        <Search fromTo="from" />
+        <Search fromTo="to" />
         <LayersControl position="topright">
           <LayersControl.BaseLayer name="AliadeSmooth">
             {/* Need an API key */}
