@@ -4,13 +4,14 @@ import './shop.css';
 import UserService from '../../Services/UserService';
 
 export default function Shop() {
+  const user = UserService.getUser();
   const rewards = UserService.getAllRewards();
-  const pseudo = UserService.getUserName();
-  const totalXp = UserService.getTotalXp();
-  const rewardsBought = UserService.getUserRewards();
+  const pseudo = user ? UserService.getUserName() : null;
+  const totalXp = user ? UserService.getTotalXp() : null;
+  const rewardsBought = user ? UserService.getUserRewards() : null;
   return (
     <div className="shopBody">
-      {console.log(UserService.getUser())}
+      {console.log(user)}
       {console.log(rewards)}
       {console.log(rewardsBought)}
       <div className="container">
