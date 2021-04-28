@@ -10,7 +10,7 @@ export default function Reward({ rewardName, price, active, onRewardClick }) {
   return (
     <div
       className={active ? 'rewardActive' : 'reward'}
-      onClick={onRewardClick}
+      onClick={active ? null : onRewardClick}
       onKeyPress={onRewardClick}
       role="button"
       tabIndex={0}
