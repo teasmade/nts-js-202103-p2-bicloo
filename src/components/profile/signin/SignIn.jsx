@@ -1,24 +1,24 @@
 /* eslint-disable global-require */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* import { LockClosedIcon } from '@heroicons/react/solid'; */
-/* import { useHistory } from 'react-router-dom'; */
+import { useHistory, Link } from 'react-router-dom';
 /* import Logo from '../../../assets/logo.png'; */
-/* import UserService from '../../../Services/UserService'; */
+import UserService from '../../../Services/UserService';
 
 const SignIn = () => {
-  /* const history = useHistory();
+  const history = useHistory();
   const redirect = () => {
     if (UserService.getUser())
       history.push(history.location.state ? `/${history.location.state}` : '/');
-  }; */
+  };
 
   const handleSign = (e) => {
     e.preventDefault();
-    console.log(e);
-    /* const mail = e.target[2].value;
-    const password = e.target[4].value;
+    console.log(e.target);
+    const mail = e.target[0].value;
+    const password = e.target[1].value;
     UserService.logUser(mail, password);
-    setTimeout(redirect, 500); */
+    setTimeout(redirect, 500);
   };
 
   return (
@@ -123,7 +123,7 @@ const SignIn = () => {
                       <div className="text-center mt-6">
                         <button
                           className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                          type="button"
+                          type="submit"
                           style={{ transition: 'all .15s ease' }}
                         >
                           Sign In
@@ -148,7 +148,9 @@ const SignIn = () => {
                       onClick={(e) => e.preventDefault()}
                       className="text-gray-300"
                     >
-                      <small>Create new account</small>
+                      <Link to="/signUp">
+                        <small>Create new account</small>
+                      </Link>
                     </a>
                   </div>
                 </div>
