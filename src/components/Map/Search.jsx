@@ -4,7 +4,6 @@ import ReactLeafletSearch from 'react-leaflet-search';
 import SearchService from '../../Services/SearchService';
 
 const Search = ({ fromTo }) => {
-  console.log(fromTo);
   return (
     <ReactLeafletSearch
       onChange={(info) => {

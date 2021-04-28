@@ -65,7 +65,13 @@ const Map = () => {
   };
   return (
     <>
-      <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
+      <MapContainer
+        center={userPosition}
+        zoom={13}
+        maxZoom={18}
+        scrollWheelZoom
+        tap={false}
+      >
         <Search fromTo="from" />
         <Search fromTo="to" />
         <LayersControl position="topright">
