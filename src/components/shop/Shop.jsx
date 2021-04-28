@@ -1,14 +1,18 @@
-import React from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useState, useEffect } from 'react';
 import RewardList from './RewardList';
 import './shop.css';
 import UserService from '../../Services/UserService';
 
 export default function Shop() {
   const user = UserService.getUser();
-  let rewards = null;
-  UserService.getAllRewards().then((data) => {
-    rewards = data;
-  });
+  const [allRewards, setAllRewards] = useState(null);
+  // async call to user service to get all rewards
+  useEffect(() => {
+    UserService.getAllRewards().then((data) => {
+      setAllRewards(data);
+    });
+  }, []);
 
   /*
   1 - Shop se monte (rewards vaut null)
@@ -19,16 +23,14 @@ export default function Shop() {
   6 - ton state update ton composant
   7 - et là hop, tes rewards sont dispo, et peuvent être utilisées
   8 - !!! Condition dans le useeffect pour ne pas rappeler l'API à chaque fois (boucle sans fin)
-
-
-
   */
+
   const pseudo = user ? UserService.getUserName() : null;
   const totalXp = user ? UserService.getTotalXp() : null;
   const rewardsBought = user ? UserService.getUserRewards() : null;
   return (
     <div className="shopBody">
-      {console.log(rewards)}
+      {console.log(allRewards)}
       <div className="container">
         {user ? (
           <div className="xpbar">{totalXp} XP disponibles</div>
@@ -46,9 +48,9 @@ export default function Shop() {
       staten ++ pass in XP if we want to display reward too expensive message??? */}
       {user ? (
         <RewardList user={user} rewardsToDisplay={rewardsBought} />
-      ) : (
-        <RewardList /* NOT LOGGED USER PROPS HERE */ />
-      )}
+      ) : allRewards ? (
+        <RewardList user={user} rewardsToDisplay={allRewards} />
+      ) : null}
     </div>
   );
 }

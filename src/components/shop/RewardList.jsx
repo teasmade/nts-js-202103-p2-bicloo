@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import Reward from './Reward';
-import rewardsData from './rewardsData';
+// import rewardsData from './rewardsData';
 import './reward.css';
 
 const RewardList = ({ user, rewardsToDisplay }) => {
@@ -8,11 +8,11 @@ const RewardList = ({ user, rewardsToDisplay }) => {
     <div className="rewards">
       {console.log(user)}
       {console.log(rewardsToDisplay)}
-      {rewardsData.map((reward) => {
+      {rewardsToDisplay.map((reward) => {
         return (
           <Reward
             key={reward.id}
-            rewardName={reward.rewardName}
+            rewardName={reward.name}
             price={reward.price}
           />
         );
