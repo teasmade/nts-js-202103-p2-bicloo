@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Map as MapContainer,
@@ -31,9 +31,8 @@ import Routing from './Routing';
 
 const Map = () => {
   const defaultPosition = [47.2076056402, -1.55753246791];
-
+  const [coordinates, setCoordinates] = useState([]);
   const [userPosition, setUserPosition] = useState(defaultPosition);
-
   const getUserPosition = (lat, long) => {
     setUserPosition([lat, long]);
   };
@@ -46,6 +45,8 @@ const Map = () => {
       () => defaultPosition
     );
   }, []);
+
+  useEffect(() => {}, [coordinates]);
 
   const [colorMarkerFilter, setColorMarkerFilter] = useState('bikes');
   const handleMarkerColor = (availableBikes, availablePlaces, filter) => {
@@ -63,6 +64,7 @@ const Map = () => {
     }
     return greenMarker;
   };
+
   return (
     <>
       <MapContainer
@@ -72,8 +74,14 @@ const Map = () => {
         scrollWheelZoom
         tap={false}
       >
-        <Search fromTo="from" />
-        <Search fromTo="to" />
+        <Search
+          fromTo="from"
+          update={() => setCoordinates(SearchService.getCoordinates())}
+        />
+        <Search
+          fromTo="to"
+          update={() => setCoordinates(SearchService.getCoordinates())}
+        />
         <LayersControl position="topright">
           <LayersControl.BaseLayer name="AliadeSmooth">
             {/* Need an API key */}
@@ -102,7 +110,7 @@ const Map = () => {
             />
           </LayersControl.BaseLayer>
         </LayersControl>
-        <Routing />
+        <Routing show coordinates={coordinates} />
         <Marker
           className="testMarker"
           position={userPosition}
@@ -137,18 +145,20 @@ const Map = () => {
                 <br />
                 <button
                   type="button"
-                  onClick={() =>
-                    SearchService.setStartStation(station.fields.position)
-                  }
+                  onClick={() => {
+                    SearchService.setStartStation(station.fields.position);
+                    setCoordinates(SearchService.getCoordinates());
+                  }}
                 >
                   Utiliser comme départ
                 </button>
                 <br />
                 <button
                   type="button"
-                  onClick={() =>
-                    SearchService.setEndStation(station.fields.position)
-                  }
+                  onClick={() => {
+                    SearchService.setEndStation(station.fields.position);
+                    setCoordinates(SearchService.getCoordinates());
+                  }}
                 >
                   Utiliser comme arrivé
                 </button>
@@ -160,7 +170,7 @@ const Map = () => {
       <button
         type="button"
         onClick={() => {
-          SearchService.deleteRoute();
+          console.log('remove');
         }}
       >
         Remove

@@ -22,7 +22,13 @@ const SearchService = {
   },
 
   getCoordinates() {
-    return [this.startPoint, this.startStation, this.endStation, this.endPoint];
+    const filteredCoordinatesArray = [
+      this.startPoint,
+      this.startStation,
+      this.endStation,
+      this.endPoint,
+    ].filter((point) => point !== null);
+    return filteredCoordinatesArray.length >= 2 ? filteredCoordinatesArray : [];
   },
 
   searchStartStation() {
