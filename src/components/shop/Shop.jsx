@@ -5,15 +5,30 @@ import UserService from '../../Services/UserService';
 
 export default function Shop() {
   const user = UserService.getUser();
-  const rewards = UserService.getAllRewards();
+  let rewards = null;
+  UserService.getAllRewards().then((data) => {
+    rewards = data;
+  });
+
+  /*
+  1 - Shop se monte (rewards vaut null)
+  2 - mounted, donc appel useEffect
+  3 - dans useEffect, tu peux faire un appel API (getRewards)
+  4 - toujours dans useEffect getRewards.then()
+  5 - dans le then, tu mets à jour un state avec les nouvelles données reçues de l'API (then(data) ....)
+  6 - ton state update ton composant
+  7 - et là hop, tes rewards sont dispo, et peuvent être utilisées
+  8 - !!! Condition dans le useeffect pour ne pas rappeler l'API à chaque fois (boucle sans fin)
+
+
+
+  */
   const pseudo = user ? UserService.getUserName() : null;
   const totalXp = user ? UserService.getTotalXp() : null;
   const rewardsBought = user ? UserService.getUserRewards() : null;
   return (
     <div className="shopBody">
-      {console.log(user)}
       {console.log(rewards)}
-      {console.log(rewardsBought)}
       <div className="container">
         {user ? (
           <div className="xpbar">{totalXp} XP disponibles</div>
@@ -28,8 +43,12 @@ export default function Shop() {
         </div>
       </div>
       {/* 2 rewards lists needed, pass in rewards or rewards bought based on user
-      staten */}
-      <RewardList />
+      staten ++ pass in XP if we want to display reward too expensive message??? */}
+      {user ? (
+        <RewardList user={user} rewardsToDisplay={rewardsBought} />
+      ) : (
+        <RewardList /* NOT LOGGED USER PROPS HERE */ />
+      )}
     </div>
   );
 }

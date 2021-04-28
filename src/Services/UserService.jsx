@@ -3,6 +3,7 @@ import axios from '../axios-orders';
 const UserService = {
   // user id in state
   user: null,
+  rewards: null,
 
   levels: [0, 1000, 2000, 5000, 10000],
 
@@ -102,6 +103,7 @@ const UserService = {
     }
   },
 
+  // renamed to reflect fetch of all rewards plus active or not for this.user
   getUserRewards() {
     const userRewards = this.user.rewards_bought;
     return axios
@@ -116,17 +118,17 @@ const UserService = {
       });
   },
 
+  // renamed to reflect fetch of all possible rewards
+  // if rewards not yet called, start promise chain; if rewards already !null, return this.rewards as a promise so that it works with method call (still async) further down the chain.
   getAllRewards() {
-    return axios
-      .get('/rewards.json')
-      .then((data) => data.data)
-      .then((data) => {
-        return data.map((reward) => {
-          const newReward = reward;
+    if (this.rewards) {
+      return Promise.resolve(this.rewards);
+    }
 
-          return newReward;
-        });
-      });
+    return axios.get('/rewards.json').then((response) => {
+      this.rewards = response.data;
+      return response.data;
+    });
   },
 
   addRewardBought(rewardId) {

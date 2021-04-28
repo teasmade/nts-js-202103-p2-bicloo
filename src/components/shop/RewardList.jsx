@@ -1,10 +1,13 @@
+/* eslint-disable react/prop-types */
 import Reward from './Reward';
 import rewardsData from './rewardsData';
 import './reward.css';
 
-const RewardList = () => {
+const RewardList = ({ user, rewardsToDisplay }) => {
   return (
     <div className="rewards">
+      {console.log(user)}
+      {console.log(rewardsToDisplay)}
       {rewardsData.map((reward) => {
         return (
           <Reward
