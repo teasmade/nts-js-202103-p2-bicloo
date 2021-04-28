@@ -1,7 +1,11 @@
-/* eslint-disable react/prop-types */
+// Import Modules
 import { LatLng } from 'leaflet';
 import ReactLeafletSearch from 'react-leaflet-search';
+import PropTypes from 'prop-types';
+
+// Import Tools
 import SearchService from '../../Services/SearchService';
+import { userIcon } from './CustomIcon';
 
 const Search = ({ fromTo, update }) => {
   return (
@@ -14,7 +18,9 @@ const Search = ({ fromTo, update }) => {
         }
         update();
       }}
-      inputPlaceholder="Chercher"
+      inputPlaceholder={
+        fromTo === 'from' ? 'Adresse de départ' : "Adresse d'arrivée"
+      }
       position="topleft"
       provider="OpenStreetMap"
       providerOptions={{
@@ -24,10 +30,16 @@ const Search = ({ fromTo, update }) => {
         ],
         region: 'fr',
       }}
-      showMarker={false}
+      closeResultsOnClick
+      markerIcon={userIcon}
       showPopup={false}
     />
   );
+};
+
+Search.propTypes = {
+  fromTo: PropTypes.string.isRequired,
+  update: PropTypes.func.isRequired,
 };
 
 export default Search;

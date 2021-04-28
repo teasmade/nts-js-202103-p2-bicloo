@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// Import Modules
 import { MapLayer, withLeaflet } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';

@@ -1,14 +1,9 @@
+// Import Modules
 import React, { useState, useEffect } from 'react';
-
-import {
-  Map as MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  LayersControl,
-} from 'react-leaflet';
+import { Map as MapContainer, ZoomControl } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import Search from './Search';
+
+// Import Tools
 import SearchService from '../../Services/SearchService';
 import {
   createClusterCustomIcon,
@@ -18,26 +13,29 @@ import {
   yellowMarker,
   greenMarker,
 } from './CustomIcon';
-
 import sampleStations from './data/sampleStations';
+
+// Import Styles
 import './style/Map.css';
 import './style/CustomIcon.css';
 import 'react-leaflet-markercluster/dist/styles.min.css';
+
+// Import Components
+import Search from './Search';
 import Routing from './Routing';
-
-// import Routing from './Routing';
-
-// Nantes "position": [47.2076056402, -1.55753246791]
+import TileLayerComponent from './Tiles';
+import StationsMarkers, { UserMarker } from './MarkersComponent';
 
 const Map = () => {
+  // Nantes "position":
   const defaultPosition = [47.2076056402, -1.55753246791];
   const [coordinates, setCoordinates] = useState([]);
+
+  // Get user postion and change the userPostion state
   const [userPosition, setUserPosition] = useState(defaultPosition);
   const getUserPosition = (lat, long) => {
     setUserPosition([lat, long]);
   };
-
-  // Get user postion and change the userPostion state
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) =>
@@ -46,8 +44,7 @@ const Map = () => {
     );
   }, []);
 
-  useEffect(() => {}, [coordinates]);
-
+  // Handle marker icons colors w/ filter name
   const [colorMarkerFilter, setColorMarkerFilter] = useState('bikes');
   const handleMarkerColor = (availableBikes, availablePlaces, filter) => {
     if (filter === 'bikes') {
@@ -70,10 +67,13 @@ const Map = () => {
       <MapContainer
         center={userPosition}
         zoom={13}
-        maxZoom={18}
+        maxZoom={17}
         scrollWheelZoom
         tap={false}
+        zoomControl={false}
       >
+        <TileLayerComponent tile="Burn" />
+        <ZoomControl position="topright" />
         <Search
           fromTo="from"
           update={() => setCoordinates(SearchService.getCoordinates())}
@@ -82,89 +82,22 @@ const Map = () => {
           fromTo="to"
           update={() => setCoordinates(SearchService.getCoordinates())}
         />
-        <LayersControl position="topright">
-          <LayersControl.BaseLayer name="AliadeSmooth">
-            {/* Need an API key */}
-            <TileLayer
-              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-              url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=626aff83-a908-4f3d-8898-782129addfc5"
-            />
-          </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer checked name="AliadeSmoothDark">
-            {/* Need an API key */}
-            <TileLayer
-              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-              url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=626aff83-a908-4f3d-8898-782129addfc5"
-            />
-          </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer name="OpenStreetMap.Base">
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-          </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer name="OpenStreetMap.Cycle">
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
-            />
-          </LayersControl.BaseLayer>
-        </LayersControl>
         <Routing show coordinates={coordinates} />
-        <Marker
-          className="testMarker"
-          position={userPosition}
-          icon={userIcon}
-          onClick={() => setColorMarkerFilter('places')}
-        >
-          <Popup>This is our test position marker</Popup>
-        </Marker>
+        <UserMarker
+          userPosition={userPosition}
+          userIcon={userIcon}
+          setColorMarkerFilter={setColorMarkerFilter}
+        />
         <MarkerClusterGroup
           showCoverageOnHover={false}
           iconCreateFunction={createClusterCustomIcon}
         >
-          {sampleStations.map((station) => (
-            <Marker
-              key={station.fields.number}
-              position={[
-                station.fields.position[0],
-                station.fields.position[1],
-              ]}
-              icon={handleMarkerColor(
-                station.fields.available_bikes,
-                station.fields.available_bike_stands,
-                colorMarkerFilter
-              )}
-            >
-              <Popup>
-                {station.fields.address}
-                <br />
-                {station.fields.available_bikes} bikes available
-                <br />
-                {station.fields.available_bike_stands} stands available
-                <br />
-                <button
-                  type="button"
-                  onClick={() => {
-                    SearchService.setStartStation(station.fields.position);
-                    setCoordinates(SearchService.getCoordinates());
-                  }}
-                >
-                  Utiliser comme départ
-                </button>
-                <br />
-                <button
-                  type="button"
-                  onClick={() => {
-                    SearchService.setEndStation(station.fields.position);
-                    setCoordinates(SearchService.getCoordinates());
-                  }}
-                >
-                  Utiliser comme arrivé
-                </button>
-              </Popup>
-            </Marker>
-          ))}
+          <StationsMarkers
+            stationsArray={sampleStations}
+            handleMarkerColor={handleMarkerColor}
+            colorMarkerFilter={colorMarkerFilter}
+            setCoordinates={setCoordinates}
+          />
         </MarkerClusterGroup>
       </MapContainer>
       <button
