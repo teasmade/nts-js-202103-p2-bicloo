@@ -5,7 +5,6 @@ import Log from './components/profile/Log';
 import Home from './components/home/Home';
 import Shop from './components/shop/Shop';
 
-import Footer from './components/footer/Footer';
 import SignIn from './components/profile/signin/SignIn';
 import SignUp from './components/profile/signup/SignUp';
 import Map from './components/Map/Map';
@@ -36,7 +35,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <Footer />
     </div>
   );
 }
