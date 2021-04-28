@@ -7,12 +7,21 @@ import UserService from '../../Services/UserService';
 export default function Shop() {
   const user = UserService.getUser();
   const [allRewards, setAllRewards] = useState(null);
-  // async call to user service to get all rewards
-  useEffect(() => {
-    UserService.getAllRewards().then((data) => {
-      setAllRewards(data);
-    });
-  }, []);
+  // if user null (not connected)... async call to user service to get all possible rewards
+  if (!user) {
+    useEffect(() => {
+      UserService.getAllRewards().then((data) => {
+        setAllRewards(data);
+      });
+    }, []);
+  } else {
+    // another use effect here to get all logged user rewards
+    useEffect(() => {
+      UserService.getUserRewards().then((data) => {
+        setAllRewards(data);
+      });
+    }, []);
+  }
 
   /*
   1 - Shop se monte (rewards vaut null)
@@ -27,7 +36,7 @@ export default function Shop() {
 
   const pseudo = user ? UserService.getUserName() : null;
   const totalXp = user ? UserService.getTotalXp() : null;
-  const rewardsBought = user ? UserService.getUserRewards() : null;
+  // const rewardsBought = user ? UserService.getUserRewards() : null;
   return (
     <div className="shopBody">
       {console.log(allRewards)}
@@ -46,9 +55,7 @@ export default function Shop() {
       </div>
       {/* 2 rewards lists needed, pass in rewards or rewards bought based on user
       staten ++ pass in XP if we want to display reward too expensive message??? */}
-      {user ? (
-        <RewardList user={user} rewardsToDisplay={rewardsBought} />
-      ) : allRewards ? (
+      {allRewards ? (
         <RewardList user={user} rewardsToDisplay={allRewards} />
       ) : null}
     </div>

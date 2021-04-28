@@ -14,6 +14,7 @@ const RewardList = ({ user, rewardsToDisplay }) => {
             key={reward.id}
             rewardName={reward.name}
             price={reward.price}
+            active={reward.active}
           />
         );
       })}
