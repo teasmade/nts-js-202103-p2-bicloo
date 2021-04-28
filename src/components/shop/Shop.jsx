@@ -42,6 +42,9 @@ export default function Shop() {
   const modalOpenHandler = () => setModalIsOpen(true);
   const modalCloseHandler = () => setModalIsOpen(false);
 
+  // clickedRewardKey added to allow for description, but will also be needed to confirm selection, write back to DB, spend XP
+  const [clickedRewardKey, setClickedRewardKey] = useState(0);
+
   return (
     <div className="shopBody">
       {console.log(allRewards)}
@@ -64,10 +67,14 @@ export default function Shop() {
           user={user}
           rewardsToDisplay={allRewards}
           onRewardClick={modalOpenHandler}
+          setClickedRewardKey={setClickedRewardKey}
         />
       ) : null}
       {modalIsOpen ? (
-        <Modal Content="I AM A MODAL" onCancel={modalCloseHandler} />
+        <Modal
+          Content={`${allRewards[clickedRewardKey].description}`}
+          onCancel={modalCloseHandler}
+        />
       ) : null}
       {modalIsOpen ? <ModalBackdrop onCancel={modalCloseHandler} /> : null}
     </div>
