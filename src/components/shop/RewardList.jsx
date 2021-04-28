@@ -3,7 +3,7 @@ import Reward from './Reward';
 // import rewardsData from './rewardsData';
 import './reward.css';
 
-const RewardList = ({ user, rewardsToDisplay }) => {
+const RewardList = ({ user, rewardsToDisplay, onRewardClick }) => {
   return (
     <div className="rewards">
       {console.log(user)}
@@ -15,6 +15,7 @@ const RewardList = ({ user, rewardsToDisplay }) => {
             rewardName={reward.name}
             price={reward.price}
             active={reward.active}
+            onRewardClick={onRewardClick}
           />
         );
       })}

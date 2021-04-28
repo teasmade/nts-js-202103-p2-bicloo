@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import RewardList from './RewardList';
 import './shop.css';
 import UserService from '../../Services/UserService';
+import ModalBackdrop from '../modal/ModalBackdrop';
+import Modal from '../modal/Modal';
 
 export default function Shop() {
   const user = UserService.getUser();
@@ -33,10 +35,13 @@ export default function Shop() {
   7 - et là hop, tes rewards sont dispo, et peuvent être utilisées
   8 - !!! Condition dans le useeffect pour ne pas rappeler l'API à chaque fois (boucle sans fin)
   */
-
   const pseudo = user ? UserService.getUserName() : null;
   const totalXp = user ? UserService.getTotalXp() : null;
-  // const rewardsBought = user ? UserService.getUserRewards() : null;
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const modalOpenHandler = () => setModalIsOpen(true);
+  const modalCloseHandler = () => setModalIsOpen(false);
+
   return (
     <div className="shopBody">
       {console.log(allRewards)}
@@ -53,11 +58,18 @@ export default function Shop() {
             : ', regardez ce que vous pouvez gagner! Sign up to win teh kewl lootz!'}
         </div>
       </div>
-      {/* 2 rewards lists needed, pass in rewards or rewards bought based on user
-      staten ++ pass in XP if we want to display reward too expensive message??? */}
+      {/* staten ++ pass in XP if we want to display reward too expensive message??? */}
       {allRewards ? (
-        <RewardList user={user} rewardsToDisplay={allRewards} />
+        <RewardList
+          user={user}
+          rewardsToDisplay={allRewards}
+          onRewardClick={modalOpenHandler}
+        />
       ) : null}
+      {modalIsOpen ? (
+        <Modal Content="I AM A MODAL" onCancel={modalCloseHandler} />
+      ) : null}
+      {modalIsOpen ? <ModalBackdrop onCancel={modalCloseHandler} /> : null}
     </div>
   );
 }

@@ -104,6 +104,7 @@ const UserService = {
   },
 
   // renamed to reflect fetch of all rewards plus active or not for this.user
+  // ADD IN PROMISE RESOLVE STEP???
   getUserRewards() {
     const userRewards = this.user.rewards_bought;
     return axios
