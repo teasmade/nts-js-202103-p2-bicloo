@@ -170,10 +170,10 @@ const Map = () => {
       <button
         type="button"
         onClick={() => {
-          console.log('remove');
+          setCoordinates([]);
         }}
       >
-        Remove
+        Remove itinary
       </button>
     </>
   );
