@@ -48,8 +48,6 @@ export default function Shop() {
 
   return (
     <div className="shopBody">
-      {console.log(allRewards)}
-      {console.log(clickedRewardKey)}
       <div className="container">
         {user ? (
           <div className="xpbar">{totalXp} XP disponibles</div>

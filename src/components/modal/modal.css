@@ -62,3 +62,10 @@
   padding: 2.5vh 12vw;
   border-radius: 15px;
 }
+
+.modalButtonConfirm {
+  background-color: palegreen;
+  color: white;
+  padding: 2.5vh 12vw;
+  border-radius: 15px;
+}

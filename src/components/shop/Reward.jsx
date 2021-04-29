@@ -14,7 +14,6 @@ export default function Reward({
   // this state currently does nothing haha!
   // const [rewardActive, setRewardActive] = useState(false);
   const clickHandler = () => {
-    console.log(id);
     setClickedRewardKey(id);
     onRewardClick();
   };
