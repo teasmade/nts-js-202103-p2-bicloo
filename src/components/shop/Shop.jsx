@@ -78,6 +78,7 @@ export default function Shop() {
               onCancel={modalCloseHandler}
               allRewards={allRewards}
               clickedRewardKey={clickedRewardKey}
+              setAllRewards={setAllRewards}
             />
           }
         />
