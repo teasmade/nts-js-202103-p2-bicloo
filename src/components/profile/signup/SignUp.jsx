@@ -10,6 +10,7 @@ import Logo from '../../../assets/logo.png';
 import './SignUp.css';
 import GithubBtn from '../../buttons/github/GithubBtn';
 import GoogleBtn from '../../buttons/google/GoogleBtn';
+import LogoBicloo from '../../../assets/img/logo-bicloo.png';
 
 export default function SignUp() {
   const signIn = useHistory();
@@ -28,6 +29,7 @@ export default function SignUp() {
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
                   <div className="rounded-t mb-0 px-6 py-6">
                     <div className="text-center mb-3">
+                      <img src={LogoBicloo} alt="logo" />
                       <h6 className="text-gray-600 text-sm font-bold">
                         Sign up with
                       </h6>
