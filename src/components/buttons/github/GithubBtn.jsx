@@ -2,11 +2,13 @@ import React from 'react';
 import { githubProvider } from '../config/AuthMethods';
 import socialMediaAuth from '../service/Auth';
 import GithubIcon from '../../../assets/img/github.svg';
+import UserService from '../../../Services/UserService';
 
 export default function GithubBtn() {
   const handleOnClick = async (provider) => {
     const res = await socialMediaAuth(provider);
     console.log(res);
+    UserService.logUser(res);
   };
 
   return (
