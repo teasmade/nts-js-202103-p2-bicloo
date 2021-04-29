@@ -5,7 +5,7 @@ import LogSignButtons from '../tools/LogSignButtons';
 import UserService from '../../Services/UserService';
 import ModalBackdrop from '../modal/ModalBackdrop';
 import Modal from '../modal/Modal';
-import HomeModalContent from '../modal/HomeModalContent';
+import HomeModalContent from './HomeModalContent';
 
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
