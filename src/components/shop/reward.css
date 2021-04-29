@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
 .reward {
   width: 40%;
   height: 8.5em;
@@ -12,18 +13,29 @@
   color: white;
   text-align: center;
   margin-bottom: 15px;
-  padding-top: 25px;
+  padding: 10px;
 }
 
 .rewardActive {
   transition: all 1.5s ease-out;
   order: -1;
-  border: 2px solid gold;
+  border: 3px solid #17bebb;
   width: 40%;
   height: 8.5em;
   background: #252327;
   border-radius: 16px;
-  color: gold;
+  color: #17bebb;
   text-align: center;
+  font-weight: bold;
   margin-bottom: 15px;
+  padding: 10px;
+}
+
+.rewardName {
+  margin-bottom: 10px;
+}
+
+.rewardPrice {
+  font-size: 1.3rem;
+  color: #17bebb;
 }

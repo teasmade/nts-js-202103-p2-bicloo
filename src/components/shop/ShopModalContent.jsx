@@ -11,8 +11,7 @@ const ShopModalContent = ({
 }) => {
   return (
     <div>
-      <div>{`${allRewards[clickedRewardKey].description}`}</div>
-      <p>Im shop modal content</p>
+      <div className="description">{`${allRewards[clickedRewardKey].description}`}</div>
       <ModalButtonClose
         confirmText={user ? 'Annuler ma sélection' : 'Fermer'}
         onCancel={onCancel}

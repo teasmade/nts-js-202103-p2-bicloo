@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import RewardList from './RewardList';
 import './shop.css';
@@ -43,7 +42,7 @@ export default function Shop() {
   const modalOpenHandler = () => setModalIsOpen(true);
   const modalCloseHandler = () => setModalIsOpen(false);
 
-  // clickedRewardKey added to allow for description, but will also be needed to confirm selection, write back to DB, spend XP
+  // clickedRewardKey added to allow for description, confirm selection, write back to DB, spend XP
   const [clickedRewardKey, setClickedRewardKey] = useState(null);
 
   return (
@@ -52,16 +51,15 @@ export default function Shop() {
         {user ? (
           <div className="xpbar">{totalXp} XP disponibles</div>
         ) : (
-          <div className="xpbar" />
+          <div className="xpbarHide" />
         )}
         <div className="choose">
           Bonjour
           {user
             ? ` ${pseudo}, choisissez vos récompenses :)`
-            : ', regardez ce que vous pouvez gagner! Sign up to win teh kewl lootz!'}
+            : ', regardez ce que vous pouvez gagner! Sign up to win teh kewl lootz...'}
         </div>
       </div>
-      {/* staten ++ pass in XP if we want to display reward too expensive message??? */}
       {allRewards ? (
         <RewardList
           user={user}

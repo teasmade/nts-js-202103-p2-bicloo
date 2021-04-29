@@ -11,8 +11,6 @@ export default function Reward({
   onRewardClick,
   setClickedRewardKey,
 }) {
-  // this state currently does nothing haha!
-  // const [rewardActive, setRewardActive] = useState(false);
   const clickHandler = () => {
     setClickedRewardKey(id);
     onRewardClick();
@@ -25,8 +23,8 @@ export default function Reward({
       role="button"
       tabIndex={0}
     >
-      <div>{rewardName}</div>
-      <div>{price} XP</div>
+      <div className="rewardName">{rewardName}</div>
+      <div className="rewardPrice">{price} XP</div>
     </div>
   );
 }
