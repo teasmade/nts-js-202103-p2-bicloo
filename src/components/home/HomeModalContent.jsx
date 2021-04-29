@@ -1,4 +1,4 @@
-import ModalButtonOK from '../modal/ModalButtonOK';
+import ModalButtonClose from '../modal/ModalButtonClose';
 
 // eslint-disable-next-line react/prop-types
 function HomeModalContent({ onCancel }) {
@@ -22,7 +22,7 @@ function HomeModalContent({ onCancel }) {
         voluptatum reiciendis aliquid recusandae facere eum praesentium dolor,
         voluptas quam?
       </p>
-      <ModalButtonOK confirmText="OK, got it" onCancel={onCancel} />
+      <ModalButtonClose confirmText="OK, got it" onCancel={onCancel} />
     </div>
   );
 }

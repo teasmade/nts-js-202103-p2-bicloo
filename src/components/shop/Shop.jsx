@@ -5,6 +5,7 @@ import './shop.css';
 import UserService from '../../Services/UserService';
 import ModalBackdrop from '../modal/ModalBackdrop';
 import Modal from '../modal/Modal';
+import ShopModalContent from './ShopModalContent';
 
 export default function Shop() {
   const user = UserService.getUser();
@@ -43,11 +44,12 @@ export default function Shop() {
   const modalCloseHandler = () => setModalIsOpen(false);
 
   // clickedRewardKey added to allow for description, but will also be needed to confirm selection, write back to DB, spend XP
-  const [clickedRewardKey, setClickedRewardKey] = useState(0);
+  const [clickedRewardKey, setClickedRewardKey] = useState(null);
 
   return (
     <div className="shopBody">
       {console.log(allRewards)}
+      {console.log(clickedRewardKey)}
       <div className="container">
         {user ? (
           <div className="xpbar">{totalXp} XP disponibles</div>
@@ -72,8 +74,13 @@ export default function Shop() {
       ) : null}
       {modalIsOpen ? (
         <Modal
-          Content={`${allRewards[clickedRewardKey].description}`}
-          onCancel={modalCloseHandler}
+          Content={
+            <ShopModalContent
+              onCancel={modalCloseHandler}
+              allRewards={allRewards}
+              clickedRewardKey={clickedRewardKey}
+            />
+          }
         />
       ) : null}
       {modalIsOpen ? <ModalBackdrop onCancel={modalCloseHandler} /> : null}

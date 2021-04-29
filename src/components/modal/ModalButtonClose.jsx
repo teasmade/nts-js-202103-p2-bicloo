@@ -2,18 +2,18 @@ import PropTypes from 'prop-types';
 import './modal.css';
 
 // eslint-disable-next-line react/prop-types
-function ModalButtonOK({ confirmText, onCancel }) {
+function ModalButtonClose({ confirmText, onCancel }) {
   return (
     <div>
-      <button onClick={onCancel} className="modalButtonOK" type="button">
+      <button onClick={onCancel} className="modalButtonClose" type="button">
         {confirmText}
       </button>
     </div>
   );
 }
 
-ModalButtonOK.propTypes = {
+ModalButtonClose.propTypes = {
   confirmText: PropTypes.string.isRequired,
 };
 
-export default ModalButtonOK;
+export default ModalButtonClose;
