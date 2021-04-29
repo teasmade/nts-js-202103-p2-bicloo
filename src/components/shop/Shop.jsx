@@ -76,6 +76,7 @@ export default function Shop() {
         <Modal
           Content={
             <ShopModalContent
+              user={user}
               onCancel={modalCloseHandler}
               allRewards={allRewards}
               clickedRewardKey={clickedRewardKey}
