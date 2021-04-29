@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 // Import Tools
 import SearchService from '../../Services/SearchService';
 
+// Export the user position marker
 export const UserMarker = ({
   userPosition,
   userIcon,
@@ -22,10 +23,11 @@ export const UserMarker = ({
 
 UserMarker.propTypes = {
   userPosition: PropTypes.arrayOf(PropTypes.number).isRequired,
-  userIcon: PropTypes.element.isRequired,
+  userIcon: PropTypes.objectOf(PropTypes.any).isRequired,
   setColorMarkerFilter: PropTypes.func.isRequired,
 };
 
+// Export an array of marker defined by the data received
 const StationsMarkers = ({
   stationsArray,
   handleMarkerColor,

@@ -38,6 +38,46 @@
   transition: all 0.8s ease;
 }
 
-.leaflet-routing-container {
+/* .leaflet-routing-container {
   display: none;
+} */
+
+.results-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 75%;
+  max-height: 90vh;
+  overflow: auto;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  z-index: 5000;
+  background-color: rgba(240, 248, 255, 0.911);
+  border-radius: 10px;
+  border: solid black 2px;
+  box-shadow: -2px -2px 20px 2px black;
+  opacity: 1;
+  transition: max-height 1.2s ease, opacity 1.2s ease;
+}
+
+.results-container-close {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 75%;
+  overflow: auto;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  z-index: 5000;
+  background-color: rgba(240, 248, 255, 0.911);
+  border-radius: 10px;
+  border: solid black 2px;
+  box-shadow: -2px -2px 20px 2px black;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 1.2s ease, opacity 1s ease 200ms;
+}
+
+.results-el {
+  border: solid black 1px;
 }

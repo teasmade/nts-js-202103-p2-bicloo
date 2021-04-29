@@ -9,6 +9,7 @@ class Routing extends MapLayer {
     if (!this.leafletElement) {
       this.leafletElement = L.Routing.control({
         waypoints: this.props.coordinates,
+        language: 'fr',
       }).addTo(map);
     }
     return this.leafletElement.getPlan();

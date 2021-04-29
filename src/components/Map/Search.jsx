@@ -5,15 +5,16 @@ import PropTypes from 'prop-types';
 
 // Import Tools
 import SearchService from '../../Services/SearchService';
-import { userIcon } from './CustomIcon';
 
 const Search = ({ fromTo, update }) => {
   return (
     <ReactLeafletSearch
+      on
       onChange={(info) => {
         if (fromTo === 'from') {
           SearchService.setStartPoint([info.latLng.lat, info.latLng.lng]);
-        } else {
+        }
+        if (fromTo === 'to') {
           SearchService.setEndPoint([info.latLng.lat, info.latLng.lng]);
         }
         update();
@@ -31,7 +32,7 @@ const Search = ({ fromTo, update }) => {
         region: 'fr',
       }}
       closeResultsOnClick
-      markerIcon={userIcon}
+      showMarker={false}
       showPopup={false}
     />
   );
