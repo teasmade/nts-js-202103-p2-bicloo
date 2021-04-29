@@ -60,20 +60,27 @@
 }
 
 .modalButtonClose {
-  background-color: #17bebb;
-  color: white;
-  padding: 2.5vh 12vw;
+  width: 30vw;
+  background-color: #252327;
+  color: #17bebb;
+  padding: 25px 15px;
   border-radius: 15px;
 }
 
 .modalButtonConfirm {
-  background-color: palegreen;
+  width: 30vw;
+  background-color: #17bebb;
   color: white;
-  padding: 2.5vh 12vw;
+  padding: 25px 15px;
   border-radius: 15px;
 }
 
 .description {
   margin-top: 1rem;
   margin-bottom: 2rem;
+}
+
+.twoButtonWrapper {
+  display: flex;
+  justify-content: space-around;
 }

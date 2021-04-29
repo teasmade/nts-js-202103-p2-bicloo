@@ -12,18 +12,20 @@ const ShopModalContent = ({
   return (
     <div>
       <div className="description">{`${allRewards[clickedRewardKey].description}`}</div>
-      <ModalButtonClose
-        confirmText={user ? 'Annuler ma sélection' : 'Fermer'}
-        onCancel={onCancel}
-      />
-      {user ? (
-        <ModalButtonConfirm
-          confirmText="Confirmer ma sélection"
+      <div className="twoButtonWrapper">
+        <ModalButtonClose
+          confirmText={user ? 'Annuler ma sélection' : 'Fermer'}
           onCancel={onCancel}
-          clickedRewardKey={clickedRewardKey}
-          setAllRewards={setAllRewards}
         />
-      ) : null}
+        {user ? (
+          <ModalButtonConfirm
+            confirmText="Valider ma sélection"
+            onCancel={onCancel}
+            clickedRewardKey={clickedRewardKey}
+            setAllRewards={setAllRewards}
+          />
+        ) : null}
+      </div>
     </div>
   );
 };
