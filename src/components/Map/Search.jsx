@@ -1,31 +1,46 @@
-import { useState } from 'react';
+// Import Modules
+import { LatLng } from 'leaflet';
+import ReactLeafletSearch from 'react-leaflet-search';
+import PropTypes from 'prop-types';
 
-const Search = () => {
-  const [isOpen, setIsOpen] = useState(false);
+// Import Tools
+import SearchService from '../../Services/SearchService';
+
+const Search = ({ fromTo, update }) => {
   return (
-    <>
-      <div className={isOpen ? 'form-search-open' : 'form-search-close'}>
-        <div className="form-search-lines">
-          {' '}
-          <button
-            className="btn-search"
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            icon
-          </button>
-          <input className="input-search" type="text" placeholder="From :" />
-        </div>
-        <div className="form-search-lines">
-          {' '}
-          <button className="btn-search" type="button">
-            icon
-          </button>
-          <input className="input-search" type="text" placeholder="To :" />
-        </div>
-      </div>
-    </>
+    <ReactLeafletSearch
+      on
+      onChange={(info) => {
+        if (fromTo === 'from') {
+          SearchService.setStartPoint([info.latLng.lat, info.latLng.lng]);
+        }
+        if (fromTo === 'to') {
+          SearchService.setEndPoint([info.latLng.lat, info.latLng.lng]);
+        }
+        update();
+      }}
+      inputPlaceholder={
+        fromTo === 'from' ? 'Adresse de départ' : "Adresse d'arrivée"
+      }
+      position="topleft"
+      provider="OpenStreetMap"
+      providerOptions={{
+        searchBounds: [
+          new LatLng(47.2719, -1.3728),
+          new LatLng(47.1645, -1.6423),
+        ],
+        region: 'fr',
+      }}
+      closeResultsOnClick
+      showMarker={false}
+      showPopup={false}
+    />
   );
+};
+
+Search.propTypes = {
+  fromTo: PropTypes.string.isRequired,
+  update: PropTypes.func.isRequired,
 };
 
 export default Search;

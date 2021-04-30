@@ -1,16 +1,24 @@
+/* eslint-disable react/prop-types */
 import Reward from './Reward';
-import rewardsData from './rewardsData';
 import './reward.css';
 
-const RewardList = () => {
+const RewardList = ({
+  rewardsToDisplay,
+  onRewardClick,
+  setClickedRewardKey,
+}) => {
   return (
     <div className="rewards">
-      {rewardsData.map((reward) => {
+      {rewardsToDisplay.map((reward, i) => {
         return (
           <Reward
             key={reward.id}
-            rewardName={reward.rewardName}
+            id={i}
+            rewardName={reward.name}
             price={reward.price}
+            active={reward.active}
+            onRewardClick={onRewardClick}
+            setClickedRewardKey={setClickedRewardKey}
           />
         );
       })}

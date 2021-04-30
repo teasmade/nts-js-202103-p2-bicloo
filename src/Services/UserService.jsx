@@ -3,6 +3,7 @@ import axios from '../axios-orders';
 const UserService = {
   // user id in state
   user: null,
+  rewards: null,
 
   levels: [0, 1000, 2000, 5000, 10000],
 
@@ -85,11 +86,30 @@ const UserService = {
     this.user.level = index;
   },
 
-  // getBadgesWon
+  getAllBadge() {
+    const userBadges = this.user.badges_won;
+    return axios
+      .get('/badges.json')
+      .then((data) => data.data)
+      .then((data) => {
+        return data.map((badge) => {
+          const newBadge = badge;
+          newBadge.active = !!userBadges.includes(newBadge.id);
+          return newBadge;
+        });
+      });
+  },
 
-  // addBadge
+  addBadge(badgeId) {
+    if (!this.user.badges_won.includes(badgeId)) {
+      this.user.badges_won.push(badgeId);
+      this.updateUser('badges_won', this.user.badges_won);
+    }
+  },
 
-  getAllRewards() {
+  // renamed to reflect fetch of all rewards plus active or not for this.user
+  // ADD IN PROMISE RESOLVE STEP???
+  getUserRewards() {
     const userRewards = this.user.rewards_bought;
     return axios
       .get('/rewards.json')
@@ -101,6 +121,26 @@ const UserService = {
           return newReward;
         });
       });
+  },
+
+  // renamed to reflect fetch of all possible rewards
+  // if rewards not yet called, start promise chain; if rewards already !null, return this.rewards as a promise so that it works with method call (still async) further down the chain.
+  getAllRewards() {
+    if (this.rewards) {
+      return Promise.resolve(this.rewards);
+    }
+
+    return axios.get('/rewards.json').then((response) => {
+      this.rewards = response.data;
+      return response.data;
+    });
+  },
+
+  addRewardBought(rewardId) {
+    if (!this.user.rewards_bought.includes(rewardId)) {
+      this.user.rewards_bought.push(rewardId);
+      this.updateUser('rewards_bought', this.user.rewards_bought);
+    }
   },
 };
 

@@ -1,12 +1,10 @@
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  LayersControl,
-} from 'react-leaflet';
+// Import Modules
+import React, { useState, useEffect } from 'react';
+import { Map as MapContainer, ZoomControl } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import { useState, useEffect } from 'react';
+
+// Import Tools
+import SearchService from '../../Services/SearchService';
 import {
   createClusterCustomIcon,
   userIcon,
@@ -15,25 +13,49 @@ import {
   yellowMarker,
   greenMarker,
 } from './CustomIcon';
-
 import sampleStations from './data/sampleStations';
+
+// Import Styles
 import './style/Map.css';
 import './style/CustomIcon.css';
 import 'react-leaflet-markercluster/dist/styles.min.css';
-import Search from './Search';
 
-// Nantes "position": [47.2076056402, -1.55753246791]
+// Import Components
+import Search from './Search';
+import Routing from './Routing';
+import TileLayerComponent from './Tiles';
+import StationsMarkers, { UserMarker } from './MarkersComponent';
+import ResultsPopup from './ResultsPopup';
 
 const Map = () => {
+  const [popupIsOpen, setPopupIsOpen] = useState(false);
+  const [searchStatus, setSearchStatus] = useState(null);
+  // Nantes "position":
   const defaultPosition = [47.2076056402, -1.55753246791];
+  const [coordinates, setCoordinates] = useState([]);
+  const [resultStations, setResultStations] = useState([]);
+  useEffect(() => {
+    if (searchStatus === 'from')
+      setResultStations(
+        SearchService.calculateDistanceToStation(
+          SearchService.startPoint,
+          sampleStations
+        )
+      );
+    if (searchStatus === 'to')
+      setResultStations(
+        SearchService.calculateDistanceToStation(
+          SearchService.endPoint,
+          sampleStations
+        )
+      );
+  }, [coordinates]);
 
+  // Get user postion and change the userPostion state
   const [userPosition, setUserPosition] = useState(defaultPosition);
-
   const getUserPosition = (lat, long) => {
     setUserPosition([lat, long]);
   };
-
-  // Get user postion and change the userPostion state
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) =>
@@ -42,91 +64,75 @@ const Map = () => {
     );
   }, []);
 
+  // Handle marker icons colors w/ filter name
   const [colorMarkerFilter, setColorMarkerFilter] = useState('bikes');
   const handleMarkerColor = (availableBikes, availablePlaces, filter) => {
     if (filter === 'bikes') {
       if (availableBikes === 0) return redMarker;
       if (availableBikes <= 4) return orangeMarker;
       if (availableBikes <= 9) return yellowMarker;
-      return greenMarker;
     }
     if (filter === 'places') {
       if (availablePlaces === 0) return redMarker;
       if (availablePlaces <= 4) return orangeMarker;
       if (availablePlaces <= 9) return yellowMarker;
-      return greenMarker;
     }
     return greenMarker;
   };
 
   return (
     <>
-      <Search />
-      <MapContainer center={userPosition} zoom={14} scrollWheelZoom>
-        <LayersControl position="topright">
-          <LayersControl.BaseLayer name="AliadeSmooth">
-            {/* Need an API key */}
-            <TileLayer
-              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-              url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=626aff83-a908-4f3d-8898-782129addfc5"
-            />
-          </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer checked name="AliadeSmoothDark">
-            {/* Need an API key */}
-            <TileLayer
-              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-              url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=626aff83-a908-4f3d-8898-782129addfc5"
-            />
-          </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer name="OpenStreetMap.Base">
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-          </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer name="OpenStreetMap.Cycle">
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
-            />
-          </LayersControl.BaseLayer>
-        </LayersControl>
-        <Marker
-          className="testMarker"
-          position={userPosition}
-          icon={userIcon}
-          onClick={() => setColorMarkerFilter('places')}
-        >
-          <Popup>This is our test position marker</Popup>
-        </Marker>
+      <MapContainer
+        center={defaultPosition}
+        zoom={13}
+        maxZoom={17}
+        scrollWheelZoom
+        tap={false}
+        zoomControl={false}
+        attributionControl={false}
+      >
+        <TileLayerComponent tile="AliadeSmoothDark" />
+        <ZoomControl position="topright" />
+        <Search
+          fromTo="from"
+          update={() => {
+            setSearchStatus('from');
+            setCoordinates(SearchService.getCoordinates());
+            setPopupIsOpen(!popupIsOpen);
+          }}
+        />
+        <Search
+          fromTo="to"
+          update={() => {
+            setSearchStatus('to');
+            setCoordinates(SearchService.getCoordinates());
+            setPopupIsOpen(!popupIsOpen);
+          }}
+        />
+        <Routing show coordinates={coordinates} />
+        <UserMarker
+          userPosition={userPosition}
+          userIcon={userIcon}
+          setColorMarkerFilter={setColorMarkerFilter}
+        />
         <MarkerClusterGroup
           showCoverageOnHover={false}
           iconCreateFunction={createClusterCustomIcon}
         >
-          {sampleStations.map((station) => (
-            <Marker
-              key={station.fields.number}
-              position={[
-                station.fields.position[0],
-                station.fields.position[1],
-              ]}
-              icon={handleMarkerColor(
-                station.fields.available_bikes,
-                station.fields.available_bike_stands,
-                colorMarkerFilter
-              )}
-            >
-              <Popup>
-                {station.fields.address}
-                <br />
-                {station.fields.available_bikes} bikes available
-                <br />
-                {station.fields.available_bike_stands} stands available
-              </Popup>
-            </Marker>
-          ))}
+          <StationsMarkers
+            stationsArray={sampleStations}
+            handleMarkerColor={handleMarkerColor}
+            colorMarkerFilter={colorMarkerFilter}
+            setCoordinates={setCoordinates}
+          />
         </MarkerClusterGroup>
       </MapContainer>
+      <ResultsPopup
+        list={resultStations}
+        popupIsOpen={popupIsOpen}
+        setPopupIsOpen={setPopupIsOpen}
+        setCoordinates={setCoordinates}
+      />
     </>
   );
 };
