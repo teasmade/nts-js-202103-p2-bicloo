@@ -1,9 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable global-require */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* import { LockClosedIcon } from '@heroicons/react/solid'; */
 import { useHistory, Link } from 'react-router-dom';
-/* import Logo from '../../../assets/logo.png'; */
 import UserService from '../../../Services/UserService';
 import GithubBtn from '../../buttons/github/GithubBtn';
 import GoogleBtn from '../../buttons/google/GoogleBtn';
@@ -18,7 +14,6 @@ const SignIn = () => {
 
   const handleSign = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const mail = e.target[0].value;
     const password = e.target[1].value;
     UserService.logUser(mail, password);
