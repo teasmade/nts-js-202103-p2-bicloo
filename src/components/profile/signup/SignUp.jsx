@@ -1,106 +1,173 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useRef, useState } from 'react';
+
 import { useHistory } from 'react-router-dom';
-import { LockClosedIcon } from '@heroicons/react/solid';
-import Logo from '../../../assets/logo.png';
+
+import { useAuth } from '../../../firebase/AuthContext';
+
 import './SignUp.css';
+import GithubBtn from '../../buttons/github/GithubBtn';
+import GoogleBtn from '../../buttons/google/GoogleBtn';
+import LogoBicloo from '../../../assets/img/logo-bicloo.png';
 
 export default function SignUp() {
-  const signIn = useHistory();
+  /* const signIn = useHistory();
   const redirectSignIn = () => {
     signIn.push('/signIn');
-  };
+  }; */
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  const { signup } = useAuth();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    try {
+      setError('');
+      setLoading(true);
+      await signup(emailRef.current.value, passwordRef.current.value);
+      history.push('/');
+    } catch (err) {
+      setError('Failed to create an account');
+    }
+
+    setLoading(false);
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <img className="mx-auto w-auto" src={Logo} alt="Workflow" />
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
-          <input type="hidden" name="remember" defaultValue="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-                <input type="text" />
-              </label>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-                <input type="text" />
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-              />
+    <>
+      <main>
+        <section className="absolute w-full h-full">
+          <div className="absolute top-0 w-full h-full bg-gray-900" />
+          <div className="container mx-auto px-4 h-full">
+            <div className="flex content-center items-center justify-center h-full">
+              <div className="w-full lg:w-4/12 px-4">
+                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+                  <div className="rounded-t mb-0 px-6 py-6">
+                    <div className="text-center mb-3">
+                      <img src={LogoBicloo} alt="logo" />
+                      <h6 className="text-gray-600 text-sm font-bold">
+                        Sign up with
+                      </h6>
+                      {error && (
+                        <div
+                          className="bg-red-600 border-l-4 border-gray-900 text-orange-700 p-4"
+                          role="alert"
+                        >
+                          {error}
+                        </div>
+                      )}
+                    </div>
+                    <div className="btn-wrapper text-center">
+                      <GithubBtn />
+                      <GoogleBtn />
+                    </div>
+                    <hr className="mt-6 border-b-1 border-gray-400" />
+                  </div>
+                  <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                    <div className="text-gray-500 text-center mb-3 font-bold">
+                      <small>Or sign in with credentials</small>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Email
+                          <input
+                            type="Email"
+                            ref={emailRef}
+                            required
+                            className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                            placeholder="Email"
+                            style={{ transition: 'all .15s ease' }}
+                          />
+                        </label>
+                      </div>
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Password
+                          <input
+                            type="password"
+                            ref={passwordRef}
+                            required
+                            className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                            placeholder="Password"
+                            style={{ transition: 'all .15s ease' }}
+                          />
+                        </label>
+                      </div>
+
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Password Confirmation
+                          <input
+                            type="password"
+                            ref={passwordConfirmRef}
+                            required
+                            className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                            placeholder="Password Confirmation"
+                            style={{ transition: 'all .15s ease' }}
+                          />
+                        </label>
+                      </div>
+                      <div>
+                        <label
+                          className="inline-flex items-center cursor-pointer"
+                          htmlFor="a"
+                        >
+                          <input
+                            id="customCheckLogin"
+                            type="checkbox"
+                            className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                          />
+                          <span className="ml-2 text-sm font-semibold text-blueGray-600">
+                            I agree with the{' '}
+                            <a
+                              href="#pablo"
+                              className="text-lightBlue-500"
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              Privacy Policy
+                            </a>
+                          </span>
+                        </label>
+                      </div>
+
+                      <div className="text-center mt-6">
+                        <button
+                          disabled={loading}
+                          className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                          type="submit"
+                          style={{ transition: 'all .15s ease' }}
+                        >
+                          Create Account
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember_me"
-                name="remember_me"
-                type="checkbox"
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label
-                htmlFor="remember_me"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                {' '}
-                Remember me{' '}
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="/#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                {' '}
-                Forgot your password?
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                <LockClosedIcon
-                  className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                  aria-hidden="true"
-                />
-              </span>
-              Sign in
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        </section>
+      </main>
+    </>
   );
 }

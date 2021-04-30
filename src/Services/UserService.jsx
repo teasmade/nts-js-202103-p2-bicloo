@@ -32,6 +32,10 @@ const UserService = {
     this.user = null;
   },
 
+  // createUser() {
+  //   axios.
+  // },
+
   updateUser(property, value) {
     axios.patch(
       `/users/${this.user.user_ID}/.json`,
