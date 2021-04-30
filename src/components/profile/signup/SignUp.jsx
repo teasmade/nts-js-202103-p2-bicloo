@@ -1,6 +1,5 @@
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-unused-vars */
 import React, { useRef, useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
@@ -13,10 +12,10 @@ import GoogleBtn from '../../buttons/google/GoogleBtn';
 import LogoBicloo from '../../../assets/img/logo-bicloo.png';
 
 export default function SignUp() {
-  const signIn = useHistory();
+  /* const signIn = useHistory();
   const redirectSignIn = () => {
     signIn.push('/signIn');
-  };
+  }; */
 
   const emailRef = useRef();
   const passwordRef = useRef();
