@@ -52,32 +52,51 @@
   text-align: center;
   transform: translate(-50%, -50%);
   z-index: 5000;
-  background-color: rgba(240, 248, 255, 0.911);
+  background-color: #fcffebef;
   border-radius: 10px;
   border: solid black 2px;
   box-shadow: -2px -2px 20px 2px black;
   opacity: 1;
-  transition: max-height 1.2s ease, opacity 1.2s ease;
+  transition: max-height 600ms ease, opacity 800ms ease, width 600ms ease-out;
 }
 
 .results-container-close {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 75%;
+  width: 0;
   overflow: auto;
   text-align: center;
   transform: translate(-50%, -50%);
   z-index: 5000;
-  background-color: rgba(240, 248, 255, 0.911);
+  background-color: #fcffeb;
   border-radius: 10px;
   border: solid black 2px;
   box-shadow: -2px -2px 20px 2px black;
   max-height: 0;
   opacity: 0;
-  transition: max-height 1.2s ease, opacity 1s ease 200ms;
+  overflow: hidden;
+  transition: max-height 600ms ease, opacity 600ms ease 100ms,
+    width 600ms ease-out;
 }
 
 .results-el {
   border: solid black 1px;
+}
+
+.results-choose-btn {
+  margin: 1px;
+  padding: 2px 15px;
+  border-radius: 20px;
+  background-color: #fcffeb;
+}
+
+.search-control button,
+.search-control input,
+.leaflet-routing-container,
+a.leaflet-control-zoom-in,
+a.leaflet-control-zoom-out,
+ul.search-control-info-list,
+.search-input .search-control-input {
+  background-color: #fcffeb;
 }

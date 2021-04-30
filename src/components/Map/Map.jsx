@@ -133,9 +133,6 @@ const Map = () => {
         setPopupIsOpen={setPopupIsOpen}
         setCoordinates={setCoordinates}
       />
-      <button type="button" onClick={() => setPopupIsOpen(!popupIsOpen)}>
-        Remove itinary
-      </button>
     </>
   );
 };

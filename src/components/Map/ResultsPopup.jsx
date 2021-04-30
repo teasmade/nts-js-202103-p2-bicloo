@@ -19,6 +19,7 @@ const ResultsPopup = ({
             {`Place${station.stands > 1 ? 's' : null} dispo: ${station.stands}`}
           </span>
           <button
+            className="results-choose-btn"
             type="button"
             onClick={() => {
               SearchService.setStartStation(station.position);
