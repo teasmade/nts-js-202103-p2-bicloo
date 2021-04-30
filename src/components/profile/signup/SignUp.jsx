@@ -1,9 +1,6 @@
 /* eslint-disable consistent-return */
-/* eslint-disable global-require */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useRef, useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
