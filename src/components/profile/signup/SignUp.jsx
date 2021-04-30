@@ -66,7 +66,7 @@ export default function SignUp() {
                       </h6>
                       {error && (
                         <div
-                          className="bg-red-600 border-l-4 border-orange-500 text-orange-700 p-4"
+                          className="bg-red-600 border-l-4 border-gray-900 text-orange-700 p-4"
                           role="alert"
                         >
                           {error}
