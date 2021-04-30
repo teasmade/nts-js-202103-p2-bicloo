@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef, useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
@@ -85,15 +84,15 @@ export default function SignUp() {
                           htmlFor="grid-password"
                         >
                           Email
+                          <input
+                            type="Email"
+                            ref={emailRef}
+                            required
+                            className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                            placeholder="Email"
+                            style={{ transition: 'all .15s ease' }}
+                          />
                         </label>
-                        <input
-                          type="Email"
-                          ref={emailRef}
-                          required
-                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                          placeholder="Email"
-                          style={{ transition: 'all .15s ease' }}
-                        />
                       </div>
                       <div className="relative w-full mb-3">
                         <label
@@ -101,15 +100,15 @@ export default function SignUp() {
                           htmlFor="grid-password"
                         >
                           Password
+                          <input
+                            type="password"
+                            ref={passwordRef}
+                            required
+                            className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                            placeholder="Password"
+                            style={{ transition: 'all .15s ease' }}
+                          />
                         </label>
-                        <input
-                          type="password"
-                          ref={passwordRef}
-                          required
-                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                          placeholder="Password"
-                          style={{ transition: 'all .15s ease' }}
-                        />
                       </div>
 
                       <div className="relative w-full mb-3">
@@ -118,18 +117,21 @@ export default function SignUp() {
                           htmlFor="grid-password"
                         >
                           Password Confirmation
+                          <input
+                            type="password"
+                            ref={passwordConfirmRef}
+                            required
+                            className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                            placeholder="Password Confirmation"
+                            style={{ transition: 'all .15s ease' }}
+                          />
                         </label>
-                        <input
-                          type="password"
-                          ref={passwordConfirmRef}
-                          required
-                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                          placeholder="Password Confirmation"
-                          style={{ transition: 'all .15s ease' }}
-                        />
                       </div>
                       <div>
-                        <label className="inline-flex items-center cursor-pointer">
+                        <label
+                          className="inline-flex items-center cursor-pointer"
+                          htmlFor="a"
+                        >
                           <input
                             id="customCheckLogin"
                             type="checkbox"

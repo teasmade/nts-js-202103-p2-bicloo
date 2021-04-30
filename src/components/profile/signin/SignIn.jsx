@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useHistory, Link } from 'react-router-dom';
 import UserService from '../../../Services/UserService';
 import GithubBtn from '../../buttons/github/GithubBtn';
@@ -57,13 +56,13 @@ const SignIn = () => {
                           htmlFor="grid-password"
                         >
                           Email
+                          <input
+                            type="email"
+                            className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                            placeholder="Email"
+                            style={{ transition: 'all .15s ease' }}
+                          />
                         </label>
-                        <input
-                          type="email"
-                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                          placeholder="Email"
-                          style={{ transition: 'all .15s ease' }}
-                        />
                       </div>
 
                       <div className="relative w-full mb-3">
@@ -72,16 +71,19 @@ const SignIn = () => {
                           htmlFor="grid-password"
                         >
                           Password
+                          <input
+                            type="password"
+                            className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                            placeholder="Password"
+                            style={{ transition: 'all .15s ease' }}
+                          />
                         </label>
-                        <input
-                          type="password"
-                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                          placeholder="Password"
-                          style={{ transition: 'all .15s ease' }}
-                        />
                       </div>
                       <div>
-                        <label className="inline-flex items-center cursor-pointer">
+                        <label
+                          className="inline-flex items-center cursor-pointer"
+                          htmlFor="a"
+                        >
                           <input
                             id="customCheckLogin"
                             type="checkbox"
