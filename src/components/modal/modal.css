@@ -38,6 +38,7 @@
 
 .modal ul {
   display: block;
+  margin: 0 0 10px;
 }
 
 .modal li {
@@ -46,7 +47,8 @@
 }
 
 .modal h2 {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  margin: 0 0 10px;
 }
 
 .modal p {
@@ -54,11 +56,31 @@
   font-size: 1rem;
   width: 100%;
   text-align: justify;
+  margin: 15px 0 25px;
 }
 
-.modalButtonOK {
+.modalButtonClose {
+  width: 30vw;
+  background-color: #252327;
+  color: #17bebb;
+  padding: 25px 15px;
+  border-radius: 15px;
+}
+
+.modalButtonConfirm {
+  width: 30vw;
   background-color: #17bebb;
   color: white;
-  padding: 2.5vh 12vw;
+  padding: 25px 15px;
   border-radius: 15px;
+}
+
+.description {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.twoButtonWrapper {
+  display: flex;
+  justify-content: space-around;
 }

@@ -27,9 +27,9 @@ const Profile = () => {
         </div>
       </div>
       <p>
-        Félicitation <strong>{pseudo}</strong>!
+        Félicitations <strong>{pseudo}</strong>!
       </p>
-      <p>Tu as atteind le niveau {level}</p>
+      <p>Tu as atteint le niveau {level}</p>
       <div className="profile-howto">
         <p>Comment gagner plus d&apos;XP?</p>
       </div>

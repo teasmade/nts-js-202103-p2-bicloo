@@ -1,21 +1,30 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import './reward.css';
 
-export default function Reward(props) {
-  const [rewardActive, setRewardActive] = useState(false);
-
+export default function Reward({
+  id,
+  rewardName,
+  price,
+  active,
+  onRewardClick,
+  setClickedRewardKey,
+}) {
+  const clickHandler = () => {
+    setClickedRewardKey(id);
+    onRewardClick();
+  };
   return (
     <div
-      className={rewardActive ? 'rewardActive' : 'reward'}
-      onClick={() => setRewardActive(!rewardActive)}
-      onKeyPress={() => setRewardActive(!rewardActive)}
+      className={active ? 'rewardActive' : 'reward'}
+      onClick={active ? null : clickHandler}
+      onKeyPress={active ? null : clickHandler}
       role="button"
       tabIndex={0}
     >
-      <div>{props.rewardName}</div>
-      <div>{props.price}</div>
+      <div className="rewardName">{rewardName}</div>
+      <div className="rewardPrice">{price} XP</div>
     </div>
   );
 }
