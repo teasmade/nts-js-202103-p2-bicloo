@@ -1,5 +1,5 @@
 import ModalButtonClose from '../modal/ModalButtonClose';
-import ModalButtonConfirm from '../modal/ModalButtonConfirm';
+import ShopModalButtonConfirm from './ShopModalButtonConfirm';
 
 /* eslint-disable react/prop-types */
 const ShopModalContent = ({
@@ -18,7 +18,7 @@ const ShopModalContent = ({
           onCancel={onCancel}
         />
         {user ? (
-          <ModalButtonConfirm
+          <ShopModalButtonConfirm
             confirmText="Valider ma sélection"
             onCancel={onCancel}
             clickedRewardKey={clickedRewardKey}

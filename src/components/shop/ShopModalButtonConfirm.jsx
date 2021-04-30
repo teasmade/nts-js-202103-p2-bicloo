@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
-import './modal.css';
+import '../modal/modal.css';
 import UserService from '../../Services/UserService';
 
 // eslint-disable-next-line react/prop-types
-function ModalButtonConfirm({
+function ShopModalButtonConfirm({
   confirmText,
   onCancel,
   clickedRewardKey,
@@ -31,8 +31,8 @@ function ModalButtonConfirm({
   );
 }
 
-ModalButtonConfirm.propTypes = {
+ShopModalButtonConfirm.propTypes = {
   confirmText: PropTypes.string.isRequired,
 };
 
-export default ModalButtonConfirm;
+export default ShopModalButtonConfirm;
