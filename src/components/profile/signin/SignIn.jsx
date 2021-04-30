@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable global-require */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* import { LockClosedIcon } from '@heroicons/react/solid'; */

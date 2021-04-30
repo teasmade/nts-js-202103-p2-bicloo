@@ -1,12 +1,15 @@
+/* eslint-disable consistent-return */
 /* eslint-disable global-require */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useRef, useState } from 'react';
+
 import { useHistory } from 'react-router-dom';
-import { LockClosedIcon } from '@heroicons/react/solid';
-import Logo from '../../../assets/logo.png';
+
+import { useAuth } from '../../../firebase/AuthContext';
+
 import './SignUp.css';
 import GithubBtn from '../../buttons/github/GithubBtn';
 import GoogleBtn from '../../buttons/google/GoogleBtn';
@@ -17,6 +20,34 @@ export default function SignUp() {
   const redirectSignIn = () => {
     signIn.push('/signIn');
   };
+
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  const signup = useAuth();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError('Passwords do not match');
+    }
+
+    try {
+      setError('');
+      setLoading(true);
+      await signup(emailRef.current.value, passwordRef.current.value);
+      history.push('/');
+    } catch {
+      setError('Failed to create an account');
+    }
+
+    setLoading(false);
+  }
 
   return (
     <>
@@ -33,6 +64,7 @@ export default function SignUp() {
                       <h6 className="text-gray-600 text-sm font-bold">
                         Sign up with
                       </h6>
+                      {error && <alert variant="danger">{error}</alert>}
                     </div>
                     <div className="btn-wrapper text-center">
                       <GithubBtn />
@@ -44,7 +76,7 @@ export default function SignUp() {
                     <div className="text-gray-500 text-center mb-3 font-bold">
                       <small>Or sign in with credentials</small>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -53,7 +85,9 @@ export default function SignUp() {
                           Name
                         </label>
                         <input
-                          type="email"
+                          type="name"
+                          ref={nameRef}
+                          required
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                           placeholder="Name"
                           style={{ transition: 'all .15s ease' }}
@@ -68,6 +102,8 @@ export default function SignUp() {
                         </label>
                         <input
                           type="email"
+                          ref={emailRef}
+                          required
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                           placeholder="Email"
                           style={{ transition: 'all .15s ease' }}
@@ -83,6 +119,8 @@ export default function SignUp() {
                         </label>
                         <input
                           type="password"
+                          ref={passwordRef}
+                          required
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                           placeholder="Password"
                           style={{ transition: 'all .15s ease' }}
@@ -110,8 +148,9 @@ export default function SignUp() {
 
                       <div className="text-center mt-6">
                         <button
+                          disabled={loading}
                           className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                          type="button"
+                          type="submit"
                           style={{ transition: 'all .15s ease' }}
                         >
                           Create Account
