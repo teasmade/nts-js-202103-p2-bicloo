@@ -40,7 +40,6 @@ export default function SignUp() {
       history.push('/');
     } catch (err) {
       setError('Failed to create an account');
-      console.error(err);
     }
 
     setLoading(false);
