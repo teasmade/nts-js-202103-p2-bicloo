@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef, useState } from 'react';
 
@@ -29,7 +28,8 @@ export default function SignUp() {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError('Passwords do not match');
+      setError('Passwords do not match');
+      return;
     }
 
     try {
