@@ -122,15 +122,9 @@ const SignIn = () => {
                     </a>
                   </div>
                   <div className="w-1/2 text-right">
-                    <a
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      className="text-gray-300"
-                    >
-                      <Link to="/signUp">
-                        <small>Create new account</small>
-                      </Link>
-                    </a>
+                    <Link to="/signUp" className="text-gray-300">
+                      <small>Create new account</small>
+                    </Link>
                   </div>
                 </div>
               </div>

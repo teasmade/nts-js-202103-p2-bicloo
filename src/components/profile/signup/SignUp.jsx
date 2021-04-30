@@ -21,11 +21,10 @@ export default function SignUp() {
     signIn.push('/signIn');
   };
 
-  const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const signup = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -42,8 +41,9 @@ export default function SignUp() {
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
       history.push('/');
-    } catch {
+    } catch (err) {
       setError('Failed to create an account');
+      console.error(err);
     }
 
     setLoading(false);
@@ -64,7 +64,14 @@ export default function SignUp() {
                       <h6 className="text-gray-600 text-sm font-bold">
                         Sign up with
                       </h6>
-                      {error && <alert variant="danger">{error}</alert>}
+                      {error && (
+                        <div
+                          className="bg-red-600 border-l-4 border-orange-500 text-orange-700 p-4"
+                          role="alert"
+                        >
+                          {error}
+                        </div>
+                      )}
                     </div>
                     <div className="btn-wrapper text-center">
                       <GithubBtn />
@@ -82,26 +89,10 @@ export default function SignUp() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Name
-                        </label>
-                        <input
-                          type="name"
-                          ref={nameRef}
-                          required
-                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                          placeholder="Name"
-                          style={{ transition: 'all .15s ease' }}
-                        />
-                      </div>
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
                           Email
                         </label>
                         <input
-                          type="email"
+                          type="Email"
                           ref={emailRef}
                           required
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
@@ -109,7 +100,6 @@ export default function SignUp() {
                           style={{ transition: 'all .15s ease' }}
                         />
                       </div>
-
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -123,6 +113,23 @@ export default function SignUp() {
                           required
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                           placeholder="Password"
+                          style={{ transition: 'all .15s ease' }}
+                        />
+                      </div>
+
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Password Confirmation
+                        </label>
+                        <input
+                          type="password"
+                          ref={passwordConfirmRef}
+                          required
+                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          placeholder="Password Confirmation"
                           style={{ transition: 'all .15s ease' }}
                         />
                       </div>
@@ -157,26 +164,6 @@ export default function SignUp() {
                         </button>
                       </div>
                     </form>
-                  </div>
-                </div>
-                <div className="flex flex-wrap mt-6">
-                  <div className="w-1/2">
-                    <a
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      className="text-gray-300"
-                    >
-                      <small>Forgot password?</small>
-                    </a>
-                  </div>
-                  <div className="w-1/2 text-right">
-                    <a
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      className="text-gray-300"
-                    >
-                      <small>Create new account</small>
-                    </a>
                   </div>
                 </div>
               </div>
