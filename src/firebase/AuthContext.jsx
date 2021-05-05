@@ -35,6 +35,10 @@ export default function AuthProvider({ children }) {
       });
   }
 
+  function resetPassword(email) {
+    return auth.sendPasswordResetEmail(email);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setLoading(false);
@@ -49,6 +53,7 @@ export default function AuthProvider({ children }) {
     signUpWithEmail,
     signInWithEmail,
     signOut,
+    resetPassword,
   };
 
   return (
