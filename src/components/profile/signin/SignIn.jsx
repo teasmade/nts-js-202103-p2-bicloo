@@ -40,8 +40,8 @@ const SignIn = () => {
   }
   return (
     <>
-      <main>
-        <section className="signContainer w-full h-full">
+      <main className="signContainer">
+        <section className=" w-full h-full">
           <div className="absolute top-0 w-full h-full bg-gray-900" />
           <div className="container mx-auto px-4 h-full">
             <div className="flex content-center items-center justify-center h-full">

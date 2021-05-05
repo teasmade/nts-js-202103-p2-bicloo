@@ -52,14 +52,14 @@ export default function SignUp() {
 
   return (
     <>
-      <main>
-        <section className="signContainer w-full">
+      <main className="signContainer">
+        <section className=" w-full">
           <div className="absolute top-0 w-full h-full bg-gray-900" />
           <div className="container mx-auto px-4 h-full">
             <div className="flex content-center items-center justify-center h-full">
               <div className="w-full lg:w-4/12 px-4">
-                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
-                  <div className="rounded-t mb-0 px-6 py-6">
+                <div className="relative flex flex-col min-w-0 break-words w-full shadow-lg rounded-lg bg-gray-300 border-0">
+                  <div className="rounded-t mb-0 px-6 py-3">
                     <div className="text-center mb-3">
                       <img src={LogoBicloo} alt="logo" />
                       <h6 className="text-gray-600 text-sm font-bold">
@@ -80,7 +80,7 @@ export default function SignUp() {
                     </div>
                     <hr className="mt-6 border-b-1 border-gray-400" />
                   </div>
-                  <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                  <div className="flex-auto px-4 lg:px-10 py-5 pt-0">
                     <div className="text-gray-500 text-center mb-3 font-bold">
                       <small>Or sign in with credentials</small>
                     </div>

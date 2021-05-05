@@ -44,7 +44,7 @@ export default function Menu({ clickOnUser, isUserChoiceExpended }) {
   ];
 
   return (
-    <div className="menu">
+    <div id="footerMenu" className="menu">
       <nav>
         <ul>
           {menuItems.map((item) => (

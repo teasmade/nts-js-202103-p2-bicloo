@@ -1,7 +1,7 @@
 .menu {
   position: absolute;
   display: flex;
-  height: 7vh;
+  height: calc(var(--vh, 1vh) * 7);
   width: 100%;
   padding: 0 3vw;
   justify-content: center;
