@@ -56,7 +56,7 @@ export default function Shop() {
           Bonjour
           {user
             ? ` ${pseudo}, choisissez vos récompenses BICLOOAPP :)`
-            : ', regardez ce que vous pouvez gagner en inscrivant au BICLOOAPP'}
+            : ' ! Regardez ce que vous pouvez gagner en vous inscrivant sur BICLOOAPP!'}
         </div>
       </div>
       {allRewards ? (

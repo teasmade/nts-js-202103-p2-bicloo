@@ -47,9 +47,9 @@ const StationsMarkers = ({
       <Popup>
         {station.fields.address}
         <br />
-        {station.fields.available_bikes} bikes available
+        {station.fields.available_bikes} bikes availables
         <br />
-        {station.fields.available_bike_stands} stands available
+        {station.fields.available_bike_stands} stands availables
         <br />
         <button
           type="button"
@@ -68,7 +68,7 @@ const StationsMarkers = ({
             setCoordinates(SearchService.getCoordinates());
           }}
         >
-          Utiliser comme arrivé
+          Utiliser comme arrivée
         </button>
       </Popup>
     </Marker>

@@ -32,7 +32,7 @@ const SignIn = () => {
                     <img src={LogoBicloo} alt="logo" />
                     <div className="text-center mb-3">
                       <h6 className="text-gray-600 text-sm font-bold">
-                        Sign in with
+                        Se connecter avec
                       </h6>
                     </div>
                     <div className="btn-wrapper text-center">
@@ -43,7 +43,7 @@ const SignIn = () => {
                   </div>
                   <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                     <div className="text-gray-500 text-center mb-3 font-bold">
-                      <small>Or sign in with credentials</small>
+                      <small>Ou se connecter avec mes informations</small>
                     </div>
                     <form
                       action="#"
@@ -70,11 +70,11 @@ const SignIn = () => {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Password
+                          Mot de passe
                           <input
                             type="password"
                             className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                            placeholder="Password"
+                            placeholder="Mot de passe"
                             style={{ transition: 'all .15s ease' }}
                           />
                         </label>
@@ -91,7 +91,7 @@ const SignIn = () => {
                             style={{ transition: 'all .15s ease' }}
                           />
                           <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                            Remember me
+                            Se souvenir de moi
                           </span>
                         </label>
                       </div>
@@ -102,7 +102,7 @@ const SignIn = () => {
                           type="submit"
                           style={{ transition: 'all .15s ease' }}
                         >
-                          Sign In
+                          Se connecter
                         </button>
                       </div>
                     </form>
@@ -115,12 +115,12 @@ const SignIn = () => {
                       onClick={(e) => e.preventDefault()}
                       className="text-gray-300"
                     >
-                      <small>Forgot password?</small>
+                      <small>Mot de passe oublié?</small>
                     </a>
                   </div>
                   <div className="w-1/2 text-right">
                     <Link to="/signUp" className="text-gray-300">
-                      <small>Create new account</small>
+                      <small>Créer un nouveau compte</small>
                     </Link>
                   </div>
                 </div>

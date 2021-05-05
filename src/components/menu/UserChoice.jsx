@@ -13,11 +13,11 @@ export default function userChoice({ isUserChoiceExpended, toRef }) {
       }`}
     >
       <Link to={isUserLogged ? '/log' : '/log'}>
-        {`${isUserLogged ? 'Sign out' : 'Sign up'}`}
+        {`${isUserLogged ? 'Se déconnecter' : "S'inscrire"}`}
       </Link>
       <div className="separator" />
       <Link to={isUserLogged ? '/profile' : '/log'}>
-        {`${isUserLogged ? 'My profile' : 'Sign In'}`}
+        {`${isUserLogged ? 'Mon profil' : 'Se connecter'}`}
       </Link>
     </div>
   );
