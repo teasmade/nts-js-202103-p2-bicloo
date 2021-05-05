@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useState } from 'react';
 import Menu from './components/menu/Menu';
+import UserChoice from './components/menu/UserChoice';
 import Log from './components/profile/Log';
 
 import Home from './components/home/Home';
@@ -11,11 +13,12 @@ import Map from './components/Map/Map';
 import AuthContext from './firebase/AuthContext';
 
 function App() {
+  const [isUserChoiceExpended, setIsUserChoiceExpended] = useState(false);
+
   return (
     <div className="App">
       <AuthContext>
         <Router>
-          <Menu />
           <Switch>
             <Route exact path="/">
               <Home />
@@ -36,6 +39,14 @@ function App() {
               <Shop />
             </Route>
           </Switch>
+          <UserChoice isUserChoiceExpended={isUserChoiceExpended} />
+          <Menu
+            isUserChoiceExpended={isUserChoiceExpended}
+            clickOnUser={() => {
+              console.log('click', isUserChoiceExpended);
+              setIsUserChoiceExpended(!isUserChoiceExpended);
+            }}
+          />
         </Router>
       </AuthContext>
     </div>
