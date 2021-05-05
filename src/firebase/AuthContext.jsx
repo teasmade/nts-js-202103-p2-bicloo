@@ -23,16 +23,7 @@ export default function AuthProvider({ children }) {
 
   function signOut() {
     UserService.logOut();
-    auth
-      .signOut()
-      .then(() => {
-        // Sign-out successful.
-        console.log('sign out success');
-      })
-      .catch((error) => {
-        console.error('error on signOut user (firebase)', error);
-        // An error happened.
-      });
+    auth.signOut();
   }
 
   function resetPassword(email) {

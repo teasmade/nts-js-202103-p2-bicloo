@@ -5,6 +5,7 @@ import GithubBtn from '../../buttons/github/GithubBtn';
 import GoogleBtn from '../../buttons/google/GoogleBtn';
 import LogoBicloo from '../../../assets/img/logo-bicloo.png';
 import { useAuth } from '../../../firebase/AuthContext';
+import '../signup/SignPage.css';
 
 const SignIn = () => {
   /* const history = useHistory();
@@ -29,11 +30,9 @@ const SignIn = () => {
         emailRef.current.value,
         passwordRef.current.value
       ).then((data) => {
-        console.log('sign in data', data);
         UserService.logUser(data.user.uid);
       });
     } catch (err) {
-      console.error('sign in error', err);
       setError('Failed to sign in');
     }
 
@@ -42,7 +41,7 @@ const SignIn = () => {
   return (
     <>
       <main>
-        <section className="absolute w-full h-full">
+        <section className="signContainer w-full h-full">
           <div className="absolute top-0 w-full h-full bg-gray-900" />
           <div className="container mx-auto px-4 h-full">
             <div className="flex content-center items-center justify-center h-full">

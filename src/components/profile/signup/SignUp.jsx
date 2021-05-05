@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../firebase/AuthContext';
 
-import './SignUp.css';
+import './SignPage.css';
 import GithubBtn from '../../buttons/github/GithubBtn';
 import GoogleBtn from '../../buttons/google/GoogleBtn';
 import LogoBicloo from '../../../assets/img/logo-bicloo.png';
@@ -53,7 +53,7 @@ export default function SignUp() {
   return (
     <>
       <main>
-        <section className="absolute w-full h-full">
+        <section className="signContainer w-full">
           <div className="absolute top-0 w-full h-full bg-gray-900" />
           <div className="container mx-auto px-4 h-full">
             <div className="flex content-center items-center justify-center h-full">

@@ -8,16 +8,21 @@ const UserService = {
   levels: [0, 1000, 2000, 5000, 10000],
 
   getUser() {
+    const storedUser = localStorage.getItem('user');
+    if (!this.user && storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
     return this.user || null;
   },
 
   logUser(user) {
     this.user = user;
-    console.log('log user', this.user);
+    localStorage.setItem('user', JSON.stringify(this.user));
   },
 
   logOut() {
     this.user = null;
+    localStorage.removeItem('user');
   },
 
   async createUserInDatabase(uid, name) {
@@ -45,13 +50,13 @@ const UserService = {
           }
         )
         .then((res) => res.data);
+    } else {
+      usersData = usersData[uid];
     }
-    console.log('usersData', usersData);
     this.logUser(usersData);
   },
 
   updateUser(property, value) {
-    console.log('user update', this.user);
     axios.patch(
       `/users/${this.user.user_ID}/.json`,
       { [property]: value },
@@ -153,10 +158,8 @@ const UserService = {
 
   addRewardBought(rewardId) {
     if (!this.user.rewards_bought) {
-      console.log('create reward obughghrh');
       this.user.rewards_bought = [];
     }
-    console.log('ooo', this.user.rewards_bought);
 
     if (!this.user.rewards_bought.includes(rewardId)) {
       this.user.rewards_bought.push(rewardId);
