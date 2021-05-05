@@ -1,5 +1,5 @@
 .leaflet-container {
-  height: 88vh;
+  height: 93vh;
   width: 100vw;
   margin: auto;
 }
@@ -11,7 +11,7 @@
 .form-search-open,
 .form-search-close {
   position: fixed;
-  z-index: 10000;
+  z-index: 1000;
   left: 10%;
   display: flex;
   flex-direction: column;

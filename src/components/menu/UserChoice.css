@@ -1,0 +1,30 @@
+.UserChoice {
+  height: 12vh;
+  width: 30vw;
+  position: absolute;
+  bottom: 7vh;
+  right: 0;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vh;
+  z-index: 1200;
+}
+
+.noShowChoice {
+  transform: translateY(100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.showChoice {
+  transform: translateY(0%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.separator {
+  width: 80%;
+  border-bottom: white 1px solid;
+}
