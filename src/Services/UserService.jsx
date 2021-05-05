@@ -66,8 +66,8 @@ const UserService = {
   },
 
   removeXp(nbXp) {
-    this.user.total_xp_won -= nbXp;
-    this.updateUser('total_xp_won', this.user.total_xp_won);
+    this.user.current_xp -= nbXp;
+    this.updateUser('current_xp', this.user.current_xp);
   },
 
   getCurrentXp() {
@@ -118,7 +118,7 @@ const UserService = {
         return data.map((reward) => {
           const newReward = reward;
           newReward.active = !!userRewards.includes(newReward.id);
-          newReward.buyable = this.user.total_xp_won >= newReward.price;
+          newReward.buyable = this.user.current_xp >= newReward.price;
           return newReward;
         });
       });
