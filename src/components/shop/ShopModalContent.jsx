@@ -38,6 +38,7 @@ const ShopModalContent = ({
             confirmText="Valider ma sélection"
             onCancel={onCancel}
             clickedRewardKey={clickedRewardKey}
+            allRewards={allRewards}
             setAllRewards={setAllRewards}
           />
         ) : user ? (

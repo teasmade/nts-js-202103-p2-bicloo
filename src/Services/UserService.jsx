@@ -66,8 +66,8 @@ const UserService = {
   },
 
   removeXp(nbXp) {
-    this.user.current_xp -= nbXp;
-    this.updateUser('current_xp', this.user.current_xp);
+    this.user.total_xp_won -= nbXp;
+    this.updateUser('total_xp_wonp', this.user.total_xp_won);
   },
 
   getCurrentXp() {
