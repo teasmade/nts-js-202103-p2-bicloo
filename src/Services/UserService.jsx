@@ -20,48 +20,33 @@ const UserService = {
     this.user = null;
   },
 
-  createUserInDatabase(uid, name) {
-    console.log('create user db', uid, name);
-    return axios
-      .get('/users.json')
-      .then((data) => data.data)
-      .then((data) => {
-        // check if the user isn't already existing, if not, create it
-        if (!data[uid]) {
-          console.log('create', data);
-          return axios
-            .put(
-              `/users/${uid}/.json`,
-              {
-                id: uid,
-                name,
-                current_xp: 0,
-                total_xp_won: 0,
-                level: 1,
-                user_ID: uid,
-                badges_won: [],
-                reward_bought: [],
-              },
-              {
-                headers: {
-                  'Access-Control-Allow-Origin': '*',
-                  'Content-Type': 'application/json',
-                },
-              }
-            )
-            .then(() => Promise.resolve());
-          // .then((data) => console.log('ok post', data))
-          // .catch((err) => console.log('error post', err));
-        }
-        // else, if uid already exist, mainly usefull for github wich doesn't make a difference between signIn and signUp
-        console.log('already exist', data[uid]);
-        return Promise.resolve();
-      })
-      .then((data) => {
-        console.log('data user created', data);
-        this.logUser(data.data);
-        return Promise.resolve();
-      });
+  async createUserInDatabase(uid, name) {
+    let usersData = await axios.get('/users.json').then((res) => res.data);
+    // check if the user isn't already existing, if not, create it
+    if (!usersData[uid]) {
+      usersData = await axios
+        .put(
+          `/users/${uid}/.json`,
+          {
+            id: uid,
+            name,
+            current_xp: 0,
+            total_xp_won: 0,
+            level: 1,
+            user_ID: uid,
+            badges_won: [],
+            reward_bought: [],
+          },
+          {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        .then((res) => res.data);
+    }
+    this.logUser(usersData);
   },
 
   updateUser(property, value) {

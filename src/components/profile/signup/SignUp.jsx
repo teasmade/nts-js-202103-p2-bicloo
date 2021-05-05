@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
-
 import { useAuth } from '../../../firebase/AuthContext';
 
 import './SignUp.css';
@@ -39,9 +38,10 @@ export default function SignUp() {
         emailRef.current.value,
         passwordRef.current.value
       ).then((data) => {
-        console.log('data', data);
-        UserService.createUserInDatabase(data.user.uid, nameRef.current.value);
-        history.push('/');
+        UserService.createUserInDatabase(
+          data.user.uid,
+          nameRef.current.value
+        ).then(() => history.push('/'));
       });
     } catch (err) {
       setError('Failed to create an account');
@@ -148,28 +148,6 @@ export default function SignUp() {
                             placeholder="Password Confirmation"
                             style={{ transition: 'all .15s ease' }}
                           />
-                        </label>
-                      </div>
-                      <div>
-                        <label
-                          className="inline-flex items-center cursor-pointer"
-                          htmlFor="a"
-                        >
-                          <input
-                            id="customCheckLogin"
-                            type="checkbox"
-                            className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                          />
-                          <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                            I agree with the{' '}
-                            <a
-                              href="#pablo"
-                              className="text-lightBlue-500"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Privacy Policy
-                            </a>
-                          </span>
                         </label>
                       </div>
 

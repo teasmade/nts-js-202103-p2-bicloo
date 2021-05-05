@@ -47,7 +47,6 @@ function App() {
           <Menu
             isUserChoiceExpended={isUserChoiceExpended}
             clickOnUser={() => {
-              console.log('click', isUserChoiceExpended);
               setIsUserChoiceExpended(!isUserChoiceExpended);
             }}
           />
