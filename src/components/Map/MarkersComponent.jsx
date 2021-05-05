@@ -47,9 +47,9 @@ const StationsMarkers = ({
       <Popup>
         {station.fields.address}
         <br />
-        {station.fields.available_bikes} bikes availables
+        {station.fields.available_bikes} vélos disponibles
         <br />
-        {station.fields.available_bike_stands} stands availables
+        {station.fields.available_bike_stands} emplacements disponibles
         <br />
         <button
           type="button"
