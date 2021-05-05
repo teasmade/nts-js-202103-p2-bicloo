@@ -31,3 +31,9 @@
   font-size: 1.2rem;
   margin-bottom: 5vw;
 }
+
+.shortfall {
+  font-size: 0.9rem;
+  text-align: justify;
+  width: 30vw;
+}

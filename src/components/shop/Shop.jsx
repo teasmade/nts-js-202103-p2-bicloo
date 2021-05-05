@@ -24,6 +24,8 @@ export default function Shop() {
       });
     }, []);
   }
+  console.log(allRewards);
+  console.log(user);
 
   /*
   1 - Shop se monte (rewards vaut null)

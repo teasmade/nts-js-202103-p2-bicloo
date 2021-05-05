@@ -118,6 +118,7 @@ const UserService = {
         return data.map((reward) => {
           const newReward = reward;
           newReward.active = !!userRewards.includes(newReward.id);
+          newReward.buyable = this.user.total_xp_won >= newReward.price;
           return newReward;
         });
       });
