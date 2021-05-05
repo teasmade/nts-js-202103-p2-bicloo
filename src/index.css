@@ -8,7 +8,12 @@
   padding: 0;
 }
 
+body {
+  overflow: hidden;
+}
+
 @font-face {
   font-family: 'MontserratSubrayada';
-  src: local('MontserratSubrayada'), url(./fonts/MontserratSubrayada-Regular.ttf) format('truetype');
+  src: local('MontserratSubrayada'),
+    url(./fonts/MontserratSubrayada-Regular.ttf) format('truetype');
 }

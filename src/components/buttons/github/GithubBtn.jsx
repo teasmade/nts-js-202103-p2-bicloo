@@ -12,7 +12,10 @@ export default function GithubBtn() {
   const handleOnClick = async (provider) => {
     const res = await socialMediaAuth(provider);
     console.log('github result', res);
-    UserService.createUserInDatabase(res.uid, res.email)
+    const nameFromEmail = res.email.includes('@')
+      ? res.email.split('@')[0]
+      : res.email;
+    UserService.createUserInDatabase(res.uid, nameFromEmail)
       .then(() => {
         // redirect
         history.push('/');

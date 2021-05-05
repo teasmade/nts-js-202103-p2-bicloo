@@ -29,7 +29,7 @@ const UserService = {
           `/users/${uid}/.json`,
           {
             id: uid,
-            name,
+            pseudo: name,
             current_xp: 0,
             total_xp_won: 0,
             level: 1,
@@ -46,10 +46,12 @@ const UserService = {
         )
         .then((res) => res.data);
     }
+    console.log('usersData', usersData);
     this.logUser(usersData);
   },
 
   updateUser(property, value) {
+    console.log('user update', this.user);
     axios.patch(
       `/users/${this.user.user_ID}/.json`,
       { [property]: value },
@@ -100,7 +102,7 @@ const UserService = {
   },
 
   getAllBadge() {
-    const userBadges = this.user.badges_won;
+    const userBadges = this.user.badges_won || [];
     return axios
       .get('/badges.json')
       .then((data) => data.data)
@@ -123,7 +125,7 @@ const UserService = {
   // renamed to reflect fetch of all rewards plus active or not for this.user
   // ADD IN PROMISE RESOLVE STEP???
   getUserRewards() {
-    const userRewards = this.user.rewards_bought;
+    const userRewards = this.user.rewards_bought || [];
     return axios
       .get('/rewards.json')
       .then((data) => data.data)
@@ -150,6 +152,12 @@ const UserService = {
   },
 
   addRewardBought(rewardId) {
+    if (!this.user.rewards_bought) {
+      console.log('create reward obughghrh');
+      this.user.rewards_bought = [];
+    }
+    console.log('ooo', this.user.rewards_bought);
+
     if (!this.user.rewards_bought.includes(rewardId)) {
       this.user.rewards_bought.push(rewardId);
       this.updateUser('rewards_bought', this.user.rewards_bought);
