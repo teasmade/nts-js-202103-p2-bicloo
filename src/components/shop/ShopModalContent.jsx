@@ -11,9 +11,18 @@ const ShopModalContent = ({
   setAllRewards,
 }) => {
   const shortfall = allRewards[clickedRewardKey].price - user.total_xp_won;
+  const newBalance = user.total_xp_won - allRewards[clickedRewardKey].price;
   return (
-    <div>
+    <div className="shopContent">
       <div className="description">{`${allRewards[clickedRewardKey].description}`}</div>
+
+      {user && allRewards[clickedRewardKey].buyable ? (
+        <>
+          <div className="balance">{`A ce moment, vous disposez de ${user.total_xp_won} XP`}</div>
+          <div className="cost">{`Cette récompense coûte ${allRewards[clickedRewardKey].price} XP; vous auriez ${newBalance} XP restants après validation`}</div>
+        </>
+      ) : null}
+
       <div className="twoButtonWrapper">
         <ModalButtonClose
           confirmText={
@@ -23,6 +32,7 @@ const ShopModalContent = ({
           }
           onCancel={onCancel}
         />
+
         {user && allRewards[clickedRewardKey].buyable ? (
           <ShopModalButtonConfirm
             confirmText="Valider ma sélection"
