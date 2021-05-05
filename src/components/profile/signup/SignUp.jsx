@@ -56,7 +56,7 @@ export default function SignUp() {
                     <div className="text-center mb-3">
                       <img src={LogoBicloo} alt="logo" />
                       <h6 className="text-gray-600 text-sm font-bold">
-                        Sign up with
+                        S&#039;inscrire avec
                       </h6>
                       {error && (
                         <div
@@ -75,7 +75,7 @@ export default function SignUp() {
                   </div>
                   <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                     <div className="text-gray-500 text-center mb-3 font-bold">
-                      <small>Or sign in with credentials</small>
+                      <small>Ou s&#039;inscrire avec mes informations </small>
                     </div>
                     <form onSubmit={handleSubmit}>
                       <div className="relative w-full mb-3">
@@ -99,13 +99,13 @@ export default function SignUp() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Password
+                          Mot de passe
                           <input
                             type="password"
                             ref={passwordRef}
                             required
                             className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                            placeholder="Password"
+                            placeholder="Mot de passe"
                             style={{ transition: 'all .15s ease' }}
                           />
                         </label>
@@ -116,13 +116,13 @@ export default function SignUp() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Password Confirmation
+                          Confirmer le mot de passe
                           <input
                             type="password"
                             ref={passwordConfirmRef}
                             required
                             className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                            placeholder="Password Confirmation"
+                            placeholder="Confirmer le mot de passe"
                             style={{ transition: 'all .15s ease' }}
                           />
                         </label>
@@ -138,13 +138,13 @@ export default function SignUp() {
                             className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
                           />
                           <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                            I agree with the{' '}
+                            Je suis d&#039;accord avec les{' '}
                             <a
                               href="#pablo"
                               className="text-lightBlue-500"
                               onClick={(e) => e.preventDefault()}
                             >
-                              Privacy Policy
+                              Conditions d&#039;utilisation
                             </a>
                           </span>
                         </label>
@@ -157,7 +157,7 @@ export default function SignUp() {
                           type="submit"
                           style={{ transition: 'all .15s ease' }}
                         >
-                          Create Account
+                          Créer mon compte
                         </button>
                       </div>
                     </form>

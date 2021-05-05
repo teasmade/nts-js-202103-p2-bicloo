@@ -22,7 +22,7 @@ const ShopModalContent = ({
 
       {user && allRewards[clickedRewardKey].buyable ? (
         <>
-          <div className="balance">{`A ce moment, vous disposez de ${user.current_xp} XP`}</div>
+          <div className="balance">{`En ce moment, vous disposez de ${user.current_xp} XP`}</div>
           <div className="cost">{`Cette récompense coûte ${allRewards[clickedRewardKey].price} XP; vous auriez ${newBalance} XP restants après validation`}</div>
         </>
       ) : null}
