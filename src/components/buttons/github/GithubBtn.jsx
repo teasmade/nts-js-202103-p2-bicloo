@@ -1,15 +1,23 @@
 /* eslint-disable no-console */
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { GithubProvider } from '../../../firebase/Firebase';
 import socialMediaAuth from '../../../firebase/service/Auth';
 import GithubIcon from '../../../assets/img/github.svg';
-/* import UserService from '../../../Services/UserService'; */
+import UserService from '../../../Services/UserService';
 
 export default function GithubBtn() {
+  const history = useHistory();
+
   const handleOnClick = async (provider) => {
     const res = await socialMediaAuth(provider);
-    console.log(res);
-    // UserService.logUser(res);
+    console.log('github result', res);
+    UserService.createUserInDatabase(res.uid, res.email)
+      .then(() => {
+        // redirect
+        history.push('/');
+      })
+      .catch((e) => console.error('catch error', e));
   };
 
   return (

@@ -6,8 +6,11 @@ import UserService from '../../Services/UserService';
 import ModalBackdrop from '../modal/ModalBackdrop';
 import Modal from '../modal/Modal';
 import HomeModalContent from './HomeModalContent';
+import { useAuth } from '../../firebase/AuthContext';
 
 export default function Home() {
+  const { signOut } = useAuth();
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const modalOpenHandler = () => setModalIsOpen(true);
   const modalCloseHandler = () => setModalIsOpen(false);
@@ -44,6 +47,9 @@ export default function Home() {
         <span>BiclooApp</span>
       </h2>
       <p>The App which will make you ride ye boïke more, and more !</p>
+      <button type="button" onClick={signOut}>
+        Sign out
+      </button>
       {!UserService.getUser() ? noLoggedUser : loggedUser()}
     </div>
   );

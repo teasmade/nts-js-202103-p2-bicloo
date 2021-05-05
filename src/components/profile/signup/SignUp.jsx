@@ -8,17 +8,18 @@ import './SignUp.css';
 import GithubBtn from '../../buttons/github/GithubBtn';
 import GoogleBtn from '../../buttons/google/GoogleBtn';
 import LogoBicloo from '../../../assets/img/logo-bicloo.png';
+import UserService from '../../../Services/UserService';
 
 export default function SignUp() {
   /* const signIn = useHistory();
   const redirectSignIn = () => {
-    signIn.push('/signIn');
+    useHistory().push('/');
   }; */
-
+  const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
+  const { signUpWithEmail } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -34,8 +35,14 @@ export default function SignUp() {
     try {
       setError('');
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      history.push('/');
+      await signUpWithEmail(
+        emailRef.current.value,
+        passwordRef.current.value
+      ).then((data) => {
+        console.log('data', data);
+        UserService.createUserInDatabase(data.user.uid, nameRef.current.value);
+        history.push('/');
+      });
     } catch (err) {
       setError('Failed to create an account');
     }
@@ -78,6 +85,22 @@ export default function SignUp() {
                       <small>Or sign in with credentials</small>
                     </div>
                     <form onSubmit={handleSubmit}>
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Name
+                          <input
+                            type="Text"
+                            ref={nameRef}
+                            required
+                            className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                            placeholder="Name"
+                            style={{ transition: 'all .15s ease' }}
+                          />
+                        </label>
+                      </div>
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"

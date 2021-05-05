@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useState, useEffect } from 'react';
+import UserService from '../Services/UserService';
 import { auth } from './Firebase';
 
 const AuthContext = React.createContext();
@@ -12,8 +13,26 @@ export default function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
+  function signUpWithEmail(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  function signInWithEmail(email, password) {
+    return auth.signInWithEmailAndPassword(email, password);
+  }
+
+  function signOut() {
+    UserService.logOut();
+    auth
+      .signOut()
+      .then(() => {
+        // Sign-out successful.
+        console.log('sign out success');
+      })
+      .catch((error) => {
+        console.error('error on signOut user (firebase)', error);
+        // An error happened.
+      });
   }
 
   useEffect(() => {
@@ -27,7 +46,9 @@ export default function AuthProvider({ children }) {
 
   const value = {
     currentUser,
-    signup,
+    signUpWithEmail,
+    signInWithEmail,
+    signOut,
   };
 
   return (

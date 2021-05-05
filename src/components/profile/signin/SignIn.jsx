@@ -1,24 +1,44 @@
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useState, useRef } from 'react';
 import UserService from '../../../Services/UserService';
 import GithubBtn from '../../buttons/github/GithubBtn';
 import GoogleBtn from '../../buttons/google/GoogleBtn';
 import LogoBicloo from '../../../assets/img/logo-bicloo.png';
+import { useAuth } from '../../../firebase/AuthContext';
 
 const SignIn = () => {
-  const history = useHistory();
+  /* const history = useHistory();
   const redirect = () => {
     if (UserService.getUser())
       history.push(history.location.state ? `/${history.location.state}` : '/');
-  };
+  }; */
 
-  const handleSign = (e) => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { signInWithEmail } = useAuth();
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    const mail = e.target[0].value;
-    const password = e.target[1].value;
-    UserService.logUser(mail, password);
-    setTimeout(redirect, 500);
-  };
 
+    try {
+      setError('');
+      setLoading(true);
+      await signInWithEmail(
+        emailRef.current.value,
+        passwordRef.current.value
+      ).then((data) => {
+        console.log('sign in data', data);
+        UserService.logUser(data.user.uid);
+      });
+    } catch (err) {
+      console.error('sign in error', err);
+      setError('Failed to sign in');
+    }
+
+    setLoading(false);
+  }
   return (
     <>
       <main>
@@ -34,6 +54,14 @@ const SignIn = () => {
                       <h6 className="text-gray-600 text-sm font-bold">
                         Sign in with
                       </h6>
+                      {error && (
+                        <div
+                          className="bg-red-600 border-l-4 border-gray-900 text-orange-700 p-4"
+                          role="alert"
+                        >
+                          {error}
+                        </div>
+                      )}
                     </div>
                     <div className="btn-wrapper text-center">
                       <GithubBtn />
@@ -45,11 +73,7 @@ const SignIn = () => {
                     <div className="text-gray-500 text-center mb-3 font-bold">
                       <small>Or sign in with credentials</small>
                     </div>
-                    <form
-                      action="#"
-                      method="GET"
-                      onSubmit={(e) => handleSign(e)}
-                    >
+                    <form action="#" method="GET" onSubmit={handleSubmit}>
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -57,6 +81,7 @@ const SignIn = () => {
                         >
                           Email
                           <input
+                            ref={emailRef}
                             type="email"
                             className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                             placeholder="Email"
@@ -72,6 +97,7 @@ const SignIn = () => {
                         >
                           Password
                           <input
+                            ref={passwordRef}
                             type="password"
                             className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                             placeholder="Password"
@@ -98,6 +124,7 @@ const SignIn = () => {
 
                       <div className="text-center mt-6">
                         <button
+                          disabled={loading}
                           className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                           type="submit"
                           style={{ transition: 'all .15s ease' }}

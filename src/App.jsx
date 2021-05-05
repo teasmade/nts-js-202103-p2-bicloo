@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
 import Menu from './components/menu/Menu';
 import UserChoice from './components/menu/UserChoice';
-import Log from './components/profile/Log';
+// import Log from './components/profile/Log';
 
 import Home from './components/home/Home';
 import Shop from './components/shop/Shop';
@@ -26,9 +26,9 @@ function App() {
             <Route exact path="/map">
               <Map />
             </Route>
-            <Route exact path="/profile">
+            {/* <Route exact path="/profile">
               <Log />
-            </Route>
+            </Route> */}
             <Route exact path="/signIn">
               <SignIn />
             </Route>
