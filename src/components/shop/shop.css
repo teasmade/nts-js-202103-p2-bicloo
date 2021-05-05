@@ -31,3 +31,25 @@
   font-size: 1.2rem;
   margin-bottom: 5vw;
 }
+
+.shortfall {
+  font-size: 0.9rem;
+  text-align: justify;
+  width: 30vw;
+}
+
+.cost {
+  color: #252327;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+.balance {
+  color: #252327;
+  margin-top: -1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.shopContent {
+  text-align: justify;
+}

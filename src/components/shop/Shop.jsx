@@ -24,7 +24,6 @@ export default function Shop() {
       });
     }, []);
   }
-
   /*
   1 - Shop se monte (rewards vaut null)
   2 - mounted, donc appel useEffect
@@ -36,7 +35,7 @@ export default function Shop() {
   8 - !!! Condition dans le useeffect pour ne pas rappeler l'API à chaque fois (boucle sans fin)
   */
   const pseudo = user ? UserService.getUserName() : null;
-  const totalXp = user ? UserService.getTotalXp() : null;
+  const totalXp = user ? UserService.getCurrentXp() : null;
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const modalOpenHandler = () => setModalIsOpen(true);
