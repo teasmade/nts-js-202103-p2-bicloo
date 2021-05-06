@@ -28,8 +28,8 @@ export default function Home() {
   const noLoggedUser = (
     <>
       <button type="button" className="homeButton" onClick={modalOpenHandler}>
-        Discover <br />
-        the concept
+        Découvrir <br />
+        le concept
       </button>
       {modalIsOpen ? (
         <Modal Content={<HomeModalContent onCancel={modalCloseHandler} />} />
@@ -43,8 +43,7 @@ export default function Home() {
       <h2 className="logoTitle">
         <span>BiclooApp</span>
       </h2>
-      <p>The App which will make you ride ye boïke more, and more !</p>
-
+      <p>L&#39;application qui vous fera pédaler encore et encore!</p>
       {!UserService.getUser() ? noLoggedUser : loggedUser()}
     </div>
   );

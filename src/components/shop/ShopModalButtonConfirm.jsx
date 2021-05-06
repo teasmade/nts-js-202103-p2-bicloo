@@ -8,11 +8,13 @@ function ShopModalButtonConfirm({
   confirmText,
   onCancel,
   clickedRewardKey,
+  allRewards,
   setAllRewards,
 }) {
   const clickHandler = () => {
     onCancel();
     UserService.addRewardBought(clickedRewardKey);
+    UserService.removeXp(allRewards[clickedRewardKey].price);
     UserService.getUserRewards().then((data) => {
       setAllRewards(data);
     });

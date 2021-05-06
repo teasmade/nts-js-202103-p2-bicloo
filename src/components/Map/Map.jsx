@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Map as MapContainer, ZoomControl } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import axios from 'axios';
 
 // Import Tools
 import SearchService from '../../Services/SearchService';
@@ -13,7 +14,6 @@ import {
   yellowMarker,
   greenMarker,
 } from './CustomIcon';
-import sampleStations from './data/sampleStations';
 
 // Import Styles
 import './style/Map.css';
@@ -28,6 +28,9 @@ import StationsMarkers, { UserMarker } from './MarkersComponent';
 import ResultsPopup from './ResultsPopup';
 
 const Map = () => {
+  // Get API response
+  const [apiResponse, setApiResponse] = useState([]);
+
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [searchStatus, setSearchStatus] = useState(null);
   // Nantes "position":
@@ -39,14 +42,14 @@ const Map = () => {
       setResultStations(
         SearchService.calculateDistanceToStation(
           SearchService.startPoint,
-          sampleStations
+          apiResponse
         )
       );
     if (searchStatus === 'to')
       setResultStations(
         SearchService.calculateDistanceToStation(
           SearchService.endPoint,
-          sampleStations
+          apiResponse
         )
       );
   }, [coordinates]);
@@ -57,6 +60,17 @@ const Map = () => {
     setUserPosition([lat, long]);
   };
   useEffect(() => {
+    const apiUrl =
+      'https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=150&facet=status&exclude.status=CLOSED';
+    axios.get(apiUrl).then((response) => {
+      const recordsArray = response.data.records;
+      setApiResponse(
+        recordsArray.filter(
+          (record) => !record.fields.name.includes('BORNE TEST')
+        )
+      );
+    });
+
     navigator.geolocation.getCurrentPosition(
       (position) =>
         getUserPosition(position.coords.latitude, position.coords.longitude),
@@ -120,7 +134,7 @@ const Map = () => {
           iconCreateFunction={createClusterCustomIcon}
         >
           <StationsMarkers
-            stationsArray={sampleStations}
+            stationsArray={apiResponse}
             handleMarkerColor={handleMarkerColor}
             colorMarkerFilter={colorMarkerFilter}
             setCoordinates={setCoordinates}
