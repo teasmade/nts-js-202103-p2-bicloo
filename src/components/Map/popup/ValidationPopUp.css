@@ -1,0 +1,72 @@
+.bg-popup-close {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  background-color: rgba(0, 0, 0, 0.568);
+  transition: height 600ms ease, width 600ms ease-out;
+}
+
+.bg-popup {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1000px;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.568);
+  transition: height 600ms ease, width 600ms ease-out;
+}
+
+.popup-close {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  width: 75%;
+  max-height: 90vh;
+  overflow: auto;
+  text-align: center;
+  transform: translateX(200%);
+  z-index: 5000;
+  background-color: #fcffebef;
+  border-radius: 10px;
+  border: solid black 2px;
+  box-shadow: -2px -2px 20px 2px black;
+  opacity: 0;
+  transition: max-height 600ms ease, opacity 800ms ease, transform 800ms ease;
+}
+
+.popup {
+  position: fixed;
+  top: 46%;
+  left: 50%;
+  padding: 20px;
+  width: 75%;
+  max-height: 90vh;
+  overflow: auto;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  z-index: 5000;
+  background-color: #fcffebef;
+  border-radius: 10px;
+  border: solid black 2px;
+  box-shadow: -2px -2px 20px 2px black;
+  opacity: 1;
+  transition: max-height 600ms ease, opacity 800ms ease, transform 800ms ease;
+}
+
+.popup-btn {
+  border-radius: 10px;
+  border: solid black 0.1em;
+  padding: 0 10px;
+  margin: 10px;
+}
+
+.results-el {
+  border: solid black 0.05em;
+  border-radius: 5px;
+  margin-bottom: 2px;
+}

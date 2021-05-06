@@ -4,6 +4,10 @@ const SearchService = {
   startStation: null,
   endStation: null,
   route: null,
+  // choosedStation [position, xp_by_available_bikes, xp_by_available_stands]
+  choosedStation: [],
+  startXp: null,
+  endXp: null,
 
   setStartPoint(coordinates) {
     this.startPoint = coordinates;
@@ -21,6 +25,32 @@ const SearchService = {
     this.endStation = coordinates;
   },
 
+  // Store temporary informations about selected station
+  setChoosedStation(coordinates, availableBikes, availableBikeStands) {
+    const convertToXp = (availableChoose) => {
+      if (availableChoose <= 4) return 10;
+      if (availableChoose <= 9) return 15;
+      return 20;
+    };
+    this.choosedStation.push(
+      coordinates,
+      convertToXp(availableBikes),
+      convertToXp(availableBikeStands)
+    );
+  },
+
+  resetChoosedStation() {
+    this.choosedStation = [];
+  },
+
+  setStartXp(xp) {
+    this.startXp = xp;
+  },
+
+  setEndXp(xp) {
+    this.endXp = xp;
+  },
+
   getCoordinates() {
     const filteredCoordinatesArray = [
       this.startPoint,
@@ -28,7 +58,7 @@ const SearchService = {
       this.endStation,
       this.endPoint,
     ].filter((point) => point !== null);
-    return filteredCoordinatesArray; // .length >= 2 ? filteredCoordinatesArray : [];
+    return filteredCoordinatesArray;
   },
 
   searchStartStation() {

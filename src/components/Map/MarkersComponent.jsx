@@ -3,6 +3,7 @@ import { Marker, Popup } from 'react-leaflet';
 import PropTypes from 'prop-types';
 
 // Import Tools
+import { useRef } from 'react';
 import SearchService from '../../Services/SearchService';
 
 // Export the user position marker
@@ -32,8 +33,10 @@ const StationsMarkers = ({
   stationsArray,
   handleMarkerColor,
   colorMarkerFilter,
-  setCoordinates,
+  setPopupIsOpen,
+  setPopupDisplayed,
 }) => {
+  const popupRef = useRef();
   return stationsArray.map((station) => (
     <Marker
       key={station.fields.number}
@@ -44,7 +47,7 @@ const StationsMarkers = ({
         colorMarkerFilter
       )}
     >
-      <Popup>
+      <Popup ref={popupRef}>
         {station.fields.address}
         <br />
         {station.fields.available_bikes} bikes available
@@ -54,21 +57,17 @@ const StationsMarkers = ({
         <button
           type="button"
           onClick={() => {
-            SearchService.setStartStation(station.fields.position);
-            setCoordinates(SearchService.getCoordinates());
+            SearchService.setChoosedStation(
+              station.fields.position,
+              station.fields.available_bikes,
+              station.fields.available_bike_stands
+            );
+            setPopupIsOpen(true);
+            setPopupDisplayed('validation');
+            popupRef.current.leafletElement.options.leaflet.map.closePopup();
           }}
         >
-          Utiliser comme départ
-        </button>
-        <br />
-        <button
-          type="button"
-          onClick={() => {
-            SearchService.setEndStation(station.fields.position);
-            setCoordinates(SearchService.getCoordinates());
-          }}
-        >
-          Utiliser comme arrivé
+          Choisir cette station
         </button>
       </Popup>
     </Marker>
@@ -80,6 +79,8 @@ StationsMarkers.propTypes = {
   handleMarkerColor: PropTypes.func.isRequired,
   colorMarkerFilter: PropTypes.string.isRequired,
   setCoordinates: PropTypes.func.isRequired,
+  setPopupIsOpen: PropTypes.func.isRequired,
+  setPopupDisplayed: PropTypes.func.isRequired,
 };
 
 export default StationsMarkers;

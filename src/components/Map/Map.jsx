@@ -5,6 +5,7 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 import axios from 'axios';
 
 // Import Tools
+import UserService from '../../Services/UserService';
 import SearchService from '../../Services/SearchService';
 import {
   createClusterCustomIcon,
@@ -25,13 +26,15 @@ import Search from './Search';
 import Routing from './Routing';
 import TileLayerComponent from './Tiles';
 import StationsMarkers, { UserMarker } from './MarkersComponent';
-import ResultsPopup from './ResultsPopup';
+import PopUp from './popup/PopUp';
 
 const Map = () => {
   // Get API response
   const [apiResponse, setApiResponse] = useState([]);
 
   const [popupIsOpen, setPopupIsOpen] = useState(false);
+  const [popupDisplayed, setPopupDisplayed] = useState('');
+
   const [searchStatus, setSearchStatus] = useState(null);
   // Nantes "position":
   const defaultPosition = [47.2076056402, -1.55753246791];
@@ -54,12 +57,17 @@ const Map = () => {
       );
   }, [coordinates]);
 
-  // Get user postion and change the userPostion state
+  // userToStationDistance [depart, destination]
+  const userToStationDistance = [null, null];
+
+  // Get user position and change the userPostion state
   const [userPosition, setUserPosition] = useState(defaultPosition);
   const getUserPosition = (lat, long) => {
     setUserPosition([lat, long]);
   };
+
   useEffect(() => {
+    // API call
     const apiUrl =
       'https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_stations-velos-libre-service-nantes-metropole-disponibilites&q=&rows=150&facet=status&exclude.status=CLOSED';
     axios.get(apiUrl).then((response) => {
@@ -71,11 +79,64 @@ const Map = () => {
       );
     });
 
+    // Location API call
     navigator.geolocation.getCurrentPosition(
       (position) =>
         getUserPosition(position.coords.latitude, position.coords.longitude),
       () => defaultPosition
     );
+  }, []);
+
+  // Check user distance w/ selected stations to validate xp
+  useEffect(() => {
+    const checkPosition = setInterval(() => {
+      if (SearchService.startStation) {
+        userToStationDistance[0] = SearchService.convertToMetres(
+          ...userPosition,
+          ...SearchService.startStation
+        );
+      }
+      if (SearchService.endStation) {
+        userToStationDistance[1] = SearchService.convertToMetres(
+          ...userPosition,
+          ...SearchService.endStation
+        );
+      }
+
+      // TODO Add journey to dataBase
+
+      // Validate XP w/ distance condition
+      if (userToStationDistance[0] && userToStationDistance[0] < 3000) {
+        setPopupDisplayed('addXp');
+        setPopupIsOpen(true);
+        // Add XP to user count
+        if (UserService.getUser) UserService.addXp(SearchService.startXp);
+        SearchService.setStartStation(null);
+        userToStationDistance[0] = null;
+        SearchService.setStartXp(null);
+      }
+      if (userToStationDistance[1] && userToStationDistance[1] < 3000) {
+        setPopupDisplayed('addXp');
+        setPopupIsOpen(true);
+        // Add XP to user count
+        if (UserService.getUser) UserService.addXp(SearchService.endXp);
+        SearchService.setEndStation(null);
+        userToStationDistance[1] = null;
+        SearchService.setEndXp(null);
+      }
+      console.log(
+        'userToStationDistance',
+        userToStationDistance,
+        'startStation',
+        SearchService.startStation,
+        'endstation',
+        SearchService.endStation,
+        'choosedStation',
+        SearchService.startXp,
+        SearchService.endXp
+      );
+    }, 5000);
+    return () => clearInterval(checkPosition);
   }, []);
 
   // Handle marker icons colors w/ filter name
@@ -112,6 +173,7 @@ const Map = () => {
           update={() => {
             setSearchStatus('from');
             setCoordinates(SearchService.getCoordinates());
+            setPopupDisplayed('result');
             setPopupIsOpen(!popupIsOpen);
           }}
         />
@@ -120,6 +182,7 @@ const Map = () => {
           update={() => {
             setSearchStatus('to');
             setCoordinates(SearchService.getCoordinates());
+            setPopupDisplayed('result');
             setPopupIsOpen(!popupIsOpen);
           }}
         />
@@ -138,14 +201,17 @@ const Map = () => {
             handleMarkerColor={handleMarkerColor}
             colorMarkerFilter={colorMarkerFilter}
             setCoordinates={setCoordinates}
+            setPopupIsOpen={setPopupIsOpen}
+            setPopupDisplayed={setPopupDisplayed}
           />
         </MarkerClusterGroup>
       </MapContainer>
-      <ResultsPopup
+      <PopUp
         list={resultStations}
+        setCoordinates={setCoordinates}
         popupIsOpen={popupIsOpen}
         setPopupIsOpen={setPopupIsOpen}
-        setCoordinates={setCoordinates}
+        popupDisplayed={popupDisplayed}
       />
     </>
   );
