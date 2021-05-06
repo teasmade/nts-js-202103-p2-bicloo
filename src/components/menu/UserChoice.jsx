@@ -2,7 +2,11 @@ import { Link } from 'react-router-dom';
 import UserService from '../../Services/UserService';
 import './UserChoice.css';
 
-export default function userChoice({ isUserChoiceExpended, toRef }) {
+export default function userChoice({
+  isUserChoiceExpended,
+  closeUserChoicePopup,
+  toRef,
+}) {
   const isUserLogged = UserService.getUser();
 
   return (
@@ -12,12 +16,21 @@ export default function userChoice({ isUserChoiceExpended, toRef }) {
         isUserChoiceExpended ? 'showChoice' : 'noShowChoice'
       }`}
     >
-      <Link to={isUserLogged ? '/log' : '/log'}>
-        {`${isUserLogged ? 'Se déconnecter' : "S'inscrire"}`}
+      <Link
+        onClick={() => {
+          closeUserChoicePopup();
+          UserService.logOut();
+        }}
+        to={isUserLogged ? '/' : '/signUp'}
+      >
+        {`${isUserLogged ? 'Sign out' : 'Sign up'}`}
       </Link>
       <div className="separator" />
-      <Link to={isUserLogged ? '/profile' : '/log'}>
-        {`${isUserLogged ? 'Mon profil' : 'Se connecter'}`}
+      <Link
+        onClick={closeUserChoicePopup}
+        to={isUserLogged ? '/profile' : '/signIn'}
+      >
+        {`${isUserLogged ? 'My profile' : 'Sign In'}`}
       </Link>
     </div>
   );
