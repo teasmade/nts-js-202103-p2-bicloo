@@ -27,6 +27,8 @@ import Routing from './Routing';
 import TileLayerComponent from './Tiles';
 import StationsMarkers, { UserMarker } from './MarkersComponent';
 import PopUp from './popup/PopUp';
+import ValidationBtn from './ValidationBtn';
+import ToogleFilter from './ToogleFilter';
 
 const Map = () => {
   // Get API response
@@ -89,6 +91,7 @@ const Map = () => {
 
   // Check user distance w/ selected stations to validate xp
   useEffect(() => {
+    console.log(userPosition);
     const checkPosition = setInterval(() => {
       if (SearchService.startStation) {
         userToStationDistance[0] = SearchService.convertToMetres(
@@ -106,20 +109,20 @@ const Map = () => {
       // TODO Add journey to dataBase
 
       // Validate XP w/ distance condition
-      if (userToStationDistance[0] && userToStationDistance[0] < 3000) {
+      if (userToStationDistance[0] && userToStationDistance[0] < 100) {
         setPopupDisplayed('addXp');
         setPopupIsOpen(true);
         // Add XP to user count
-        if (UserService.getUser) UserService.addXp(SearchService.startXp);
+        if (UserService.getUser()) UserService.addXp(SearchService.startXp);
         SearchService.setStartStation(null);
         userToStationDistance[0] = null;
         SearchService.setStartXp(null);
       }
-      if (userToStationDistance[1] && userToStationDistance[1] < 3000) {
+      if (userToStationDistance[1] && userToStationDistance[1] < 100) {
         setPopupDisplayed('addXp');
         setPopupIsOpen(true);
         // Add XP to user count
-        if (UserService.getUser) UserService.addXp(SearchService.endXp);
+        if (UserService.getUser()) UserService.addXp(SearchService.endXp);
         SearchService.setEndStation(null);
         userToStationDistance[1] = null;
         SearchService.setEndXp(null);
@@ -131,13 +134,13 @@ const Map = () => {
         SearchService.startStation,
         'endstation',
         SearchService.endStation,
-        'choosedStation',
+        'choosedStation XP',
         SearchService.startXp,
         SearchService.endXp
       );
     }, 5000);
     return () => clearInterval(checkPosition);
-  }, []);
+  }, [userPosition]);
 
   // Handle marker icons colors w/ filter name
   const [colorMarkerFilter, setColorMarkerFilter] = useState('bikes');
@@ -173,7 +176,7 @@ const Map = () => {
           update={() => {
             setSearchStatus('from');
             setCoordinates(SearchService.getCoordinates());
-            setPopupDisplayed('result');
+            setPopupDisplayed('results-from');
             setPopupIsOpen(!popupIsOpen);
           }}
         />
@@ -182,7 +185,7 @@ const Map = () => {
           update={() => {
             setSearchStatus('to');
             setCoordinates(SearchService.getCoordinates());
-            setPopupDisplayed('result');
+            setPopupDisplayed('results-to');
             setPopupIsOpen(!popupIsOpen);
           }}
         />
@@ -212,6 +215,14 @@ const Map = () => {
         popupIsOpen={popupIsOpen}
         setPopupIsOpen={setPopupIsOpen}
         popupDisplayed={popupDisplayed}
+      />
+      <ValidationBtn
+        setPopupDisplayed={setPopupDisplayed}
+        setPopupIsOpen={setPopupIsOpen}
+      />
+      <ToogleFilter
+        colorMarkerFilter={colorMarkerFilter}
+        setColorMarkerFilter={setColorMarkerFilter}
       />
     </>
   );

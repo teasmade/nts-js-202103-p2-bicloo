@@ -8,7 +8,6 @@ class Routing extends MapLayer {
     const { map } = this.props.leaflet;
     if (!this.leafletElement) {
       this.leafletElement = L.Routing.control({
-        // waypoints: this.props.coordinates,
         router: L.Routing.mapbox(
           'pk.eyJ1IjoiY2RyaWMtbGIiLCJhIjoiY2tvYndkMDJ1MGMxejJ2bjFhMWF2cGUyNyJ9.3LaE2Y7qw8DW5olaBkbN0Q',
           {

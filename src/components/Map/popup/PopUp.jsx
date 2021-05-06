@@ -12,6 +12,23 @@ const PopUp = ({
 }) => {
   const popupClass = popupIsOpen ? 'popup' : 'popup-close';
 
+  // Fill w/ Not signed user
+
+  const notSigned = (
+    <>
+      <span>Vous n&#39;êtes pas signé !</span>
+      <button
+        type="button"
+        className="popup-btn"
+        onClick={() => {
+          setPopupIsOpen(false);
+        }}
+      >
+        Fermer
+      </button>
+    </>
+  );
+
   // Fill popup w/ validation message
 
   const addXpPopup = (
@@ -31,13 +48,29 @@ const PopUp = ({
 
   // Fill popup w/ nearest stations
 
+  const chooseDirection = (fromOrTo) => {
+    if (fromOrTo === 'results-from') {
+      SearchService.setStartStation(SearchService.choosedStation[0]);
+      SearchService.setStartXp(SearchService.choosedStation[1]);
+    }
+    if (fromOrTo === 'results-to') {
+      SearchService.setEndStation(SearchService.choosedStation[0]);
+      SearchService.setEndXp(SearchService.choosedStation[2]);
+    }
+  };
+
   const results = (
     <>
       {list.map((station) => (
         <div className="results-el" key={station.name}>
           <span>{station.address}</span>
           <span>{Math.round(station.distance)} mètres</span>
-          <span>Xp: ///</span>
+          <span>
+            Xp:{' '}
+            {popupDisplayed === 'results-from'
+              ? SearchService.convertToXp(station.bikes)
+              : SearchService.convertToXp(station.stands)}
+          </span>
           <span>
             {`Vélo${station.bikes > 1 ? 's' : ''} dispo: ${station.bikes}`} -{' '}
             {`Place${station.stands > 1 ? 's' : ''} dispo: ${station.stands}`}
@@ -46,8 +79,15 @@ const PopUp = ({
             className="popup-btn"
             type="button"
             onClick={() => {
-              SearchService.setStartStation(station.position);
-              setPopupIsOpen(!popupIsOpen);
+              console.log(station);
+              SearchService.setChoosedStation(
+                station.position,
+                station.bikes,
+                station.stands
+              );
+              chooseDirection(popupDisplayed);
+              SearchService.resetChoosedStation();
+              setPopupIsOpen(false);
               setCoordinates(SearchService.getCoordinates());
             }}
           >
@@ -89,7 +129,11 @@ const PopUp = ({
       >
         Utiliser comme arrivé
       </button>
-      <button type="button" className="popup-btn">
+      <button
+        type="button"
+        className="popup-btn"
+        onClick={() => setPopupIsOpen(false)}
+      >
         Annuler
       </button>
     </>
@@ -98,7 +142,8 @@ const PopUp = ({
   // Choose what to display on the popup
 
   let display = null;
-  if (popupDisplayed === 'result') display = results;
+  if (popupDisplayed === 'notSigned') display = notSigned;
+  if (popupDisplayed.includes('results')) display = results;
   if (popupDisplayed === 'validation') display = validation;
   if (popupDisplayed === 'addXp') display = addXpPopup;
 
