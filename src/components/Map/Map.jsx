@@ -36,6 +36,7 @@ const Map = () => {
 
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [popupDisplayed, setPopupDisplayed] = useState('');
+  const [showValidation, setShowValidation] = useState(false);
 
   const [searchStatus, setSearchStatus] = useState(null);
   // Nantes "position":
@@ -164,6 +165,7 @@ const Map = () => {
             setCoordinates(SearchService.getCoordinates());
             setPopupDisplayed('results-from');
             setPopupIsOpen(!popupIsOpen);
+            setShowValidation(true);
           }}
         />
         <Search
@@ -201,11 +203,14 @@ const Map = () => {
         popupIsOpen={popupIsOpen}
         setPopupIsOpen={setPopupIsOpen}
         popupDisplayed={popupDisplayed}
+        setShowValidation={setShowValidation}
       />
-      <ValidationBtn
-        setPopupDisplayed={setPopupDisplayed}
-        setPopupIsOpen={setPopupIsOpen}
-      />
+      {showValidation ? (
+        <ValidationBtn
+          setPopupDisplayed={setPopupDisplayed}
+          setPopupIsOpen={setPopupIsOpen}
+        />
+      ) : null}
       <ToogleFilter
         colorMarkerFilter={colorMarkerFilter}
         setColorMarkerFilter={setColorMarkerFilter}

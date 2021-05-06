@@ -9,6 +9,7 @@ const PopUp = ({
   setPopupIsOpen,
   setCoordinates,
   popupDisplayed,
+  setShowValidation,
 }) => {
   const popupClass = popupIsOpen ? 'popup' : 'popup-close';
 
@@ -111,6 +112,7 @@ const PopUp = ({
           SearchService.resetChoosedStation();
           setCoordinates(SearchService.getCoordinates());
           setPopupIsOpen(false);
+          setShowValidation(true);
         }}
       >
         Station de depart
@@ -159,6 +161,7 @@ PopUp.propTypes = {
   setPopupIsOpen: PropTypes.func.isRequired,
   setCoordinates: PropTypes.func.isRequired,
   popupDisplayed: PropTypes.string.isRequired,
+  setShowValidation: PropTypes.func.isRequired,
 };
 
 export default PopUp;
