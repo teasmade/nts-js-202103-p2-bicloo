@@ -79,7 +79,6 @@ const PopUp = ({
             className="popup-btn"
             type="button"
             onClick={() => {
-              console.log(station);
               SearchService.setChoosedStation(
                 station.position,
                 station.bikes,

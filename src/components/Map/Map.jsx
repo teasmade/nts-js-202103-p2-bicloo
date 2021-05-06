@@ -91,7 +91,6 @@ const Map = () => {
 
   // Check user distance w/ selected stations to validate xp
   useEffect(() => {
-    console.log(userPosition);
     const checkPosition = setInterval(() => {
       if (SearchService.startStation) {
         userToStationDistance[0] = SearchService.convertToMetres(
@@ -105,8 +104,6 @@ const Map = () => {
           ...SearchService.endStation
         );
       }
-
-      // TODO Add journey to dataBase
 
       // Validate XP w/ distance condition
       if (userToStationDistance[0] && userToStationDistance[0] < 100) {
@@ -127,17 +124,6 @@ const Map = () => {
         userToStationDistance[1] = null;
         SearchService.setEndXp(null);
       }
-      console.log(
-        'userToStationDistance',
-        userToStationDistance,
-        'startStation',
-        SearchService.startStation,
-        'endstation',
-        SearchService.endStation,
-        'choosedStation XP',
-        SearchService.startXp,
-        SearchService.endXp
-      );
     }, 5000);
     return () => clearInterval(checkPosition);
   }, [userPosition]);
