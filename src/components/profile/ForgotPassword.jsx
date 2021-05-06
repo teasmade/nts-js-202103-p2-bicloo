@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import { useAuth } from '../../firebase/AuthContext';
-// import UserService from '../../Services/UserService';
 import LogoBicloo from '../../assets/img/logo-bicloo.png';
 import './signup/SignPage.css';
 

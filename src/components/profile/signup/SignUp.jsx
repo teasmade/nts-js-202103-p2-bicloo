@@ -10,10 +10,6 @@ import LogoBicloo from '../../../assets/img/logo-bicloo.png';
 import UserService from '../../../Services/UserService';
 
 export default function SignUp() {
-  /* const signIn = useHistory();
-  const redirectSignIn = () => {
-    useHistory().push('/');
-  }; */
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
