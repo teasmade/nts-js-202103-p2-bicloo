@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useState, useRef } from 'react';
+
 import UserService from '../../../Services/UserService';
 import GithubBtn from '../../buttons/github/GithubBtn';
 import GoogleBtn from '../../buttons/google/GoogleBtn';
@@ -8,11 +9,7 @@ import { useAuth } from '../../../firebase/AuthContext';
 import '../signup/SignPage.css';
 
 const SignIn = () => {
-  /* const history = useHistory();
-  const redirect = () => {
-    if (UserService.getUser())
-      history.push(history.location.state ? `/${history.location.state}` : '/');
-  }; */
+  const history = useHistory();
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -30,7 +27,10 @@ const SignIn = () => {
         emailRef.current.value,
         passwordRef.current.value
       ).then((data) => {
-        UserService.logUser(data.user.uid);
+        UserService.getAllUsers().then((users) => {
+          UserService.logUser(users[data.user.uid]);
+          history.push('/');
+        });
       });
     } catch (err) {
       setError('Failed to sign in');

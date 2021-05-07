@@ -22,7 +22,7 @@ const Profile = () => {
             style={{ backgroundColor: '#17BEBB' }}
             className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center w-3/4"
           >
-            <p className="progress-text">{totalXp}</p>
+            <p className="progress-text">{`total XP : ${totalXp}`}</p>
           </div>
         </div>
       </div>

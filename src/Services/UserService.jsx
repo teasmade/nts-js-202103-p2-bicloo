@@ -25,6 +25,11 @@ const UserService = {
     localStorage.removeItem('user');
   },
 
+  async getAllUsers() {
+    const usersData = await axios.get('/users.json').then((res) => res.data);
+    return usersData;
+  },
+
   async createUserInDatabase(uid, name) {
     let usersData = await axios.get('/users.json').then((res) => res.data);
     // check if the user isn't already existing, if not, create it
@@ -49,7 +54,9 @@ const UserService = {
             },
           }
         )
-        .then((res) => res.data);
+        .then((res) => {
+          return res.data;
+        });
     } else {
       usersData = usersData[uid];
     }
