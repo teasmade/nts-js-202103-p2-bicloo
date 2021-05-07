@@ -34,7 +34,7 @@ const PopUp = ({
 
   const addXpPopup = (
     <>
-      <span>Course validé !!!</span>
+      <span>Course validée !!!</span>
       <button
         type="button"
         className="popup-btn"

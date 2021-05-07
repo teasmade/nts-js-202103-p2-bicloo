@@ -14,7 +14,7 @@ const Profile = () => {
   const [openHistory, setOpenHistory] = useState(true);
 
   const journeysToDisplay = journeys.map((journey) => (
-    <History date={journey.date} xp={journeys.xp} key={journey.date} />
+    <History date={journey.date} xp={journey.xp} key={journey.date} />
   ));
   return (
     <div className="profileContainer">

@@ -6,7 +6,7 @@ const History = ({ date, xp }) => {
   return (
     <div className="history-line">
       <span className="history-date">{`${formatedDate.getDay()}/${formatedDate.getMonth()}/${formatedDate.getFullYear()}`}</span>
-      <span className="history-xp">{xp}XP</span>
+      <span className="history-xp">{xp} XP</span>
     </div>
   );
 };
