@@ -64,6 +64,8 @@ const UserService = {
   },
 
   updateUser(property, value) {
+    localStorage.setItem('user', JSON.stringify(this.user));
+
     axios.patch(
       `/users/${this.user.user_ID}/.json`,
       { [property]: value },
