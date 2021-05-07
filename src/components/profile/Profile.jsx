@@ -5,12 +5,17 @@ import './Profile.css';
 import UserService from '../../Services/UserService';
 
 const Profile = () => {
-  const pseudo = UserService.getUserName();
+  const user = UserService.getUser();
+  const { pseudo } = user;
   const level = UserService.getLevel();
   const totalXp = UserService.getTotalXp();
-  // const journeys = UserService.getJourneys();
+  const journeys = UserService.getJourneys();
   const [openBadges, setOpenBadges] = useState(true);
   const [openHistory, setOpenHistory] = useState(true);
+
+  const journeysToDisplay = journeys.map((journey) => (
+    <History date={journey.date} xp={journeys.xp} key={journey.date} />
+  ));
   return (
     <div className="profileContainer">
       <h1 className="text-4xl my-5">Bonjour {pseudo}</h1>
@@ -70,10 +75,7 @@ const Profile = () => {
           }`}
         >
           {/* map sur les trajets réalisés */}
-          <History date="01/01/1850" length="15" xp="160" />
-          <History date="01/02/1850" length="10" xp="120" />
-          <History date="01/03/1850" length="5" xp="95" />
-          <History date="01/04/1850" length="12" xp="137" />
+          {journeysToDisplay}
         </div>
       </section>
     </div>

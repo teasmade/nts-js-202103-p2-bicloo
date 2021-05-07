@@ -180,7 +180,7 @@ const UserService = {
       this.user.journeys = [];
     }
     this.user.journeys.push({ date: Date.now(), xp });
-    this.updateUser('rewards_bought', this.user.journeys);
+    this.updateUser('journeys', this.user.journeys);
   },
 
   getJourneys() {
