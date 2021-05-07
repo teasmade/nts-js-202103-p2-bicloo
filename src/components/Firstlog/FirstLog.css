@@ -43,7 +43,7 @@
   }
 }
 .anim-container .bike {
-  stroke: #17bebb;
+  stroke: white;
   fill-opacity: 0;
   opacity: 0.5;
   stroke-linecap: round;
