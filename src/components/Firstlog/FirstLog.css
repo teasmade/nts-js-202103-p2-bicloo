@@ -1,0 +1,60 @@
+.test-btn {
+  margin-top: 2%;
+  background: none;
+  padding: 10px;
+  border: 1px solid #17bebb;
+  border-radius: 20px;
+  font-size: 2em;
+  color: #17bebb;
+}
+.test-btn:hover {
+  transform: scale(1.1);
+}
+.anim-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.anim-container .bike-svg {
+  opacity: 0;
+  animation: go forwards 2s alternate 2s, fadeIn 1s forwards;
+}
+@keyframes go {
+  0% {
+    transform: translateX(-4px);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(12px);
+  }
+  75% {
+    transform: translateX(10px);
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: translateX(-400%);
+  }
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+.anim-container .bike {
+  stroke: #17bebb;
+  fill-opacity: 0;
+  opacity: 0.5;
+  stroke-linecap: round;
+  stroke-width: 2;
+  stroke-dasharray: 4400;
+  stroke-dashoffset: 4400;
+  animation: bikedrawing 3s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+@keyframes bikedrawing {
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
