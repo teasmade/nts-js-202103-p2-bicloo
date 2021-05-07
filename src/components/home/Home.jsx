@@ -43,7 +43,7 @@ export default function Home() {
       <h2 className="logoTitle">
         <span>BiclooApp</span>
       </h2>
-      <p>L&#39;application qui vous fera pédaler encore et encore!</p>
+      <p>L&#39;application qui vous fera pédaler encore et encore !</p>
       {!UserService.getUser() ? noLoggedUser : loggedUser()}
     </div>
   );
