@@ -17,6 +17,7 @@ const ValidationBtn = ({ setPopupDisplayed, setPopupIsOpen }) => {
             SearchService.setValidateDeposit(SearchService.endStation);
             if (UserService.getUser()) {
               UserService.addXp(SearchService.getTotalXp());
+              UserService.setValidatedRoute(SearchService.getTotalXp());
               setPopupDisplayed('addXp');
               setPopupIsOpen(true);
             } else {
