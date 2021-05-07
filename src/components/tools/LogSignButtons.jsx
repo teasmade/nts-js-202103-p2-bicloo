@@ -27,7 +27,7 @@ export default function LogSignButtons(props) {
           S&#039;inscrire
         </button>
         <button onClick={redirectSignIn} id="login" type="button">
-          Se connecter
+          Connexion
         </button>
       </div>
       {props.noLog ? (
