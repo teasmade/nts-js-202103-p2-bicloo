@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
 import Menu from './components/menu/Menu';
 import UserChoice from './components/menu/UserChoice';
-import Log from './components/profile/Log';
+import Profile from './components/profile/Profile';
 
 import Home from './components/home/Home';
 import Shop from './components/shop/Shop';
@@ -11,6 +11,7 @@ import SignIn from './components/profile/signin/SignIn';
 import SignUp from './components/profile/signup/SignUp';
 import Map from './components/Map/Map';
 import AuthContext from './firebase/AuthContext';
+import ForgotPassword from './components/profile/ForgotPassword';
 
 function App() {
   const [isUserChoiceExpended, setIsUserChoiceExpended] = useState(false);
@@ -27,7 +28,7 @@ function App() {
               <Map />
             </Route>
             <Route exact path="/profile">
-              <Log />
+              <Profile />
             </Route>
             <Route exact path="/signIn">
               <SignIn />
@@ -35,15 +36,20 @@ function App() {
             <Route exact path="/signUp">
               <SignUp />
             </Route>
+            <Route exact path="/forgot-password">
+              <ForgotPassword />
+            </Route>
             <Route exact path="/shop">
               <Shop />
             </Route>
           </Switch>
-          <UserChoice isUserChoiceExpended={isUserChoiceExpended} />
+          <UserChoice
+            isUserChoiceExpended={isUserChoiceExpended}
+            closeUserChoicePopup={() => setIsUserChoiceExpended(false)}
+          />
           <Menu
             isUserChoiceExpended={isUserChoiceExpended}
             clickOnUser={() => {
-              console.log('click', isUserChoiceExpended);
               setIsUserChoiceExpended(!isUserChoiceExpended);
             }}
           />
