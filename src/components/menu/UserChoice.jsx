@@ -23,14 +23,14 @@ export default function userChoice({
         }}
         to={isUserLogged ? '/' : '/signUp'}
       >
-        {`${isUserLogged ? 'Sign out' : 'Sign up'}`}
+        {`${isUserLogged ? 'Déconnexion' : "S'inscrire"}`}
       </Link>
       <div className="separator" />
       <Link
         onClick={closeUserChoicePopup}
         to={isUserLogged ? '/profile' : '/signIn'}
       >
-        {`${isUserLogged ? 'My profile' : 'Sign In'}`}
+        {`${isUserLogged ? 'Mon profil' : 'Connexion'}`}
       </Link>
     </div>
   );
