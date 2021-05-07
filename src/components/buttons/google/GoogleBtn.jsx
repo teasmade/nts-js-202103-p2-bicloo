@@ -10,15 +10,12 @@ export default function GoogleBtn() {
 
   const handleClick = async (provider) => {
     const res = await socialMediaAuth(provider);
-    console.log('google result', res);
     const nameFromEmail = res.email.includes('@')
       ? res.email.split('@')[0]
       : res.email;
-    UserService.createUserInDatabase(res.uid, nameFromEmail)
-      .then(() => {
-        history.push('/');
-      })
-      .catch((e) => console.error('catch error', e));
+    UserService.createUserInDatabase(res.uid, nameFromEmail).then(() => {
+      history.push('/');
+    });
   };
 
   return (
