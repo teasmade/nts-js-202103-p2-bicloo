@@ -8,33 +8,53 @@ const UserService = {
   levels: [0, 1000, 2000, 5000, 10000],
 
   getUser() {
+    const storedUser = localStorage.getItem('user');
+    if (!this.user && storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
     return this.user || null;
   },
 
-  logUser(pseudo, password) {
-    return axios
-      .get('/users.json')
-      .then((data) => data.data)
-      .then((data) => {
-        // iterate through users
-        const users = Object.entries(data);
-        [, this.user] = users.find(
-          (user) =>
-            (user[1].pseudo === pseudo || user[1].email === pseudo) &&
-            user[1].password === password
-        );
-
-        return this.user ? Promise.resolve(true) : Promise.resolve(false);
-      });
+  logUser(user) {
+    this.user = user;
+    localStorage.setItem('user', JSON.stringify(this.user));
   },
 
   logOut() {
     this.user = null;
+    localStorage.removeItem('user');
   },
 
-  // createUser() {
-  //   axios.
-  // },
+  async createUserInDatabase(uid, name) {
+    let usersData = await axios.get('/users.json').then((res) => res.data);
+    // check if the user isn't already existing, if not, create it
+    if (!usersData[uid]) {
+      usersData = await axios
+        .put(
+          `/users/${uid}/.json`,
+          {
+            id: uid,
+            pseudo: name,
+            current_xp: 0,
+            total_xp_won: 0,
+            level: 1,
+            user_ID: uid,
+            badges_won: [],
+            reward_bought: [],
+          },
+          {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        .then((res) => res.data);
+    } else {
+      usersData = usersData[uid];
+    }
+    this.logUser(usersData);
+  },
 
   updateUser(property, value) {
     axios.patch(
@@ -87,7 +107,7 @@ const UserService = {
   },
 
   getAllBadge() {
-    const userBadges = this.user.badges_won;
+    const userBadges = this.user.badges_won || [];
     return axios
       .get('/badges.json')
       .then((data) => data.data)
@@ -110,7 +130,7 @@ const UserService = {
   // renamed to reflect fetch of all rewards plus active or not for this.user
   // ADD IN PROMISE RESOLVE STEP???
   getUserRewards() {
-    const userRewards = this.user.rewards_bought;
+    const userRewards = this.user.rewards_bought || [];
     return axios
       .get('/rewards.json')
       .then((data) => data.data)
@@ -118,6 +138,7 @@ const UserService = {
         return data.map((reward) => {
           const newReward = reward;
           newReward.active = !!userRewards.includes(newReward.id);
+          newReward.buyable = this.user.current_xp >= newReward.price;
           return newReward;
         });
       });
@@ -137,6 +158,10 @@ const UserService = {
   },
 
   addRewardBought(rewardId) {
+    if (!this.user.rewards_bought) {
+      this.user.rewards_bought = [];
+    }
+
     if (!this.user.rewards_bought.includes(rewardId)) {
       this.user.rewards_bought.push(rewardId);
       this.updateUser('rewards_bought', this.user.rewards_bought);

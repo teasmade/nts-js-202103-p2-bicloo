@@ -1,6 +1,6 @@
 .profileContainer {
   padding: 2vh 5vw;
-  height: 88vh;
+  height: calc(var(--vh, 1vh) * 93);
   display: flex;
   flex-direction: column;
   align-items: center;

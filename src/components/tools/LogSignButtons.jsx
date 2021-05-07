@@ -24,10 +24,10 @@ export default function LogSignButtons(props) {
     <div className="logSignButtonsContainer">
       <div className="logSignButtons">
         <button onClick={redirectSignUp} id="signUp" type="button">
-          Sign-Up
+          S&#039;inscrire
         </button>
         <button onClick={redirectSignIn} id="login" type="button">
-          Sign-In
+          Se connecter
         </button>
       </div>
       {props.noLog ? (
@@ -38,7 +38,7 @@ export default function LogSignButtons(props) {
           id="noLogin"
           style={props.profile ? { color: 'black' } : null}
         >
-          Access the map without login
+          Accéder à la carte sans se connecter
         </p>
       ) : null}
     </div>

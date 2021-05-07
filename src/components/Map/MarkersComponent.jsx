@@ -50,9 +50,9 @@ const StationsMarkers = ({
       <Popup ref={popupRef}>
         {station.fields.address}
         <br />
-        {station.fields.available_bikes} bikes available
+        {station.fields.available_bikes} vélos disponibles
         <br />
-        {station.fields.available_bike_stands} stands available
+        {station.fields.available_bike_stands} emplacements disponibles
         <br />
         <button
           type="button"

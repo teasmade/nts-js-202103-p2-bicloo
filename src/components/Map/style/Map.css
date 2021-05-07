@@ -1,5 +1,5 @@
 .leaflet-container {
-  height: 93vh;
+  height: calc(var(--vh, 1vh) * 93);
   width: 100vw;
   margin: auto;
 }

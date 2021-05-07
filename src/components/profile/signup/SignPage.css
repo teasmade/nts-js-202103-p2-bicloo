@@ -1,0 +1,11 @@
+.min-h-screen {
+  min-height: calc(var(--vh, 1vh) * 93);
+}
+
+.hero-pattern {
+  background-color: #fcffeb;
+}
+
+.signContainer {
+  height: calc(var(--vh, 1vh) * 93);
+}

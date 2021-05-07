@@ -2,7 +2,7 @@
   height: 12vh;
   width: 30vw;
   position: absolute;
-  bottom: 7vh;
+  bottom: calc(var(--vh, 1vh) * 7);
   right: 0;
   background-color: black;
   color: white;
@@ -15,13 +15,13 @@
 }
 
 .noShowChoice {
-  transform: translateY(100%);
+  transform: translateY(200%);
   transition: transform 0.5s ease-in-out;
 }
 
 .showChoice {
   transform: translateY(0%);
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 .separator {
