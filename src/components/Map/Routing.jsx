@@ -8,8 +8,14 @@ class Routing extends MapLayer {
     const { map } = this.props.leaflet;
     if (!this.leafletElement) {
       this.leafletElement = L.Routing.control({
-        waypoints: this.props.coordinates,
-        language: 'fr',
+        router: L.Routing.mapbox(
+          'pk.eyJ1IjoiY2RyaWMtbGIiLCJhIjoiY2tvYndkMDJ1MGMxejJ2bjFhMWF2cGUyNyJ9.3LaE2Y7qw8DW5olaBkbN0Q',
+          {
+            waypoints: this.props.coordinates,
+            profile: 'mapbox/cycling',
+            language: 'fr',
+          }
+        ),
       }).addTo(map);
     }
     return this.leafletElement.getPlan();

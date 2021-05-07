@@ -4,6 +4,12 @@ const SearchService = {
   startStation: null,
   endStation: null,
   route: null,
+  // choosedStation [position, xp_by_available_bikes, xp_by_available_stands]
+  choosedStation: [],
+  startXp: null,
+  endXp: null,
+  validateHold: null,
+  validateDeposit: null,
 
   setStartPoint(coordinates) {
     this.startPoint = coordinates;
@@ -21,6 +27,31 @@ const SearchService = {
     this.endStation = coordinates;
   },
 
+  // Store temporary informations about selected station
+  setChoosedStation(coordinates, availableBikes, availableBikeStands) {
+    this.choosedStation.push(
+      coordinates,
+      this.convertToXp(availableBikes),
+      this.convertToXp(availableBikeStands)
+    );
+  },
+  convertToXp(availableChoose) {
+    if (availableChoose <= 4) return 10;
+    if (availableChoose <= 9) return 15;
+    return 20;
+  },
+  resetChoosedStation() {
+    this.choosedStation = [];
+  },
+
+  setStartXp(xp) {
+    this.startXp = xp;
+  },
+
+  setEndXp(xp) {
+    this.endXp = xp;
+  },
+
   getCoordinates() {
     const filteredCoordinatesArray = [
       this.startPoint,
@@ -28,19 +59,24 @@ const SearchService = {
       this.endStation,
       this.endPoint,
     ].filter((point) => point !== null);
-    return filteredCoordinatesArray; // .length >= 2 ? filteredCoordinatesArray : [];
+    return filteredCoordinatesArray;
   },
 
-  searchStartStation() {
-    // ...
+  setValidateHold(coordinates) {
+    this.validateHold = coordinates;
   },
 
-  searchEndStation() {
-    // ...
+  setValidateDeposit(coordinates) {
+    this.validateDeposit = coordinates;
   },
 
-  drawBikePath() {
-    // routing machine
+  getTotalXp() {
+    const distance = this.convertToMetres(
+      ...this.validateDeposit,
+      ...this.validateHold
+    );
+    // One hundred meter = 1Xp
+    return Math.round(distance / 100) + this.startXp + this.endXp;
   },
 
   convertToMetres(lat1, lon1, lat2, lon2) {
