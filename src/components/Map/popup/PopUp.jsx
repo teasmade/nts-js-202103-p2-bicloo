@@ -64,18 +64,18 @@ const PopUp = ({
     <>
       {list.map((station) => (
         <div className="results-el" key={station.name}>
-          <span>{station.address}</span>
-          <span>{Math.round(station.distance)} mètres</span>
-          <span>
+          <p>{station.address}</p>
+          <p>{Math.round(station.distance)} mètres</p>
+          <p>
             Xp:{' '}
             {popupDisplayed === 'results-from'
               ? SearchService.convertToXp(station.bikes)
               : SearchService.convertToXp(station.stands)}
-          </span>
-          <span>
+          </p>
+          <p>
             {`Vélo${station.bikes > 1 ? 's' : ''} dispo: ${station.bikes}`} -{' '}
             {`Place${station.stands > 1 ? 's' : ''} dispo: ${station.stands}`}
-          </span>
+          </p>
           <button
             className="popup-btn"
             type="button"
@@ -128,7 +128,7 @@ const PopUp = ({
           setPopupIsOpen(false);
         }}
       >
-        Utiliser comme arrivé
+        Utiliser comme arrivée
       </button>
       <button
         type="button"
