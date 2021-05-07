@@ -20,9 +20,15 @@ ul.search-control-info-list,
   background-color: #fcffeb;
 }
 
-.leaflet-popup-content button {
+.leaflet-routing-container,
+.leaflet-popup-content-wrapper {
   border-radius: 10px;
-  border: solid black 2px;
+  border: solid #17bebb 2px;
+}
+
+.leaflet-popup-content button {
+  border-radius: 7px;
+  border: solid #17bebb 2px;
   padding: 0 10px;
   margin: 10px;
 }
@@ -37,7 +43,7 @@ ul.search-control-info-list,
   z-index: 500;
   background-color: #fcffeb;
   border-radius: 10px;
-  border: solid black 2px;
+  border: solid #17bebb 2px;
   padding: 0 10px;
   margin: 10px;
 }

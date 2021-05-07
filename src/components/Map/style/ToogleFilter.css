@@ -10,7 +10,7 @@
   z-index: 500;
   background-color: #fcffeb;
   border-radius: 10px;
-  border: solid black 2px;
+  border: solid #17bebb 2px;
   padding: 0 10px 5px;
   margin: 10px;
 }
@@ -83,3 +83,4 @@ input:checked + .slider:after {
 .slider.round:before {
   border-radius: 50%;
 }
+

@@ -8,7 +8,7 @@ const ToogleFilter = ({ colorMarkerFilter, setColorMarkerFilter }) => {
   };
   return (
     <div className="toogle-filter">
-      <span>Vélos / Places</span>
+      <p>Vélos / Places</p>
       <div className="toggle-container">
         <input type="checkbox" onClick={() => handleClick(colorMarkerFilter)} />
         <div className="slider round" />
