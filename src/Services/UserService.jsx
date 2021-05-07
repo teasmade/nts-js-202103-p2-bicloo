@@ -83,15 +83,7 @@ const UserService = {
     this.updateUser('current_xp', this.user.current_xp);
 
     this.levels.forEach((lvl, index) => {
-      console.log(
-        'calcul',
-        this.user.total_xp_won,
-        lvl,
-        this.user.level,
-        index
-      );
       if (this.user.total_xp_won >= lvl && this.user.level < index) {
-        console.log('ça set');
         this.setLevel(index);
       }
     });
@@ -119,7 +111,6 @@ const UserService = {
   },
 
   setLevel(index) {
-    console.log('level', this.user.level);
     this.user.level = index;
     this.updateUser('level', index);
   },
@@ -195,7 +186,6 @@ const UserService = {
   },
 
   getJourneys() {
-    console.log('journ', this.user);
     return this.user.journeys || [];
   },
 };
