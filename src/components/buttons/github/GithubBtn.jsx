@@ -11,16 +11,12 @@ export default function GithubBtn() {
 
   const handleOnClick = async (provider) => {
     const res = await socialMediaAuth(provider);
-    console.log('github result', res);
     const nameFromEmail = res.email.includes('@')
       ? res.email.split('@')[0]
       : res.email;
-    UserService.createUserInDatabase(res.uid, nameFromEmail)
-      .then(() => {
-        // redirect
-        history.push('/');
-      })
-      .catch((e) => console.error('catch error', e));
+    UserService.createUserInDatabase(res.uid, nameFromEmail).then(() => {
+      history.push('/');
+    });
   };
 
   return (
