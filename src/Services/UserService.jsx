@@ -5,7 +5,7 @@ const UserService = {
   user: null,
   rewards: null,
 
-  levels: [0, 1000, 2000, 5000, 10000],
+  levels: [0, 100, 2000, 5000, 10000],
 
   getUser() {
     const storedUser = localStorage.getItem('user');
@@ -83,8 +83,17 @@ const UserService = {
     this.updateUser('current_xp', this.user.current_xp);
 
     this.levels.forEach((lvl, index) => {
-      if (this.user.total_xp_won >= lvl && this.user.level !== index)
+      console.log(
+        'calcul',
+        this.user.total_xp_won,
+        lvl,
+        this.user.level,
+        index
+      );
+      if (this.user.total_xp_won >= lvl && this.user.level < index) {
+        console.log('ça set');
         this.setLevel(index);
+      }
     });
   },
 
@@ -110,7 +119,9 @@ const UserService = {
   },
 
   setLevel(index) {
+    console.log('level', this.user.level);
     this.user.level = index;
+    this.updateUser('level', index);
   },
 
   getAllBadge() {
@@ -184,6 +195,7 @@ const UserService = {
   },
 
   getJourneys() {
+    console.log('journ', this.user);
     return this.user.journeys || [];
   },
 };
