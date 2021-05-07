@@ -8,6 +8,7 @@ const Profile = () => {
   const pseudo = UserService.getUserName();
   const level = UserService.getLevel();
   const totalXp = UserService.getTotalXp();
+  // const journeys = UserService.getJourneys();
   const [openBadges, setOpenBadges] = useState(true);
   const [openHistory, setOpenHistory] = useState(true);
   return (
