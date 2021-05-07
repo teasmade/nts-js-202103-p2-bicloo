@@ -48,7 +48,7 @@ export default function SignUp() {
 
   return (
     <>
-      <main className="signContainer">
+      <main className="signContainer flex">
         <section className=" w-full">
           <div className="absolute top-0 w-full h-full bg-gray-900" />
           <div className="container mx-auto px-4 h-full">
@@ -78,7 +78,7 @@ export default function SignUp() {
                   </div>
                   <div className="flex-auto px-4 lg:px-10 py-5 pt-0">
                     <div className="text-gray-500 text-center mb-3 font-bold">
-                      <small>Ou s&#039;inscrire avec mes informations </small>
+                      <small> Ou votre email et mot de passe</small>
                     </div>
                     <form onSubmit={handleSubmit}>
                       <div className="relative w-full mb-3">
