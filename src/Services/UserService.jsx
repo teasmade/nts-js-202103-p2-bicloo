@@ -174,6 +174,18 @@ const UserService = {
       this.updateUser('rewards_bought', this.user.rewards_bought);
     }
   },
+
+  setValidatedRoute(xp) {
+    if (!this.user.journeys) {
+      this.user.journeys = [];
+    }
+    this.user.journeys.push({ date: Date.now(), xp });
+    this.updateUser('journeys', this.user.journeys);
+  },
+
+  getJourneys() {
+    return this.user.journeys;
+  },
 };
 
 export default UserService;
