@@ -184,7 +184,7 @@ const UserService = {
   },
 
   getJourneys() {
-    return this.user.journeys;
+    return this.user.journeys || [];
   },
 };
 
