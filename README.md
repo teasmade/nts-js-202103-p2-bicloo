@@ -10,5 +10,6 @@ We used React alongside Leaflet for dynamic map data display. We exceeded the pr
 - Leaflet map display / tile layer loading
 - Map marker geo-situation according to Nantes api bike station data
 - Geolocalisation of user with browser geoloc api
+- Calculation algorithms for distance between user and stations, distance for routes
 - Shop / rewards page with system of tiles generated from remote data
 - Home and shop page modal components, created with customisable content and button controls
