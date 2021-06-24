@@ -5,3 +5,10 @@
 My team of 5 developed an app to gameify Bicloo, Nantes' on-demand bike rental service.
 
 We used React alongside Leaflet for dynamic map data display. We exceeded the project brief in the time allocated, adding authentication and user data storage using Firebase.
+
+## Principal aspects I worked on
+- Leaflet map display / tile layer loading
+- Map marker geo-situation according to Nantes api bike station data
+- Geolocalisation of user with browser geoloc api
+- Shop / rewards page with system of tiles generated from remote data
+- Home and shop page modal components, created with customisable content and button controls
